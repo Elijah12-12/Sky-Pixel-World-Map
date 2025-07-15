@@ -22,10 +22,12 @@ Welcome to the official **Sky Pixel World Map**, a fully interactive Minecraft w
 
 ---
 
-## 📄 License
+## ❗ Usage Restrictions
 
-This project is licensed under the [Creative Commons Attribution 4.0 License](LICENSE).  
-Feel free to share and adapt with proper credit!
+This map and all associated content are **not open source**.  
+- ❌ You may **not** redistribute, copy, or modify any part of this project
+- ❌ You may **not** download or reuse the tile images or source files
+- ✅ Viewing is allowed via GitHub Pages only
 
 ---
 
