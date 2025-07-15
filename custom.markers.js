@@ -4,7 +4,7 @@ UnminedCustomMarkers = {
   markers: [
     {
       x: -2898.5, z: -3469.5,
-      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.35,
+      image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
       text: "Harlow, JC", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 32px Calibri,sans serif"
@@ -13,7 +13,7 @@ UnminedCustomMarkers = {
       fontShadowColor: "#000000",},
     {
       x: -71.5, z: 98.5,
-      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.35,
+      image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
       text: "Octavian, SK, SKY", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 32px Calibri,sans serif"
@@ -22,7 +22,7 @@ UnminedCustomMarkers = {
       fontShadowColor: "#000000",},
     {
       x: -5186.5, z: 4910.5,
-      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.35,
+      image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
       text: "La Morley, VW", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 32px Calibri,sans serif"
@@ -31,7 +31,7 @@ UnminedCustomMarkers = {
       fontShadowColor: "#000000",},
     {
       x: 20814.5, z: -1219.5,
-      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.35,
+      image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
       text: "Quantum, SA", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 32px Calibri,sans serif"
