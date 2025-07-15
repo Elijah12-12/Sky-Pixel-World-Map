@@ -39,12 +39,11 @@ class Unmined {
             });
 
         const mapZoomLevels = options.maxZoom - options.minZoom;
-const defaultZoom = options.defaultZoom ?? options.maxZoom;
-
-const resolutions = new Array(mapZoomLevels + 1);
-for (let z = 0; z <= mapZoomLevels; ++z) {
-    resolutions[z] = Math.pow(2, (mapZoomLevels - z)) * dpiScale / worldMaxZoomFactor;
-}
+        // Resolution for each OpenLayers zoom level        
+        var resolutions = new Array(mapZoomLevels + 1);
+        for (let z = 0; z < mapZoomLevels + 1; ++z) {
+            resolutions[mapZoomLevels - z] = Math.pow(2, z) * dpiScale / worldMaxZoomFactor;
+        }
 
         var tileGrid = new ol.tilegrid.TileGrid({
             extent: mapExtent,
@@ -133,7 +132,9 @@ for (let z = 0; z <= mapZoomLevels; ++z) {
 
         var map = new ol.Map({
             target: mapId,
-            controls: ol.control.defaults().extend([new ol.control.Zoom(), mousePositionControl]),
+            controls: ol.control.defaults().extend([
+                mousePositionControl
+            ]),
             layers: [
                 unminedLayer,                
                 /*
@@ -152,7 +153,7 @@ for (let z = 0; z <= mapZoomLevels; ++z) {
                 projection: viewProjection,
                 resolutions: tileGrid.getResolutions(),
                 maxZoom: mapZoomLevels,
-                zoom: defaultZoom - options.minZoom,
+                zoom: mapZoomLevels - options.maxZoom,
                 constrainResolution: true,
                 showFullExtent: true,
                 constrainOnlyCenter: true

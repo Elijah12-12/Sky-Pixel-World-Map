@@ -3,12 +3,12 @@ var UnminedMapProperties = {
     minZoom: 0,
     maxZoom: 0,
     defaultZoom: 0,
-    imageFormat: "webp",
+    imageFormat: "png",
     minRegionX: -36,
     minRegionZ: -37,
     maxRegionX: 42,
-    maxRegionZ: 26,
+    maxRegionZ: 25,
     worldName: "Sky Pixel V.16.2 Map",
-    background: "rgba(0, 0, 0, 10)",
+    background: "",
     markers: new Array()
 }
