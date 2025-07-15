@@ -18,7 +18,7 @@ Welcome to the official **Sky Pixel World Map**, a fully interactive Minecraft w
 
 - [uNmINeD](https://unmined.net) — for rendering and exporting the map
 - GitHub Pages — for free static hosting
-- OpenLayers — for interactive map controls
+- OpenLayers — for interactive map controls.
 
 ---
 
