@@ -29,11 +29,3 @@ This map and all associated content are **not open source**.
 - ❌ You may **not** download or reuse the tile images or source files
 - ✅ Viewing is allowed via GitHub Pages only
 
----
-
-## 🧪 Local Testing
-
-If you want to test this map offline:
-
-1. Clone the repo
-2. Use a simple static server like:
