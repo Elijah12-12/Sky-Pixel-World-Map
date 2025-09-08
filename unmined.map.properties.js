@@ -7,8 +7,8 @@ var UnminedMapProperties = {
     minRegionX: -36,
     minRegionZ: -37,
     maxRegionX: 42,
-    maxRegionZ: 26,
-    worldName: "Sky Pixel V.16.3",
+    maxRegionZ: 25,
+    worldName: "Sky Pixel V.16.4",
     background: "#000000",
     markers: new Array()
 }

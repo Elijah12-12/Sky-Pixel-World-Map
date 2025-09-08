@@ -515,5 +515,32 @@ UnminedCustomMarkers = {
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
+    {
+      x: 2936.5, z: -620.5,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Lenore, SKY", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 14px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",}, 
+    {
+      x: 15922.5, z: -8992.5,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Orlaith, SA", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 22px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",}, 
+    {
+      x: 8511.5, z: -1149.5,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Eulaliè, SA", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 16px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
   ]
 };
