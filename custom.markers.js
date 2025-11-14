@@ -131,7 +131,7 @@ UnminedCustomMarkers = {
     {
       x: -7293.5, z: 8614.5,
       image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.32,
-      text: "Malaki, KV", textColor: "white",
+      text: "Malakai, KV", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 22px Calibri,sans serif"
     ,
