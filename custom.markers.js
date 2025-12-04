@@ -354,7 +354,7 @@ UnminedCustomMarkers = {
       fontShadow: true,
       fontShadowColor: "#000000",},
     {
-      x: -12282.5, z: -9976.5,
+      x: -12856, z: -10095, 
       image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
       text: "Porter, JC", textColor: "white",
       offsetX: 0, offsetY: 15,
