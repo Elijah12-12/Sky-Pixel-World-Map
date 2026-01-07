@@ -30,7 +30,7 @@ UnminedCustomMarkers = {
       fontShadow: true,
       fontShadowColor: "#000000",},
     {
-      x: 20814.5, z: -1219.5,
+      x: -11978, z: 15233,
       image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
       text: "Quantum, SA", textColor: "white",
       offsetX: 0, offsetY: 15,
