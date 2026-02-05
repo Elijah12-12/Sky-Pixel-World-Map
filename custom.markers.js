@@ -542,5 +542,32 @@ UnminedCustomMarkers = {
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
+    {
+      x: -196, z: 1032,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Jackson, HV", textColor: "white",
+      offsetX: 0, offsetY: 14,
+      font: "bold 16px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: -12, z: 1143,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Lemons, HV", textColor: "white",
+      offsetX: 0, offsetY: 14,
+      font: "bold 16px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: 129, z: 1337,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Savia, HV", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 16px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
   ]
 };
