@@ -578,5 +578,14 @@ UnminedCustomMarkers = {
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
+    {
+      x: 492, z: -79, 
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.28,
+      text: "Xhaelis, YU, SKY", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 25px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
   ]
 };
