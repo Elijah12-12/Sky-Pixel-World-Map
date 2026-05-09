@@ -588,10 +588,13 @@ UnminedCustomMarkers = {
       fontShadow: true,
       fontShadowColor: "#000000",},
     {
-      x: -2917, z: -895,
+      x: -2917, z: -1901,
       image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
       text: "Bellamy, MK, SKY", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 14px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
   ]
 };
