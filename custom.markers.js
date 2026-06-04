@@ -596,5 +596,23 @@ UnminedCustomMarkers = {
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
+    {
+      x: -8337, z: 8608,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Malu, KV", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 23px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: -8157, z: 8886, 
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Lilinoe, KV", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 14px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
   ]
 };
