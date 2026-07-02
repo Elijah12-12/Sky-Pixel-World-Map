@@ -619,7 +619,7 @@ UnminedCustomMarkers = {
       image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
       text: "Cosme, KV", textColor: "white",
       offsetX: 0, offsetY: 15,
-      font: "bold 13px Calibri,sans serif"
+      font: "bold 14px Calibri,sans serif"
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
