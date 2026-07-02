@@ -32,7 +32,7 @@ UnminedCustomMarkers = {
     {
       x: -11978, z: 15233,
       image: "star.png", imageAnchor: [0.5,1], imageScale: 0.35,
-      text: "Quantum, SA", textColor: "white",
+      text: "Quantum, KV", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 32px Calibri,sans serif"
     ,
@@ -611,6 +611,51 @@ UnminedCustomMarkers = {
       text: "Lilinoe, KV", textColor: "white",
       offsetX: 0, offsetY: 15,
       font: "bold 14px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: 4157, z: 16745, 
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Cosme, KV", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 13px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: 8590, z: 21982,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "L'Eulàlia, KV", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 23px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: -901, z: 2860, 
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Verdante, VW", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 13px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: -1144, z: 3232,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Oliveto, VW", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 13px Calibri,sans serif"
+    ,
+      fontShadow: true,
+      fontShadowColor: "#000000",},
+    {
+      x: -1019, z: 4028,
+      image: "custom.pin.png", imageAnchor: [0.5,1], imageScale: 0.24,
+      text: "Castello, VW", textColor: "white",
+      offsetX: 0, offsetY: 15,
+      font: "bold 13px Calibri,sans serif"
     ,
       fontShadow: true,
       fontShadowColor: "#000000",},
