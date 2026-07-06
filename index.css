@@ -78,3 +78,1215 @@ div.ol-mouse-position {
     display: inline-block;
     margin-left: -20px;
 }
+
+/* Sky Pixel atlas side panel */
+.sky-pixel-panel-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.16);
+    z-index: 9997;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.sky-pixel-panel-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sky-pixel-panel {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: min(430px, calc(100vw - 36px));
+    max-height: calc(100vh - 36px);
+    overflow: hidden auto;
+    background: rgba(8, 10, 14, 0.94);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.65);
+    z-index: 9998;
+    opacity: 0;
+    transform: translateX(28px);
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms ease;
+    backdrop-filter: blur(12px);
+}
+
+.sky-pixel-panel.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.sky-pixel-panel-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.42);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 28px;
+    line-height: 34px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.sky-pixel-panel-hero {
+    height: 185px;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(120, 160, 210, 0.24), transparent 42%),
+        linear-gradient(135deg, #10141d, #05070a 70%);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+.sky-pixel-panel-hero-fallback {
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.sky-pixel-panel-hero.has-image .sky-pixel-panel-hero-fallback {
+    display: none;
+}
+
+.sky-pixel-panel-content {
+    padding: 18px;
+}
+
+.sky-pixel-panel-kicker {
+    color: #b8c7d9;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.sky-pixel-panel h2 {
+    margin: 0 34px 10px 0;
+    font-size: 34px;
+    line-height: 1.08;
+}
+
+.sky-pixel-panel p {
+    margin: 0 0 16px;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.55;
+    font-size: 17px;
+}
+
+.sky-pixel-panel-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 14px 0 18px;
+}
+
+.sky-pixel-panel-meta div {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 14px;
+    padding: 10px;
+}
+
+.sky-pixel-panel-meta span {
+    display: block;
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.sky-pixel-panel-meta strong {
+    font-size: 14px;
+}
+
+.sky-pixel-panel-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sky-pixel-panel-actions a,
+.sky-pixel-panel-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    padding: 10px 14px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.sky-pixel-panel-actions a:hover,
+.sky-pixel-panel-actions button:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 700px) {
+    .sky-pixel-panel {
+        top: auto;
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+        width: auto;
+        max-height: min(78vh, 640px);
+        transform: translateY(28px);
+    }
+
+    .sky-pixel-panel.is-visible {
+        transform: translateY(0);
+    }
+
+    .sky-pixel-panel h2 {
+        font-size: 30px;
+    }
+}
+
+#skyPixelAiModeLink {
+    background: rgba(110, 160, 255, 0.20);
+    border-color: rgba(160, 195, 255, 0.36);
+}
+
+#skyPixelAiModeLink:hover {
+    background: rgba(110, 160, 255, 0.30);
+}
+
+
+/* Sky Pixel search bar */
+.sky-pixel-search {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: min(520px, calc(100vw - 24px));
+    pointer-events: none;
+}
+
+.sky-pixel-search-box {
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 999px;
+    background: rgba(8, 10, 14, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
+}
+
+.sky-pixel-search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    border-radius: 999px;
+    padding: 12px 16px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.10);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.sky-pixel-search input::placeholder {
+    color: rgba(255, 255, 255, 0.58);
+}
+
+.sky-pixel-search button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0 18px;
+    color: #ffffff;
+    background: rgba(110, 160, 255, 0.32);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.sky-pixel-search button:hover {
+    background: rgba(110, 160, 255, 0.44);
+}
+
+.sky-pixel-search-message {
+    margin: 8px auto 0;
+    width: fit-content;
+    max-width: calc(100vw - 32px);
+    padding: 9px 12px;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+    pointer-events: none;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.sky-pixel-search-message.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    .sky-pixel-search {
+        top: 10px;
+        width: calc(100vw - 20px);
+    }
+
+    .sky-pixel-search-box {
+        border-radius: 18px;
+    }
+
+    .sky-pixel-search button {
+        padding: 0 13px;
+    }
+}
+
+/* Sky Pixel measure tool */
+.sky-pixel-measure {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: min(620px, calc(100vw - 36px));
+    padding: 8px;
+    border-radius: 18px;
+    background: rgba(8, 10, 14, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    color: #ffffff;
+}
+
+.sky-pixel-measure button {
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    font-weight: 900;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.sky-pixel-measure button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.sky-pixel-measure button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.sky-pixel-measure button.is-active {
+    background: rgba(110, 160, 255, 0.40);
+}
+
+.sky-pixel-measure-readout {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+    min-width: 280px;
+    max-width: 520px;
+}
+
+#map.is-measuring {
+    cursor: crosshair;
+}
+
+@media (max-width: 700px) {
+    .sky-pixel-measure {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        max-width: none;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .sky-pixel-measure-readout {
+        flex-basis: 100%;
+        font-size: 13px;
+    }
+}
+
+/* Nearby places panel */
+.sky-pixel-nearby {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.sky-pixel-nearby-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.sky-pixel-nearby-header span {
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.sky-pixel-nearby-header small {
+    color: rgba(255, 255, 255, 0.52);
+    font-size: 11px;
+    text-align: right;
+}
+
+.sky-pixel-nearby-list {
+    display: grid;
+    gap: 8px;
+}
+
+.sky-pixel-nearby-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 11px 12px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.07);
+    cursor: pointer;
+    text-align: left;
+}
+
+.sky-pixel-nearby-item:hover {
+    background: rgba(110, 160, 255, 0.18);
+    border-color: rgba(160, 195, 255, 0.34);
+}
+
+.sky-pixel-nearby-name {
+    font-weight: 900;
+    font-size: 15px;
+}
+
+.sky-pixel-nearby-distance {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 13px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* Player Explorer Toolkit */
+.sky-pixel-player-tools {
+    position: fixed;
+    left: 18px;
+    top: 86px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: min(900px, calc(100vw - 36px));
+    padding: 8px;
+    border-radius: 18px;
+    background: rgba(8, 10, 14, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    color: #ffffff;
+    flex-wrap: wrap;
+}
+
+.sky-pixel-player-tools button,
+.sky-pixel-player-tools select,
+.sky-pixel-player-import {
+    border: 0;
+    border-radius: 999px;
+    padding: 10px 13px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    font-weight: 900;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.sky-pixel-player-tools select {
+    outline: none;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.sky-pixel-player-tools option {
+    color: #111111;
+}
+
+.sky-pixel-player-tools button:hover,
+.sky-pixel-player-import:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.sky-pixel-player-tools button.is-active {
+    background: rgba(110, 160, 255, 0.40);
+}
+
+.sky-pixel-player-import input {
+    display: none;
+}
+
+.sky-pixel-player-status {
+    flex-basis: 100%;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 0 4px 2px;
+}
+
+#map.is-adding-player-marker {
+    cursor: crosshair;
+}
+
+.sky-pixel-note-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease;
+}
+
+.sky-pixel-note-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sky-pixel-note-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -46%);
+    z-index: 10001;
+    width: min(420px, calc(100vw - 30px));
+    box-sizing: border-box;
+    background: rgba(8, 10, 14, 0.96);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 22px;
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.72);
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+    backdrop-filter: blur(14px);
+}
+
+.sky-pixel-note-modal.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+}
+
+.sky-pixel-note-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.sky-pixel-note-modal-icon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.sky-pixel-note-modal-kicker {
+    color: #b8c7d9;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+.sky-pixel-note-modal h2 {
+    margin: 0 42px 6px 0;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.sky-pixel-note-coords {
+    margin: 0 0 14px;
+    color: rgba(255, 255, 255, 0.64);
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.sky-pixel-note-modal label {
+    display: grid;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 13px;
+    font-weight: 900;
+    margin-top: 12px;
+}
+
+.sky-pixel-note-modal input,
+.sky-pixel-note-modal textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    color: #ffffff;
+    padding: 12px;
+    font: inherit;
+    outline: none;
+}
+
+.sky-pixel-note-modal textarea {
+    resize: vertical;
+}
+
+.sky-pixel-note-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.sky-pixel-note-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: rgba(110, 160, 255, 0.32);
+    border: 1px solid rgba(160, 195, 255, 0.36);
+    border-radius: 999px;
+    padding: 11px 15px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.sky-pixel-note-actions button.danger {
+    background: rgba(255, 70, 70, 0.20);
+    border-color: rgba(255, 120, 120, 0.34);
+}
+
+@media (max-width: 700px) {
+    .sky-pixel-player-tools {
+        top: 82px;
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+
+    .sky-pixel-player-tools button,
+    .sky-pixel-player-tools select,
+    .sky-pixel-player-import {
+        font-size: 13px;
+        padding: 9px 11px;
+    }
+}
+
+/* Adventure tools: travel planner, expedition mode, minimap */
+.sky-pixel-adventure-tools {
+    position: absolute;
+    left: 16px;
+    bottom: 92px;
+    z-index: 2600;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 330px;
+    color: #fff;
+    font-family: Calibri, Arial, sans-serif;
+}
+
+.sky-pixel-tool-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sky-pixel-adventure-tools button,
+.sky-pixel-adventure-panel button {
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.72);
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.28);
+}
+
+.sky-pixel-adventure-tools button:hover,
+.sky-pixel-adventure-panel button:hover {
+    background: rgba(255,255,255,0.16);
+}
+
+.sky-pixel-adventure-panel {
+    width: min(330px, calc(100vw - 32px));
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    background: rgba(8, 12, 18, 0.88);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.45);
+    padding: 12px;
+}
+
+.sky-pixel-adventure-section + .sky-pixel-adventure-section {
+    margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 12px;
+}
+
+.sky-pixel-adventure-title {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.86);
+    margin-bottom: 8px;
+}
+
+.sky-pixel-adventure-panel label {
+    display: block;
+    margin: 8px 0;
+    color: rgba(255,255,255,0.72);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.sky-pixel-adventure-panel select {
+    width: 100%;
+    margin-top: 3px;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+}
+
+.sky-pixel-adventure-panel select option {
+    color: #111;
+}
+
+.sky-pixel-adventure-result {
+    margin-top: 10px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    padding: 10px;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.9);
+}
+
+.sky-pixel-expedition-list {
+    display: grid;
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.sky-pixel-expedition-stop {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 14px !important;
+    text-align: left;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.sky-pixel-expedition-stop small {
+    color: rgba(255,255,255,0.62);
+    font-weight: 600;
+}
+
+.sky-pixel-expedition-stop.is-current {
+    outline: 2px solid rgba(255,255,255,0.65);
+}
+
+.sky-pixel-expedition-stop.is-complete {
+    opacity: 0.65;
+}
+
+.sky-pixel-minimap {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 2400;
+    width: 190px;
+    padding: 8px;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.68);
+    border: 1px solid rgba(255,255,255,0.16);
+    box-shadow: 0 14px 42px rgba(0,0,0,0.35);
+    color: #fff;
+    backdrop-filter: blur(14px);
+    font-family: Calibri, Arial, sans-serif;
+}
+
+.sky-pixel-minimap-title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 5px 4px;
+    opacity: 0.78;
+}
+
+.sky-pixel-minimap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.sky-pixel-minimap-bg {
+    fill: rgba(20, 28, 36, 0.88);
+    stroke: rgba(255,255,255,0.22);
+    stroke-width: 1.5;
+}
+
+.sky-pixel-minimap-view {
+    fill: rgba(255,255,255,0.14);
+    stroke: rgba(255,255,255,0.75);
+    stroke-width: 1.5;
+}
+
+.sky-pixel-minimap-dot {
+    fill: #fff;
+    stroke: #000;
+    stroke-width: 2;
+}
+
+@media (max-width: 760px) {
+    .sky-pixel-adventure-tools {
+        left: 10px;
+        right: 10px;
+        bottom: 82px;
+        max-width: none;
+    }
+
+    .sky-pixel-minimap {
+        width: 140px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
+/* v2 adventure tools: custom travel routes + custom expeditions */
+.sky-pixel-inline-add {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.sky-pixel-adventure-panel input[type="text"] {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    padding: 8px 10px;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.sky-pixel-adventure-panel input[type="text"]::placeholder {
+    color: rgba(255,255,255,0.45);
+}
+
+.sky-pixel-route-stop-list,
+.sky-pixel-expedition-list {
+    max-height: 240px;
+    overflow: auto;
+    padding-right: 2px;
+}
+
+.sky-pixel-route-empty {
+    border: 1px dashed rgba(255,255,255,0.18);
+    border-radius: 14px;
+    padding: 10px;
+    color: rgba(255,255,255,0.62);
+    font-size: 13px;
+    line-height: 1.3;
+    background: rgba(255,255,255,0.04);
+}
+
+.sky-pixel-route-stop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.10);
+    padding: 8px 8px 8px 10px;
+    margin-bottom: 6px;
+    color: rgba(255,255,255,0.92);
+    font-weight: 700;
+}
+
+.sky-pixel-route-stop-actions {
+    display: inline-flex;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.sky-pixel-route-stop-actions button,
+.sky-pixel-expedition-remove {
+    padding: 5px 8px !important;
+    border-radius: 999px !important;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.sky-pixel-expedition-stop {
+    position: relative;
+    padding-right: 42px !important;
+}
+
+.sky-pixel-expedition-remove {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 26px;
+    height: 26px;
+}
+
+.sky-pixel-adventure-result small {
+    display: block;
+    margin-top: 8px;
+    color: rgba(255,255,255,0.68);
+}
+
+.sky-pixel-minimap-place {
+    fill: rgba(255,255,255,0.52);
+    stroke: rgba(0,0,0,0.4);
+    stroke-width: 0.4;
+}
+
+.sky-pixel-minimap-place.is-major {
+    fill: rgba(255,255,255,0.9);
+    stroke: rgba(0,0,0,0.55);
+    stroke-width: 0.6;
+}
+
+/* Sky Pixel panel social footer */
+.sky-pixel-panel-social {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.sky-pixel-social-title {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.68);
+    margin-bottom: 10px;
+}
+
+.sky-pixel-social-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.sky-pixel-social-button {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.08);
+    transition: transform 140ms ease, filter 140ms ease, border-color 140ms ease;
+}
+
+.sky-pixel-social-button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.12);
+    border-color: rgba(255, 255, 255, 0.42);
+}
+
+.sky-pixel-social-button.reddit {
+    background: #ff4500;
+}
+
+.sky-pixel-social-button.youtube {
+    background: #ff0033;
+    font-size: 15px;
+}
+
+.sky-pixel-social-button.planetminecraft {
+    background: #2f7d32;
+    font-size: 12px;
+    letter-spacing: -0.03em;
+}
+
+
+/* Explorer Passport + Journey Statistics */
+.sky-pixel-passport-actions button,
+.sky-pixel-passport-import {
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(8, 12, 18, 0.82);
+    color: white;
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+}
+
+.sky-pixel-passport-actions button:hover,
+.sky-pixel-passport-import:hover {
+    background: rgba(255,255,255,0.14);
+}
+
+.sky-pixel-passport-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1490;
+    pointer-events: none;
+    opacity: 0;
+    background: rgba(0,0,0,0.2);
+    transition: opacity 180ms ease;
+}
+
+.sky-pixel-passport-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sky-pixel-passport-panel {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: min(520px, calc(100vw - 28px));
+    max-height: min(720px, calc(100vh - 28px));
+    transform: translate(-50%, -48%) scale(0.98);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1500;
+    overflow: auto;
+    color: #fff;
+    background: linear-gradient(180deg, rgba(18,23,31,0.96), rgba(4,7,12,0.98));
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 24px;
+    box-shadow: 0 24px 90px rgba(0,0,0,0.55);
+    padding: 20px;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.sky-pixel-passport-panel.is-visible {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sky-pixel-passport-close {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 50%;
+    color: white;
+    background: rgba(255,255,255,0.12);
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.sky-pixel-passport-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 2px 42px 18px 0;
+}
+
+.sky-pixel-passport-icon {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.12);
+    font-size: 28px;
+}
+
+.sky-pixel-passport-kicker,
+.sky-pixel-passport-progress small,
+.sky-pixel-passport-progress span,
+.sky-pixel-stamp small,
+.sky-pixel-passport-note {
+    color: rgba(255,255,255,0.68);
+}
+
+.sky-pixel-passport-head h2 {
+    margin: 2px 0 0;
+    font-size: 26px;
+}
+
+.sky-pixel-passport-progress {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+
+.sky-pixel-passport-progress strong {
+    font-size: 28px;
+}
+
+.sky-pixel-passport-bar {
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.14);
+    margin: 12px 0 6px;
+}
+
+.sky-pixel-passport-bar i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #9bdcff, #ffffff);
+}
+
+.sky-pixel-passport-section-title {
+    margin: 16px 0 10px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.sky-pixel-stamp-list {
+    display: grid;
+    gap: 8px;
+}
+
+.sky-pixel-stamp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: white;
+    border-radius: 16px;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.sky-pixel-stamp:hover {
+    background: rgba(255,255,255,0.13);
+}
+
+.sky-pixel-stamp-icon {
+    font-size: 24px;
+}
+
+.sky-pixel-stamp span:last-child {
+    display: grid;
+    gap: 2px;
+}
+
+.sky-pixel-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.sky-pixel-stat-grid div {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 12px;
+}
+
+.sky-pixel-stat-grid span {
+    display: block;
+    color: rgba(255,255,255,0.68);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.sky-pixel-stat-grid strong {
+    font-size: 26px;
+}
+
+.sky-pixel-passport-note,
+.sky-pixel-passport-empty {
+    margin-top: 14px;
+    line-height: 1.45;
+}
+
+.sky-pixel-passport-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.sky-pixel-passport-actions .danger {
+    background: rgba(155,30,30,0.56);
+}
+
+.sky-pixel-passport-import input {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .sky-pixel-stat-grid {
+        grid-template-columns: 1fr;
+    }
+}

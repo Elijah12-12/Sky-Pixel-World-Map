@@ -360,6 +360,10 @@ class Unmined {
                 geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], this.dataProjection, this.viewProjection))
             });
 
+            // Keep the original marker data attached to the OpenLayers feature
+            // so Sky Pixel popups/links can read fields like popupTitle and url.
+            feature.set('markerData', item);
+
             var style = new ol.style.Style();
             if (item.image)
                 style.setImage(new ol.style.Icon({
