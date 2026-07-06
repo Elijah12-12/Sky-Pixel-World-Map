@@ -551,6 +551,26 @@ div.ol-mouse-position {
     background: rgba(110, 160, 255, 0.40);
 }
 
+
+.sky-pixel-player-tools .sky-pixel-player-minimize {
+    min-width: 38px;
+    padding-inline: 13px;
+}
+
+.sky-pixel-player-tools.is-collapsed {
+    max-width: none;
+    border-radius: 999px;
+    padding: 8px;
+}
+
+.sky-pixel-player-tools.is-collapsed > :not(.sky-pixel-player-minimize) {
+    display: none;
+}
+
+.sky-pixel-player-tools.is-collapsed .sky-pixel-player-minimize {
+    min-width: 0;
+}
+
 .sky-pixel-player-import input {
     display: none;
 }

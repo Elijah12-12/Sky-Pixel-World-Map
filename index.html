@@ -59,7 +59,8 @@
     </div>
 
 
-    <div class="sky-pixel-player-tools" aria-label="Sky Pixel player explorer tools">
+    <div class="sky-pixel-player-tools" id="skyPixelPlayerTools" aria-label="Sky Pixel player explorer tools">
+        <button id="skyPixelPlayerToolsMinimize" class="sky-pixel-player-minimize" type="button" aria-expanded="true" title="Minimize Add Marker panel">−</button>
         <button id="skyPixelAddPlayerMarker" type="button">📌 Add Marker</button>
         <select id="skyPixelPlayerMarkerType" aria-label="Player marker type">
             <option value="home">🏠 Home Base</option>
@@ -248,6 +249,8 @@
         const measureReadout = document.getElementById('skyPixelMeasureReadout');
         const nearbySection = document.getElementById('skyPixelNearby');
         const nearbyList = document.getElementById('skyPixelNearbyList');
+        const playerToolsPanel = document.getElementById('skyPixelPlayerTools');
+        const playerToolsMinimize = document.getElementById('skyPixelPlayerToolsMinimize');
         const playerAddButton = document.getElementById('skyPixelAddPlayerMarker');
         const playerMarkerTypeSelect = document.getElementById('skyPixelPlayerMarkerType');
         const playerMarkerToggle = document.getElementById('skyPixelPlayerMarkersToggle');
@@ -265,6 +268,17 @@
         const playerMarkerNote = document.getElementById('skyPixelPlayerMarkerNote');
         const playerMarkerSave = document.getElementById('skyPixelPlayerMarkerSave');
         const playerMarkerDelete = document.getElementById('skyPixelPlayerMarkerDelete');
+
+        if (playerToolsPanel && playerToolsMinimize) {
+            playerToolsMinimize.addEventListener('click', function () {
+                const isCollapsed = playerToolsPanel.classList.toggle('is-collapsed');
+                playerToolsMinimize.setAttribute('aria-expanded', String(!isCollapsed));
+                playerToolsMinimize.textContent = isCollapsed ? '+' : '−';
+                playerToolsMinimize.title = isCollapsed ? 'Expand Add Marker panel' : 'Minimize Add Marker panel';
+                playerToolsMinimize.setAttribute('aria-label', isCollapsed ? 'Expand Add Marker panel' : 'Minimize Add Marker panel');
+            });
+        }
+
         const adventurePanel = document.getElementById('skyPixelAdventurePanel');
         const travelToggle = document.getElementById('skyPixelTravelToggle');
         const travelStopInput = document.getElementById('skyPixelTravelStopInput');
