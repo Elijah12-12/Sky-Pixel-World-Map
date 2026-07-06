@@ -17,7 +17,7 @@ window.SkyPixelLandmarkMarkers = {
       category: 'landmark', popupTitle: "Blackfall Provincial Park", popupType: "Provincial Park",
       popupDescription: "Explore Blackfall Provincial Park in the Sky Pixel Minecraft world.",
       image: "icon-park.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
-      text: "Blackfall Provincial Park", textColor: "#9be27d",
+      text: "Mount Blackfall Provincial Park", textColor: "#9be27d",
       textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
       offsetX: 0, offsetY: 16,
       font: "bold 18px Calibri,sans-serif", labelMinZoom: 4.55
