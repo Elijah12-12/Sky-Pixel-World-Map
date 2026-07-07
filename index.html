@@ -1439,6 +1439,16 @@
             nearbySection.hidden = false;
         }
 
+
+        const skyPixelManualHeroImages = {
+            "Octavian": "https://preview.redd.it/today-is-my-12-year-anniversary-on-my-minecraft-world-v0-jc7pzl3h1oah1.jpg?width=1080&crop=smart&auto=webp&s=6c71ffce66bf9af8ee44885834c66cc78c3aa441"
+        };
+
+        function getSkyPixelManualHeroImage(marker) {
+            const cleanName = cleanSkyPixelPlaceName(marker);
+            return skyPixelManualHeroImages[cleanName] || '';
+        }
+
         function openSkyPixelPanel(marker) {
             activeSkyPixelMarker = marker;
             const title = marker.popupTitle || marker.text || 'Location';
@@ -1458,7 +1468,7 @@
             setSkyPixelWikiDetails([]);
             renderSkyPixelNearbyPlaces(marker);
 
-            setSkyPixelHeroImage(marker.popupImage || '');
+            setSkyPixelHeroImage(getSkyPixelManualHeroImage(marker) || marker.popupImage || '');
 
             panelLink.href = marker.url || '#';
             panelLink.style.display = marker.url ? 'inline-flex' : 'none';
@@ -1528,7 +1538,7 @@
                 const page = Object.values(pages)[0];
                 if (!page || page.missing) return;
 
-                if (page.original && page.original.source) {
+                if (!getSkyPixelManualHeroImage(marker) && page.original && page.original.source) {
                     setSkyPixelHeroImage(page.original.source);
                 }
 
