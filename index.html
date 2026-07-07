@@ -6,6 +6,7 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
 
     <!-- OpenLayers  -->
     <link rel="stylesheet" type="text/css" href="lib/ol.css">
@@ -1468,9 +1469,23 @@
             loadSkyPixelWikiPreview(marker);
         }
 
+        function normalizeSkyPixelImageUrl(imageUrl) {
+            if (!imageUrl) return '';
+
+            // GitHub Pages is HTTPS. Force wiki images to HTTPS so the browser
+            // does not block them as mixed content.
+            let fixedUrl = String(imageUrl).trim().replace(/^http:\/\//i, 'https://');
+
+            // CSS background-image can break on raw spaces or quote characters.
+            fixedUrl = fixedUrl.replace(/"/g, '%22').replace(/\s/g, '%20');
+
+            return fixedUrl;
+        }
+
         function setSkyPixelHeroImage(imageUrl) {
-            if (imageUrl) {
-                panelHero.style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)), url("${imageUrl}")`;
+            const safeImageUrl = normalizeSkyPixelImageUrl(imageUrl);
+            if (safeImageUrl) {
+                panelHero.style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.62)), url("${safeImageUrl}")`;
                 panelHero.classList.add('has-image');
             } else {
                 panelHero.style.backgroundImage = '';
