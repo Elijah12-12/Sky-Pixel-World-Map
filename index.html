@@ -4821,6 +4821,14 @@
             "Mount Porter": "https://preview.redd.it/mountains-i-built-v0-0e8km7fakhwb1.jpg?width=1080&crop=smart&auto=webp&s=adb76e71ea69d4fd79244a7d1b76cb6225985dfe",
             "Mount Ellie": "https://preview.redd.it/extreme-landscapes-v0-l5z8h9frillb1.jpg?width=1080&crop=smart&auto=webp&s=ed9391ac8500fc046b458a4b7f5511342516be92",
             "North Serra Dor Mountains": "https://i.redd.it/l8jirbczm38h1.png",
+            // Corrected title aliases / duplicate image keys. Keep the original keys above so existing markers and zoom behavior are untouched.
+            "Octavian Night Raven Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-rvia80uruajg1.png?width=1080&crop=smart&auto=webp&s=aa9954b61fd8947ec8d9060987dddd17ad0952ee",
+            "Lullaby Fjord / Inlet": "https://i.redd.it/ff1akeg234ld1.jpeg",
+            "Lottish Mountain Range": "https://preview.redd.it/i-attempted-a-scotland-themed-build-did-i-do-it-justice-v0-t5067mrifrmd1.jpg?width=1080&crop=smart&auto=webp&s=3b83b91d9d1cbe6a502e6e6d1f40e71533a25f03",
+            "Bosley Bayou Nature Reserve": "https://preview.redd.it/what-do-you-think-of-my-custom-blocks-i-made-v0-yy7gxeywxe1d1.jpg?width=1080&crop=smart&auto=webp&s=b2fa8586e1a4c8524b0544664f06ef02a2437198",
+            "Cayenne Canyon Provincial Park": "https://preview.redd.it/scorching-sun-v0-ynikyl0r3qgc1.jpg?width=1080&crop=smart&auto=webp&s=7df3024b3fa8466c8fff3548df9e6f4cf6c51f43",
+            "South Mount Ellie": "https://preview.redd.it/extreme-landscapes-v0-l5z8h9frillb1.jpg?width=1080&crop=smart&auto=webp&s=ed9391ac8500fc046b458a4b7f5511342516be92",
+            "North Serra-Dor Mountains": "https://i.redd.it/l8jirbczm38h1.png",
         };
 
         function getSkyPixelManualHeroImage(marker) {
@@ -4854,7 +4862,7 @@
 
         function openSkyPixelPanel(marker) {
             activeSkyPixelMarker = marker;
-            const title = marker.popupTitle || marker.text || 'Location';
+            const title = getSkyPixelPanelDisplayTitle(marker);
 
             const countryName = getSkyPixelCountryFromMarker(marker);
             const panelRootType = marker.category === 'landmark' ? 'Sky Pixel Landmark' : 'Sky Pixel Location';
@@ -5015,6 +5023,23 @@
 
         applySkyPixelSocialLinks();
 
+
+        const skyPixelPlaceTitleAliases = {
+            'Octavian Night Ravens Stadium': 'Octavian Night Raven Stadium',
+            'Lullaby Fjord': 'Lullaby Fjord / Inlet',
+            'Lottish Mountains': 'Lottish Mountain Range',
+            'Bosley Bayou Reserve': 'Bosley Bayou Nature Reserve',
+            'Cayenne Canyon': 'Cayenne Canyon Provincial Park',
+            'Mount Ellie': 'South Mount Ellie',
+            'North Serra Dor Mountains': 'North Serra-Dor Mountains'
+        };
+
+        function getSkyPixelPanelDisplayTitle(marker) {
+            const rawTitle = marker.popupTitle || marker.text || 'Location';
+            const cleanTitle = rawTitle.split(',')[0].replace(/\s+/g, ' ').trim();
+            const fixedTitle = skyPixelPlaceTitleAliases[cleanTitle];
+            return fixedTitle ? rawTitle.replace(cleanTitle, fixedTitle) : rawTitle;
+        }
 
         function cleanSkyPixelPlaceName(marker) {
             const rawTitle = marker.popupTitle || marker.text || 'this place';
