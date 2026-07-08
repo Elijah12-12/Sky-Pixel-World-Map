@@ -97,6 +97,32 @@
                 min-height: 150px !important;
             }
 
+            /* Mobile: stack all panel buttons so the third button (3D View)
+               cannot get pushed off-screen or hidden by horizontal overflow. */
+            body.sky-pixel-location-panel-open #skyPixelPanel .sky-pixel-panel-actions {
+                display: grid !important;
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+                width: 100% !important;
+                overflow: visible !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelPanel .sky-pixel-panel-actions a,
+            body.sky-pixel-location-panel-open #skyPixelBlueMapLink {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                min-height: 44px !important;
+                box-sizing: border-box !important;
+                white-space: normal !important;
+                text-align: center !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelBlueMapLink {
+                order: 3 !important;
+            }
+
             body.sky-pixel-location-panel-open #skyPixelPanelClose.sky-pixel-panel-close {
                 position: fixed !important;
                 top: 18px !important;
