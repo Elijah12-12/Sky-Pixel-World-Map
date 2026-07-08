@@ -79,6 +79,22 @@
                 pointer-events: auto !important;
                 touch-action: manipulation !important;
             }
+
+            /* Mobile fix: let the location panel itself scroll.
+               Without this, the map/touch layer can capture vertical swipes. */
+            #skyPixelPanel,
+            .sky-pixel-panel {
+                max-height: calc(100dvh - 18px) !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
+                overscroll-behavior: contain !important;
+            }
+
+            .sky-pixel-panel-content {
+                touch-action: pan-y !important;
+            }
         }
     </style>
 
@@ -272,6 +288,15 @@
         const panel = document.getElementById('skyPixelPanel');
         const panelBackdrop = document.getElementById('skyPixelPanelBackdrop');
         const panelClose = document.getElementById('skyPixelPanelClose');
+
+        // Mobile fix: keep map drag/touch handlers from stealing scroll gestures inside the side panel.
+        if (panel) {
+            ['touchstart', 'touchmove', 'wheel'].forEach(function (eventName) {
+                panel.addEventListener(eventName, function (event) {
+                    event.stopPropagation();
+                }, { passive: true });
+            });
+        }
         const panelType = document.getElementById('skyPixelPanelType');
         const panelTitle = document.getElementById('skyPixelPanelTitle');
         const panelDescription = document.getElementById('skyPixelPanelDescription');
