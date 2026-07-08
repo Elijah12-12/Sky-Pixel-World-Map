@@ -48,7 +48,9 @@
             body.sky-pixel-location-panel-open .sky-pixel-player-tools,
             body.sky-pixel-location-panel-open .sky-pixel-measure,
             body.sky-pixel-location-panel-open .sky-pixel-adventure-tools,
-            body.sky-pixel-location-panel-open .sky-pixel-minimap {
+            body.sky-pixel-location-panel-open .sky-pixel-minimap,
+            body.sky-pixel-location-panel-open .sky-pixel-map-tools-panel,
+            body.sky-pixel-location-panel-open .sky-pixel-teleport-toggle {
                 display: none !important;
                 pointer-events: none !important;
             }
@@ -134,6 +136,392 @@
         }
     </style>
 
+
+    <style id="sky-pixel-teleport-routes-style">
+        .sky-pixel-map-tools-panel {
+            position: fixed;
+            left: 20px;
+            top: 92px;
+            z-index: 3600;
+            width: 380px;
+            max-height: calc(100dvh - 120px);
+            overflow-y: auto;
+            background: rgba(10, 14, 22, 0.88);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 18px;
+            padding: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+            backdrop-filter: blur(12px);
+            color: #ffffff;
+        }
+
+
+        .sky-pixel-map-tools-panel,
+        .sky-pixel-teleport-result,
+        #skyPixelAdventurePanel,
+        #skyPixelTravelResult,
+        #skyPixelExpeditionList {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 218, 255, 0.58) rgba(255,255,255,0.06);
+        }
+
+        .sky-pixel-map-tools-panel::-webkit-scrollbar,
+        .sky-pixel-teleport-result::-webkit-scrollbar,
+        #skyPixelAdventurePanel::-webkit-scrollbar,
+        #skyPixelTravelResult::-webkit-scrollbar,
+        #skyPixelExpeditionList::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .sky-pixel-map-tools-panel::-webkit-scrollbar-track,
+        .sky-pixel-teleport-result::-webkit-scrollbar-track,
+        #skyPixelAdventurePanel::-webkit-scrollbar-track,
+        #skyPixelTravelResult::-webkit-scrollbar-track,
+        #skyPixelExpeditionList::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.055);
+            border-radius: 999px;
+            margin: 12px 0;
+        }
+
+        .sky-pixel-map-tools-panel::-webkit-scrollbar-thumb,
+        .sky-pixel-teleport-result::-webkit-scrollbar-thumb,
+        #skyPixelAdventurePanel::-webkit-scrollbar-thumb,
+        #skyPixelTravelResult::-webkit-scrollbar-thumb,
+        #skyPixelExpeditionList::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(0, 218, 255, 0.72), rgba(120, 90, 255, 0.72));
+            border: 2px solid rgba(10, 14, 22, 0.72);
+            border-radius: 999px;
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.28);
+        }
+
+        .sky-pixel-map-tools-panel::-webkit-scrollbar-thumb:hover,
+        .sky-pixel-teleport-result::-webkit-scrollbar-thumb:hover,
+        #skyPixelAdventurePanel::-webkit-scrollbar-thumb:hover,
+        #skyPixelTravelResult::-webkit-scrollbar-thumb:hover,
+        #skyPixelExpeditionList::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, rgba(0, 238, 255, 0.92), rgba(150, 110, 255, 0.92));
+        }
+
+
+        .sky-pixel-map-tools-title {
+            font-weight: 950;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 12px;
+            opacity: 0.9;
+            margin: 0 36px 10px 2px;
+        }
+
+        .sky-pixel-map-tools-minimize {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 10px;
+            color: #ffffff;
+            background: rgba(255,255,255,0.14);
+            font-weight: 950;
+            cursor: pointer;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed {
+            width: auto;
+            max-height: none;
+            overflow: hidden;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-teleport-toggle,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-player-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-adventure-tools {
+            display: none !important;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-map-tools-title {
+            margin: 2px 42px 2px 2px;
+        }
+
+        .sky-pixel-teleport-toggle {
+            position: static;
+            z-index: auto;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            margin-bottom: 10px;
+        }
+
+        .sky-pixel-teleport-toggle button {
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(90, 120, 255, 0.82), rgba(185, 80, 255, 0.82));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 18px rgba(132, 105, 255, 0.38);
+        }
+
+        .sky-pixel-teleport-toggle button.is-active {
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.88), rgba(100, 88, 255, 0.88));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 26px rgba(0, 210, 255, 0.55);
+        }
+
+
+
+        .sky-pixel-map-tools-panel .sky-pixel-player-tools,
+        .sky-pixel-map-tools-panel .sky-pixel-adventure-tools {
+            position: static !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            z-index: auto !important;
+            width: auto !important;
+            max-width: none !important;
+            margin: 10px 0 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .sky-pixel-map-tools-panel .sky-pixel-player-tools {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        .sky-pixel-map-tools-panel .sky-pixel-adventure-tools {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        .sky-pixel-map-tools-panel .sky-pixel-player-tools button,
+        .sky-pixel-map-tools-panel .sky-pixel-player-tools select,
+        .sky-pixel-map-tools-panel .sky-pixel-player-import,
+        .sky-pixel-map-tools-panel .sky-pixel-adventure-tools button {
+            max-width: 100%;
+        }
+
+        .sky-pixel-map-tools-panel .sky-pixel-tool-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .sky-pixel-teleport-planner {
+            margin-top: 10px;
+            width: 100%;
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .sky-pixel-teleport-title {
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            margin: 8px 2px 8px;
+            color: #ffffff;
+        }
+
+        .sky-pixel-teleport-title.small {
+            margin-top: 12px;
+            opacity: 0.95;
+        }
+
+        .sky-pixel-teleport-layer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-bottom: 10px;
+        }
+
+        .sky-pixel-teleport-layer-grid label,
+        .sky-pixel-teleport-field {
+            display: block;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 7px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .sky-pixel-teleport-field {
+            margin-bottom: 8px;
+        }
+
+        .sky-pixel-teleport-field select,
+        .sky-pixel-teleport-field input {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            border: 0;
+            border-radius: 8px;
+            padding: 8px;
+            background: rgba(255,255,255,0.95);
+            color: #111827;
+            font-weight: 700;
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-teleport-actions {
+            display: grid;
+            grid-template-columns: 1fr 0.75fr;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .sky-pixel-teleport-actions button {
+            border: 0;
+            border-radius: 10px;
+            padding: 9px 10px;
+            color: #ffffff;
+            font-weight: 900;
+            cursor: pointer;
+            background: rgba(0, 190, 255, 0.72);
+        }
+
+        .sky-pixel-teleport-actions button:last-child {
+            background: rgba(255,255,255,0.16);
+        }
+
+        .sky-pixel-teleport-result {
+            max-height: 220px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.28);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 10px;
+            line-height: 1.35;
+        }
+
+        .sky-pixel-teleport-route-step {
+            padding: 7px 8px;
+            border-radius: 9px;
+            background: rgba(255,255,255,0.07);
+            margin: 6px 0;
+        }
+
+        .sky-pixel-teleport-route-arrow {
+            text-align: center;
+            opacity: 0.8;
+            font-weight: 900;
+        }
+
+        .sky-pixel-teleport-route-summary {
+            font-weight: 900;
+            color: #8eeaff;
+            margin-bottom: 8px;
+        }
+
+        .sky-pixel-teleport-warning {
+            color: #ffd37a;
+            font-weight: 800;
+        }
+
+
+        .sky-pixel-teleport-alt {
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 12px;
+            padding: 8px;
+            margin: 8px 0 10px;
+            background: rgba(255,255,255,0.055);
+        }
+        .sky-pixel-teleport-alt-title { font-weight: 900; margin-bottom: 6px; color: #ffffff; }
+        .sky-pixel-teleport-option-map,
+        .sky-pixel-teleport-more-routes {
+            width: 100%;
+            border: 0;
+            border-radius: 10px;
+            padding: 9px 10px;
+            color: #ffffff;
+            font-weight: 900;
+            cursor: pointer;
+            background: rgba(0, 190, 255, 0.72);
+            margin-top: 8px;
+        }
+        .sky-pixel-teleport-more-routes {
+            background: linear-gradient(135deg, rgba(255, 160, 40, 0.78), rgba(255, 75, 75, 0.78));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+        }
+        .sky-pixel-teleport-more-routes:disabled {
+            cursor: default;
+            opacity: 0.72;
+            background: rgba(255,255,255,0.16);
+        }
+        .sky-pixel-teleport-leg-direct { color: #70d7ff; font-weight: 900; }
+        .sky-pixel-teleport-leg-layover { color: #ffb347; font-weight: 900; }
+        .sky-pixel-teleport-leg-third { color: #ff6b6b; font-weight: 900; }
+        
+        .sky-pixel-inline-add{
+            display:flex;
+            gap:8px;
+            align-items:center;
+        }
+        .sky-pixel-inline-add input{
+            flex:1;
+            min-width:0;
+        }
+        .sky-pixel-inline-add button{
+            flex:0 0 auto;
+            white-space:nowrap;
+        }
+
+.sky-pixel-teleport-extra-stops { margin: 6px 0 8px; display: grid; gap: 6px; }
+        .sky-pixel-teleport-extra-stop {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 7px 8px;
+            font-weight: 800;
+        }
+        .sky-pixel-teleport-extra-stop button,
+        .sky-pixel-teleport-option-map {
+            border: 0;
+            border-radius: 9px;
+            padding: 7px 9px;
+            color: #ffffff;
+            background: rgba(0, 190, 255, 0.72);
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .sky-pixel-teleport-extra-stop button { background: rgba(255,255,255,0.16); }
+        .sky-pixel-teleport-option-map { width: 100%; margin-top: 8px; }
+        .sky-pixel-teleport-alt.is-selected {
+            border-color: rgba(0, 225, 255, 0.55);
+            box-shadow: 0 0 18px rgba(0, 210, 255, 0.22);
+        }
+
+        @media (max-width: 720px) {
+            .sky-pixel-map-tools-panel {
+                left: 10px;
+                right: 10px;
+                top: auto;
+                bottom: 12px;
+                width: auto;
+                max-height: 55dvh;
+            }
+
+            .sky-pixel-teleport-toggle button,
+            .sky-pixel-map-tools-panel button {
+                min-height: 44px;
+            }
+
+            body.sky-pixel-location-panel-open .sky-pixel-map-tools-panel {
+                display: none !important;
+                pointer-events: none !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -154,9 +542,54 @@
         <div id="skyPixelMeasureReadout" class="sky-pixel-measure-readout">Click Measure, then click points on the map.</div>
     </div>
 
+    <div class="sky-pixel-map-tools-panel" id="skyPixelMapToolsPanel" aria-label="Sky Pixel map tools">
+        <button id="skyPixelMapToolsMinimize" class="sky-pixel-map-tools-minimize" type="button" aria-expanded="true" title="Minimize Map Tools">−</button>
+        <div class="sky-pixel-map-tools-title">Sky Pixel Tools</div>
+
+    <div class="sky-pixel-teleport-toggle" aria-label="Sky Pixel teleport route planner">
+        <button id="skyPixelTeleportRoutesToggle" type="button" aria-pressed="false">🌀 Teleport Network</button>
+        <div id="skyPixelTeleportPlanner" class="sky-pixel-teleport-planner" hidden>
+            <div class="sky-pixel-teleport-title">Teleport Planner</div>
+
+            <div class="sky-pixel-teleport-layer-grid">
+                <label><input id="skyPixelTeleportShowDirect" type="checkbox" checked> Direct</label>
+                <label><input id="skyPixelTeleportShowLayover" type="checkbox"> Layover</label>
+                <label><input id="skyPixelTeleportShowThird" type="checkbox"> Third layover</label>
+                <label><input id="skyPixelTeleportShowLabels" type="checkbox" checked> Labels</label>
+            </div>
+
+            <label class="sky-pixel-teleport-field">City focus
+                <select id="skyPixelTeleportFocusCity">
+                    <option value="">All cities</option>
+                </select>
+            </label>
+
+            <div class="sky-pixel-teleport-title small">Find Teleport Route</div>
+            <label class="sky-pixel-teleport-field">From
+                <input id="skyPixelTeleportFrom" type="text" list="skyPixelTeleportCityList" placeholder="Example: Octavian">
+            </label>
+            <label class="sky-pixel-teleport-field">To
+                <input id="skyPixelTeleportTo" type="text" list="skyPixelTeleportCityList" placeholder="Example: Harlow">
+            </label>
+            <label class="sky-pixel-teleport-field">Add stop / next destination
+                <div class="sky-pixel-inline-add">
+                    <input id="skyPixelTeleportExtraStop" type="text" list="skyPixelTeleportCityList" placeholder="Example: Alouette">
+                    <button id="skyPixelTeleportAddStop" type="button">Add</button>
+                </div>
+            </label>
+            <div id="skyPixelTeleportExtraStops" class="sky-pixel-teleport-extra-stops"></div>
+            <datalist id="skyPixelTeleportCityList"></datalist>
+            <div class="sky-pixel-teleport-actions">
+                <button id="skyPixelTeleportFindRoute" type="button">Find Route</button>
+                <button id="skyPixelTeleportClearRoute" type="button">Clear</button>
+            </div>
+            <div id="skyPixelTeleportRouteResult" class="sky-pixel-teleport-result">Choose two places to find a teleport path.</div>
+        </div>
+    </div>
+
 
     <div class="sky-pixel-player-tools" id="skyPixelPlayerTools" aria-label="Sky Pixel player explorer tools">
-        <button id="skyPixelPlayerToolsMinimize" class="sky-pixel-player-minimize" type="button" aria-expanded="true" title="Minimize Add Marker panel">−</button>
+        <button id="skyPixelPlayerToolsMinimize" class="sky-pixel-player-minimize" type="button" aria-expanded="true" title="Collapse Add Marker controls">−</button>
         <button id="skyPixelAddPlayerMarker" type="button">📌 Add Marker</button>
         <select id="skyPixelPlayerMarkerType" aria-label="Player marker type">
             <option value="home">🏠 Home Base</option>
@@ -216,6 +649,7 @@
             </div>
         </div>
     </section>
+    </div>
 
 
     <div class="sky-pixel-minimap" aria-label="Sky Pixel minimap overview">
@@ -353,6 +787,7 @@
         const measureToggle = document.getElementById('skyPixelMeasureToggle');
         const measureClear = document.getElementById('skyPixelMeasureClear');
         const measureReadout = document.getElementById('skyPixelMeasureReadout');
+        const teleportRoutesToggle = document.getElementById('skyPixelTeleportRoutesToggle');
         const nearbySection = document.getElementById('skyPixelNearby');
         const nearbyList = document.getElementById('skyPixelNearbyList');
         const playerToolsPanel = document.getElementById('skyPixelPlayerTools');
@@ -382,6 +817,18 @@
                 playerToolsMinimize.textContent = isCollapsed ? '+' : '−';
                 playerToolsMinimize.title = isCollapsed ? 'Expand Add Marker panel' : 'Minimize Add Marker panel';
                 playerToolsMinimize.setAttribute('aria-label', isCollapsed ? 'Expand Add Marker panel' : 'Minimize Add Marker panel');
+            });
+        }
+
+        const mapToolsPanel = document.getElementById('skyPixelMapToolsPanel');
+        const mapToolsMinimize = document.getElementById('skyPixelMapToolsMinimize');
+        if (mapToolsPanel && mapToolsMinimize) {
+            mapToolsMinimize.addEventListener('click', function () {
+                const isCollapsed = mapToolsPanel.classList.toggle('is-collapsed');
+                mapToolsMinimize.setAttribute('aria-expanded', String(!isCollapsed));
+                mapToolsMinimize.textContent = isCollapsed ? '+' : '−';
+                mapToolsMinimize.title = isCollapsed ? 'Expand Map Tools' : 'Minimize Map Tools';
+                mapToolsMinimize.setAttribute('aria-label', isCollapsed ? 'Expand Map Tools' : 'Minimize Map Tools');
             });
         }
 
@@ -604,6 +1051,1398 @@
             }
         });
         unmined.olMap.addLayer(skyPixelMeasureLayer);
+
+        // Sky Pixel Teleport Network: airline-style direct routes + automatic layover planner.
+        const skyPixelTeleportRoutes = [
+            {
+                        "from": "Octavian",
+                        "to": "Razalia",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DXP-RAE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Noland",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "TP-NOLE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Harlie",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "TP-HARLIE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Chaseloke",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "TP-CHASE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Tayberry",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DX-TAY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Harlow",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DXP-HAR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Reno",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DX-RENO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Elowah",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DXP-ELO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Oxland",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DXP-OXL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Valance",
+                        "fromCode": "DXP-OCT-N",
+                        "toCode": "DX-VAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Klaxikin",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DXP-KLAX",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Adaline",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DXP-ADI",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Skyhaven",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DX-SKY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Brooklyn",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DX-BROOK",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Zalex",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DX-ZAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Ruby",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DXP-RUE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "La Morley",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Jackson",
+                        "fromCode": "DXP-OCT-S",
+                        "toCode": "TP-JACKSON",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Prunelle",
+                        "fromCode": "DXP-OCT-E",
+                        "toCode": "DXP-PRUE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Octavian",
+                        "to": "Lenore",
+                        "fromCode": "DXP-OCT-E",
+                        "toCode": "DX-LENORE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Octavian",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-OCT-N",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Elowah",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-ELO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Razalia",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-RAE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Oxland",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-OXL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Taholah",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DX-TAH",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Reno",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-RENO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Alouette",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DX-ALO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Saylor",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DX-SAY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Harlen",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "TP-HEN",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Athena",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "TP-ATHE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Coralie",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "TP-COR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "La Morley",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Harlow",
+                        "to": "Elodie",
+                        "fromCode": "DXP-HAR",
+                        "toCode": "DX-ELODIE",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Harlow",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-HAR",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Octavian",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-OCT-S",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "La Aurielle",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DX-AURE",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Ruby",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-RUE",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Quantum",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-QUA",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Malakai",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-MAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Lilo",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DX-LILO",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Razalia",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-RAE",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Skyhaven",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DX-SKY",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Malu",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-MALU",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Les Solenne",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DX-SOL",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Klaxikin",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-KLAX",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Elowah",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "DXP-ELO",
+                        "seasonal": false
+            },
+            {
+                        "from": "La Morley",
+                        "to": "Selah",
+                        "fromCode": "DXP-MOR",
+                        "toCode": "TP-SEL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Quantum",
+                        "to": "La Morley",
+                        "fromCode": "DXP-QUA",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Quantum",
+                        "to": "Malakai",
+                        "fromCode": "DXP-QUA",
+                        "toCode": "DXP-MAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Quantum",
+                        "to": "Malu",
+                        "fromCode": "DXP-QUA",
+                        "toCode": "DXP-MALU",
+                        "seasonal": false
+            },
+            {
+                        "from": "Quantum",
+                        "to": "Lilo",
+                        "fromCode": "DXP-QUA",
+                        "toCode": "DX-LILO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Quantum",
+                        "to": "L'Eulàlia",
+                        "fromCode": "DXP-QUA",
+                        "toCode": "DXP-EUA",
+                        "seasonal": false
+            },
+            {
+                        "from": "Prunelle",
+                        "to": "Orlaith",
+                        "fromCode": "DXP-PRUE",
+                        "toCode": "DXP-ORLA",
+                        "seasonal": false
+            },
+            {
+                        "from": "Prunelle",
+                        "to": "Octavian",
+                        "fromCode": "DXP-PRUE",
+                        "toCode": "DXP-OCT-E",
+                        "seasonal": false
+            },
+            {
+                        "from": "Prunelle",
+                        "to": "Valance",
+                        "fromCode": "DXP-PRUE",
+                        "toCode": "DXP-VAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Harlow",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-HAR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Elowah",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-ELO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Alouette",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DX-ALO",
+                        "seasonal": true
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Baylie",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "TP-BAY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Oxland",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-OXL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Coralie",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "TP-COR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "La Morley",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Octavian",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-N-OCT",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Bellamy",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "TP-BELLS",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Tayberry",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DX-TAY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Noland",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DX-NOLE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Klaxikin",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-KLAX",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Valance",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DXP-VAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Razalia",
+                        "to": "Skyhaven",
+                        "fromCode": "DXP-RAE",
+                        "toCode": "DX-SKY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Zalex",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DX-ZAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Octavian",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-OCT-S",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Savia",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "TP-SAV",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Razalia",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-RAE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Ruby",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-RUE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "La Morley",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Jackson",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "TP-JACKSON",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Valance",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-VAL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Malani",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "TP-MALANI",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Skyhaven",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DX-SKY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "La Aurielle",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DX-AURE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Klaxikin",
+                        "to": "Adaline",
+                        "fromCode": "DXP-KLAX",
+                        "toCode": "DXP-ADI",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Octavian",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-OCT-N",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Harlow",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-HAR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Razalia",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-RAE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Oxland",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-OXL",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Taholah",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DX-TAH",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Reno",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-RENO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Alouette",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DX-ALO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Saylor",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DX-SAY",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Harlen",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "TP-HEN",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "La Morley",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DXP-MOR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Elowah",
+                        "to": "Elodie",
+                        "fromCode": "DXP-ELO",
+                        "toCode": "DX-ELODIE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Alouette",
+                        "to": "Elowah",
+                        "fromCode": "DX-ALO",
+                        "toCode": "DXP-ELO",
+                        "seasonal": false
+            },
+            {
+                        "from": "Alouette",
+                        "to": "Harlow",
+                        "fromCode": "DX-ALO",
+                        "toCode": "DXP-HAR",
+                        "seasonal": false
+            },
+            {
+                        "from": "Alouette",
+                        "to": "Razalia",
+                        "fromCode": "DX-ALO",
+                        "toCode": "DXP-RAE",
+                        "seasonal": true
+            },
+            {
+                        "from": "Alouette",
+                        "to": "Little Ellie",
+                        "fromCode": "DX-ALO",
+                        "toCode": "TP-ELE",
+                        "seasonal": false
+            },
+            {
+                        "from": "Alouette",
+                        "to": "Grizzly",
+                        "fromCode": "DX-ALO",
+                        "toCode": "TP-GRIZ",
+                        "seasonal": false
+            },
+            {
+                        "from": "Zalex",
+                        "to": "Klaxikin",
+                        "fromCode": "DX-ZAL",
+                        "toCode": "DXP-KLAX",
+                        "seasonal": false
+            },
+            {
+                        "from": "Zalex",
+                        "to": "Adaline",
+                        "fromCode": "DX-ZAL",
+                        "toCode": "DXP-ADI",
+                        "seasonal": false
+            },
+            {
+                        "from": "Zalex",
+                        "to": "Facility A51 SKY",
+                        "fromCode": "DX-ZAL",
+                        "toCode": "TP-51",
+                        "seasonal": false
+            }
+];
+
+        const teleportPlanner = document.getElementById('skyPixelTeleportPlanner');
+        const teleportShowDirect = document.getElementById('skyPixelTeleportShowDirect');
+        const teleportShowLayover = document.getElementById('skyPixelTeleportShowLayover');
+        const teleportShowThird = document.getElementById('skyPixelTeleportShowThird');
+        const teleportShowLabels = document.getElementById('skyPixelTeleportShowLabels');
+        const teleportFocusCity = document.getElementById('skyPixelTeleportFocusCity');
+        const teleportFromSelect = document.getElementById('skyPixelTeleportFrom');
+        const teleportToSelect = document.getElementById('skyPixelTeleportTo');
+        const teleportExtraStopInput = document.getElementById('skyPixelTeleportExtraStop');
+        const teleportAddStop = document.getElementById('skyPixelTeleportAddStop');
+        const teleportExtraStops = document.getElementById('skyPixelTeleportExtraStops');
+        const teleportCityList = document.getElementById('skyPixelTeleportCityList');
+        const teleportFindRoute = document.getElementById('skyPixelTeleportFindRoute');
+        const teleportClearRoute = document.getElementById('skyPixelTeleportClearRoute');
+        const teleportRouteResult = document.getElementById('skyPixelTeleportRouteResult');
+
+        const skyPixelTeleportSource = new ol.source.Vector({ features: [] });
+        const skyPixelTeleportLayer = new ol.layer.Vector({
+            source: skyPixelTeleportSource,
+            zIndex: 2050,
+            visible: false,
+            style: function (feature) {
+                const routeType = feature.get('routeType');
+
+                if (routeType === 'label') {
+                    if (!teleportShowLabels || !teleportShowLabels.checked) return null;
+                    return new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: feature.get('label') || '',
+                            font: 'bold 12px Calibri, Arial, sans-serif',
+                            fill: new ol.style.Fill({ color: '#ffffff' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(12, 10, 28, 0.95)', width: 4 }),
+                            backgroundFill: new ol.style.Fill({ color: feature.get('labelBg') || 'rgba(18, 16, 40, 0.78)' }),
+                            padding: [3, 7, 3, 7],
+                            offsetY: -10
+                        })
+                    });
+                }
+
+                const layer = feature.get('teleportLayer') || 'direct';
+                const isHighlighted = feature.get('isHighlighted');
+                const colors = {
+                    direct: ['rgba(0, 225, 255, 0.20)', 'rgba(0, 178, 255, 0.42)', 'rgba(84, 190, 255, 0.98)'],
+                    layover: ['rgba(255, 175, 0, 0.18)', 'rgba(255, 130, 0, 0.36)', 'rgba(255, 171, 54, 0.98)'],
+                    third: ['rgba(255, 60, 60, 0.16)', 'rgba(255, 40, 40, 0.32)', 'rgba(255, 74, 74, 0.98)'],
+                    selected: ['rgba(255, 255, 255, 0.28)', 'rgba(0, 255, 210, 0.52)', 'rgba(255, 255, 255, 1)']
+                };
+                const selectedColors = {
+                    direct: ['rgba(0, 255, 255, 0.28)', 'rgba(0, 208, 255, 0.58)', 'rgba(135, 238, 255, 1)'],
+                    layover: ['rgba(255, 190, 0, 0.28)', 'rgba(255, 145, 0, 0.58)', 'rgba(255, 190, 82, 1)'],
+                    third: ['rgba(255, 80, 80, 0.26)', 'rgba(255, 40, 40, 0.54)', 'rgba(255, 92, 92, 1)']
+                };
+                const c = isHighlighted ? (selectedColors[layer] || colors[layer] || colors.direct) : (colors[layer] || colors.direct);
+                const widthBoost = isHighlighted ? 1.4 : 0;
+
+                return [
+                    new ol.style.Style({ stroke: new ol.style.Stroke({ color: c[0], width: 11 + widthBoost }) }),
+                    new ol.style.Style({ stroke: new ol.style.Stroke({ color: c[1], width: 5.5 + widthBoost }) }),
+                    new ol.style.Style({ stroke: new ol.style.Stroke({ color: c[2], width: 2.2 + widthBoost }) })
+                ];
+            }
+        });
+        unmined.olMap.addLayer(skyPixelTeleportLayer);
+
+        let skyPixelTeleportRoutesBuilt = false;
+        let skyPixelSelectedTeleportPath = null;
+        let skyPixelTeleportRouteOptions = [];
+        let skyPixelSelectedTeleportOptionIndex = 0;
+        let skyPixelTeleportVisibleOptionCount = 3;
+        let skyPixelTeleportExtraStopsList = [];
+
+        function normalizeSkyPixelName(name) {
+            return String(name || '').toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+        }
+
+        function getSkyPixelMarkerByName(name) {
+            const target = normalizeSkyPixelName(name);
+            const aliases = {
+                'brooklyn': 'brooklyn c',
+                'l eulalia': "l'eulàlia",
+                'la eulalia': "l'eulàlia"
+            };
+            const aliasedTarget = normalizeSkyPixelName(aliases[target] || target);
+
+            let found = skyPixelSearchMarkers.find(function (item) {
+                return normalizeSkyPixelName(item.cleanName) === target ||
+                    normalizeSkyPixelName(item.displayName) === target ||
+                    normalizeSkyPixelName(item.cleanName) === aliasedTarget ||
+                    normalizeSkyPixelName(item.displayName) === aliasedTarget;
+            });
+
+            if (!found) {
+                found = skyPixelSearchMarkers.find(function (item) {
+                    const clean = normalizeSkyPixelName(item.cleanName);
+                    const display = normalizeSkyPixelName(item.displayName);
+                    return clean.includes(target) || display.includes(target) || target.includes(clean);
+                });
+            }
+
+            return found ? found.marker : null;
+        }
+
+        function makeSkyPixelCurvedRouteCoords(fromMarker, toMarker, routeIndex, layer) {
+            const from = getSkyPixelMapCenter(fromMarker);
+            const to = getSkyPixelMapCenter(toMarker);
+            const dx = to[0] - from[0];
+            const dy = to[1] - from[1];
+            const distance = Math.hypot(dx, dy) || 1;
+            const normalX = -dy / distance;
+            const normalY = dx / distance;
+            const curveMultiplier = layer === 'third' ? 0.23 : (layer === 'layover' ? 0.20 : 0.16);
+            const curveStrength = Math.min(distance * curveMultiplier, 260000);
+            const alternating = routeIndex % 2 === 0 ? 1 : -1;
+            const control = [
+                (from[0] + to[0]) / 2 + normalX * curveStrength * alternating,
+                (from[1] + to[1]) / 2 + normalY * curveStrength * alternating
+            ];
+            const coords = [];
+            for (let i = 0; i <= 48; i++) {
+                const t = i / 48;
+                const oneMinusT = 1 - t;
+                coords.push([
+                    oneMinusT * oneMinusT * from[0] + 2 * oneMinusT * t * control[0] + t * t * to[0],
+                    oneMinusT * oneMinusT * from[1] + 2 * oneMinusT * t * control[1] + t * t * to[1]
+                ]);
+            }
+            return coords;
+        }
+
+        function getSkyPixelTeleportCities() {
+            const citySet = new Set();
+            skyPixelTeleportRoutes.forEach(function (route) {
+                citySet.add(route.from);
+                citySet.add(route.to);
+            });
+            return Array.from(citySet).sort(function (a, b) { return a.localeCompare(b); });
+        }
+
+        function getSkyPixelTeleportAdjacency() {
+            const adjacency = {};
+            const seenEdges = new Set();
+
+            function addRoute(from, to, route) {
+                const key = normalizeSkyPixelName(from) + '>' + normalizeSkyPixelName(to);
+                if (seenEdges.has(key)) return;
+                seenEdges.add(key);
+
+                if (!adjacency[from]) adjacency[from] = [];
+                adjacency[from].push({ to: to, route: route });
+            }
+
+            skyPixelTeleportRoutes.forEach(function (route) {
+                addRoute(route.from, route.to, route);
+                addRoute(route.to, route.from, {
+                    from: route.to,
+                    to: route.from,
+                    fromCode: route.toCode,
+                    toCode: route.fromCode,
+                    seasonal: route.seasonal
+                });
+            });
+
+            return adjacency;
+        }
+
+        function findSkyPixelTeleportPaths(from, to, maxLegs, maxResults) {
+            if (!from || !to || from === to) return [];
+            const adjacency = getSkyPixelTeleportAdjacency();
+            const results = [];
+            const resultKeys = new Set();
+            const queue = [{ city: from, path: [], visited: new Set([from]) }];
+            const maxCandidates = 160;
+
+            while (queue.length && results.length < maxCandidates) {
+                const current = queue.shift();
+                if (current.path.length >= maxLegs) continue;
+
+                const nextRoutes = (adjacency[current.city] || []).slice().sort(function (a, b) {
+                    const rank = function (entry) {
+                        const code = entry.route.toCode || '';
+                        if (code.includes('DXP')) return 0;
+                        if (code.includes('DX-')) return 1;
+                        return 2;
+                    };
+                    return rank(a) - rank(b) || a.to.localeCompare(b.to);
+                });
+
+                for (const next of nextRoutes) {
+                    const nextCity = next.to;
+                    if (current.visited.has(nextCity)) continue;
+
+                    const nextPath = current.path.concat(next.route);
+                    if (nextCity === to) {
+                        const key = getSkyPixelTeleportPathKey(nextPath);
+                        if (key && !resultKeys.has(key)) {
+                            resultKeys.add(key);
+                            results.push(nextPath);
+                        }
+                        continue;
+                    }
+
+                    const nextVisited = new Set(Array.from(current.visited));
+                    nextVisited.add(nextCity);
+                    queue.push({ city: nextCity, path: nextPath, visited: nextVisited });
+                }
+            }
+
+            const uniqueResults = dedupeSkyPixelTeleportPaths(results);
+            uniqueResults.sort(function (a, b) {
+                const seasonalA = a.some(function (leg) { return leg.seasonal; }) ? 1 : 0;
+                const seasonalB = b.some(function (leg) { return leg.seasonal; }) ? 1 : 0;
+                return a.length - b.length || seasonalA - seasonalB || getSkyPixelTeleportPathKey(a).localeCompare(getSkyPixelTeleportPathKey(b));
+            });
+
+            const limit = maxResults || 5;
+            if (uniqueResults.length <= limit || limit < 4) return uniqueResults.slice(0, limit);
+
+            const picked = uniqueResults.slice(0, limit - 1);
+            const pickedKeys = new Set(picked.map(getSkyPixelTeleportPathKey));
+            const longest = uniqueResults.slice().reverse().find(function (path) {
+                return !pickedKeys.has(getSkyPixelTeleportPathKey(path));
+            });
+            if (longest) picked.push(longest);
+            return picked.slice(0, limit);
+        }
+
+
+        function getSkyPixelTeleportPathKey(path) {
+            if (!path || !path.length) return '';
+            const cities = [path[0].from];
+            path.forEach(function (leg) {
+                cities.push(leg.to);
+            });
+            return cities.map(normalizeSkyPixelName).join('>');
+        }
+
+        function dedupeSkyPixelTeleportPaths(paths) {
+            const seen = new Set();
+            const unique = [];
+            (paths || []).forEach(function (path) {
+                const key = getSkyPixelTeleportPathKey(path);
+                if (!key || seen.has(key)) return;
+                seen.add(key);
+                unique.push(path);
+            });
+            return unique;
+        }
+
+        function findSkyPixelTeleportPath(from, to, maxLegs) {
+            const paths = findSkyPixelTeleportPaths(from, to, maxLegs, 1);
+            return paths[0] || null;
+        }
+
+        function getTeleportLayerForPathLength(length) {
+            if (length <= 1) return 'direct';
+            if (length === 2) return 'layover';
+            return 'third';
+        }
+
+        function shouldShowTeleportRoute(route, layer, focusCity) {
+            if (layer === 'direct' && teleportShowDirect && !teleportShowDirect.checked) return false;
+            if (layer === 'layover' && teleportShowLayover && !teleportShowLayover.checked) return false;
+            if (layer === 'third' && teleportShowThird && !teleportShowThird.checked) return false;
+            if (focusCity && route.from !== focusCity && route.to !== focusCity) return false;
+            return true;
+        }
+
+        function addSkyPixelTeleportLine(route, index, layer, options) {
+            options = options || {};
+            const fromMarker = getSkyPixelMarkerByName(route.from);
+            const toMarker = getSkyPixelMarkerByName(route.to);
+            if (!fromMarker || !toMarker) return;
+
+            const coords = makeSkyPixelCurvedRouteCoords(fromMarker, toMarker, index, layer);
+            const line = new ol.Feature({ geometry: new ol.geom.LineString(coords) });
+            line.set('routeType', 'line');
+            line.set('teleportLayer', layer);
+            line.set('from', route.from);
+            line.set('to', route.to);
+            line.set('isHighlighted', !!options.highlight);
+            skyPixelTeleportSource.addFeature(line);
+
+            const labelIndex = Math.floor(coords.length * 0.58);
+            const labelPoint = new ol.Feature({ geometry: new ol.geom.Point(coords[labelIndex]) });
+            labelPoint.set('routeType', 'label');
+            labelPoint.set('teleportLayer', layer);
+            labelPoint.set('from', route.from);
+            labelPoint.set('to', route.to);
+            labelPoint.set('isHighlighted', !!options.highlight);
+            labelPoint.set('labelBg', options.highlight ? 'rgba(0, 180, 160, 0.86)' : (layer === 'layover' ? 'rgba(155, 86, 0, 0.78)' : (layer === 'third' ? 'rgba(150, 26, 26, 0.78)' : 'rgba(18, 16, 40, 0.78)')));
+            labelPoint.set('label', options.label || `${route.fromCode || route.from} → ${route.toCode || route.to}${route.seasonal ? ' seasonal' : ''}`);
+            skyPixelTeleportSource.addFeature(labelPoint);
+        }
+
+        function getSkyPixelDerivedRoutesFromFocus(focusCity, targetLegs) {
+            if (!focusCity || targetLegs < 2) return [];
+            const result = [];
+            getSkyPixelTeleportCities().forEach(function (city) {
+                if (city === focusCity) return;
+                const path = findSkyPixelTeleportPath(focusCity, city, targetLegs);
+                if (path && path.length === targetLegs) {
+                    result.push({
+                        from: focusCity,
+                        to: city,
+                        fromCode: path[0].fromCode,
+                        toCode: path[path.length - 1].toCode,
+                        path: path,
+                        seasonal: path.some(function (leg) { return leg.seasonal; })
+                    });
+                }
+            });
+            return result;
+        }
+
+        function buildSkyPixelTeleportRoutes() {
+            skyPixelTeleportSource.clear();
+            const focusCity = teleportFocusCity ? teleportFocusCity.value : '';
+            let routeIndex = 0;
+
+            skyPixelTeleportRoutes.forEach(function (route) {
+                if (!shouldShowTeleportRoute(route, 'direct', focusCity)) return;
+                addSkyPixelTeleportLine(route, routeIndex++, 'direct');
+            });
+
+            if (focusCity && teleportShowLayover && teleportShowLayover.checked) {
+                getSkyPixelDerivedRoutesFromFocus(focusCity, 2).forEach(function (route) {
+                    if (!shouldShowTeleportRoute(route, 'layover', focusCity)) return;
+                    addSkyPixelTeleportLine(route, routeIndex++, 'layover', {
+                        label: `${route.from} → ${route.to} via ${route.path[0].to}`
+                    });
+                });
+            }
+
+            if (focusCity && teleportShowThird && teleportShowThird.checked) {
+                getSkyPixelDerivedRoutesFromFocus(focusCity, 3).forEach(function (route) {
+                    if (!shouldShowTeleportRoute(route, 'third', focusCity)) return;
+                    addSkyPixelTeleportLine(route, routeIndex++, 'third', {
+                        label: `${route.from} → ${route.to} via ${route.path[0].to}, ${route.path[1].to}`
+                    });
+                });
+            }
+
+            if (skyPixelSelectedTeleportPath) {
+                skyPixelSelectedTeleportPath.forEach(function (leg, index) {
+                    const legLayer = getSkyPixelTeleportLegLayer(index);
+                    addSkyPixelTeleportLine(leg, 900 + index, legLayer, {
+                        highlight: true,
+                        label: `${index + 1}. ${leg.fromCode || leg.from} → ${leg.toCode || leg.to}${leg.seasonal ? ' seasonal' : ''}`
+                    });
+                });
+            }
+
+            skyPixelTeleportRoutesBuilt = true;
+        }
+
+        function refreshSkyPixelTeleportRoutes() {
+            if (!skyPixelTeleportLayer.getVisible()) return;
+            buildSkyPixelTeleportRoutes();
+        }
+
+        function setSkyPixelTeleportRoutesVisible(visible) {
+            if (visible) {
+                buildSkyPixelTeleportRoutes();
+                if (teleportPlanner) teleportPlanner.hidden = false;
+            } else {
+                skyPixelTeleportSource.clear();
+                if (teleportPlanner) teleportPlanner.hidden = true;
+            }
+
+            skyPixelTeleportLayer.setVisible(visible);
+
+            if (teleportRoutesToggle) {
+                teleportRoutesToggle.classList.toggle('is-active', visible);
+                teleportRoutesToggle.setAttribute('aria-pressed', String(visible));
+                teleportRoutesToggle.textContent = visible ? '🌀 Hide Teleport Network' : '🌀 Teleport Network';
+            }
+        }
+
+        function populateSkyPixelTeleportControls() {
+            const cities = getSkyPixelTeleportCities();
+            if (teleportFocusCity) {
+                const current = teleportFocusCity.value;
+                teleportFocusCity.innerHTML = '<option value="">All cities</option>';
+                cities.forEach(function (city) {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    teleportFocusCity.appendChild(option);
+                });
+                if (current && cities.includes(current)) teleportFocusCity.value = current;
+            }
+            if (teleportCityList) {
+                teleportCityList.innerHTML = '';
+                cities.forEach(function (city) {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    teleportCityList.appendChild(option);
+                });
+            }
+            if (teleportFromSelect && !teleportFromSelect.value && cities.includes('Octavian')) teleportFromSelect.value = '';
+            if (teleportToSelect && !teleportToSelect.value && cities.includes('Alouette')) teleportToSelect.value = '';
+        }
+
+        function resolveSkyPixelTeleportCity(value) {
+            const input = String(value || '').trim();
+            if (!input) return '';
+            const normalized = normalizeSkyPixelName(input);
+            const cities = getSkyPixelTeleportCities();
+            return cities.find(function (city) { return normalizeSkyPixelName(city) === normalized; }) ||
+                cities.find(function (city) {
+                    return normalizeSkyPixelName(city).includes(normalized) || normalized.includes(normalizeSkyPixelName(city));
+                }) || input;
+        }
+
+        function getSkyPixelTeleportLegClass(index) {
+            if (index === 0) return 'sky-pixel-teleport-leg-direct';
+            if (index === 1) return 'sky-pixel-teleport-leg-layover';
+            return 'sky-pixel-teleport-leg-third';
+        }
+
+        function getSkyPixelTeleportLegLayer(index) {
+            if (index === 0) return 'direct';
+            if (index === 1) return 'layover';
+            return 'third';
+        }
+
+        function getSkyPixelTeleportLegLabel(index) {
+            if (index === 0) return 'Direct leg';
+            if (index === 1) return 'Layover leg';
+            return 'Long layover leg';
+        }
+
+        function escapeSkyPixelTeleportHtml(value) {
+            return String(value == null ? '' : value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function renderSkyPixelTeleportExtraStops() {
+            if (!teleportExtraStops) return;
+            if (!skyPixelTeleportExtraStopsList.length) {
+                teleportExtraStops.innerHTML = '';
+                return;
+            }
+            teleportExtraStops.innerHTML = skyPixelTeleportExtraStopsList.map(function (stop, index) {
+                return `<div class="sky-pixel-teleport-extra-stop"><span>${index + 2}. ${escapeSkyPixelTeleportHtml(stop)}</span><button type="button" data-remove-teleport-stop="${index}">Remove</button></div>`;
+            }).join('');
+        }
+
+        function addSkyPixelTeleportExtraStop() {
+            const value = resolveSkyPixelTeleportCity(teleportExtraStopInput ? teleportExtraStopInput.value : '');
+            if (!value) return;
+            skyPixelTeleportExtraStopsList.push(value);
+            if (teleportExtraStopInput) teleportExtraStopInput.value = '';
+            renderSkyPixelTeleportExtraStops();
+        }
+
+        function getSkyPixelTeleportRequestedStops() {
+            const from = resolveSkyPixelTeleportCity(teleportFromSelect ? teleportFromSelect.value : '');
+            const to = resolveSkyPixelTeleportCity(teleportToSelect ? teleportToSelect.value : '');
+            if (teleportFromSelect) teleportFromSelect.value = from;
+            if (teleportToSelect) teleportToSelect.value = to;
+            return [from, to].concat(skyPixelTeleportExtraStopsList.map(resolveSkyPixelTeleportCity)).filter(Boolean);
+        }
+
+        function getSkyPixelTeleportOptionKey(option) {
+            return getSkyPixelTeleportPathKey(option && option.legs ? option.legs : []);
+        }
+
+        function dedupeSkyPixelTeleportOptions(options) {
+            const seen = new Set();
+            const unique = [];
+            (options || []).forEach(function (option) {
+                const key = getSkyPixelTeleportOptionKey(option);
+                if (!key || seen.has(key)) return;
+                seen.add(key);
+                unique.push(option);
+            });
+            return unique;
+        }
+
+        function combineSkyPixelTeleportTripOptions(stops, maxLegsPerSegment, maxResults) {
+            if (!stops || stops.length < 2) return [];
+            const perSegmentPaths = [];
+
+            for (let i = 0; i < stops.length - 1; i++) {
+                const segmentPaths = findSkyPixelTeleportPaths(stops[i], stops[i + 1], maxLegsPerSegment, Math.max(maxResults || 24, 24));
+                if (!segmentPaths.length) return [];
+                perSegmentPaths.push(segmentPaths);
+            }
+
+            const combined = [];
+            const combinedKeys = new Set();
+
+            function walk(segmentIndex, legs, segmentIndexes) {
+                if (combined.length >= Math.max(maxResults || 24, 24) * 2) return;
+
+                if (segmentIndex >= perSegmentPaths.length) {
+                    const option = { legs: legs, segmentIndexes: segmentIndexes.slice() };
+                    const key = getSkyPixelTeleportOptionKey(option);
+                    if (key && !combinedKeys.has(key)) {
+                        combinedKeys.add(key);
+                        combined.push(option);
+                    }
+                    return;
+                }
+
+                perSegmentPaths[segmentIndex].forEach(function (path, pathIndex) {
+                    walk(segmentIndex + 1, legs.concat(path), segmentIndexes.concat(pathIndex));
+                });
+            }
+
+            walk(0, [], []);
+
+            const uniqueCombined = dedupeSkyPixelTeleportOptions(combined);
+            uniqueCombined.sort(function (a, b) {
+                const seasonalA = a.legs.some(function (leg) { return leg.seasonal; }) ? 1 : 0;
+                const seasonalB = b.legs.some(function (leg) { return leg.seasonal; }) ? 1 : 0;
+                return a.legs.length - b.legs.length ||
+                    seasonalA - seasonalB ||
+                    getSkyPixelTeleportOptionKey(a).localeCompare(getSkyPixelTeleportOptionKey(b));
+            });
+
+            return uniqueCombined.slice(0, maxResults || 24).map(function (option, index) {
+                option.optionIndex = index;
+                return option;
+            });
+        }
+
+        function fitSkyPixelTeleportPathOnMap(path) {
+            if (!path || !path.length) return;
+            const extent = ol.extent.createEmpty();
+            let hasExtent = false;
+            path.forEach(function (leg) {
+                const fromMarker = getSkyPixelMarkerByName(leg.from);
+                const toMarker = getSkyPixelMarkerByName(leg.to);
+                if (fromMarker) { ol.extent.extend(extent, new ol.geom.Point(getSkyPixelMapCenter(fromMarker)).getExtent()); hasExtent = true; }
+                if (toMarker) { ol.extent.extend(extent, new ol.geom.Point(getSkyPixelMapCenter(toMarker)).getExtent()); hasExtent = true; }
+            });
+            if (hasExtent) {
+                unmined.olMap.getView().fit(extent, { padding: [120, 420, 120, 80], duration: 700, maxZoom: getSkyPixelTargetZoom(5) });
+            }
+        }
+
+        function showSkyPixelTeleportOption(optionIndex) {
+            const option = skyPixelTeleportRouteOptions[optionIndex];
+            if (!option) return;
+            skyPixelSelectedTeleportOptionIndex = optionIndex;
+            skyPixelSelectedTeleportPath = option.legs;
+            if (!skyPixelTeleportLayer.getVisible()) {
+                setSkyPixelTeleportRoutesVisible(true);
+            } else {
+                buildSkyPixelTeleportRoutes();
+            }
+            renderSkyPixelTeleportPlannerResult(skyPixelTeleportRouteOptions);
+            fitSkyPixelTeleportPathOnMap(skyPixelSelectedTeleportPath);
+        }
+
+        function renderSkyPixelTeleportPlannerResult(options) {
+            if (!teleportRouteResult) return;
+            if (!options || !options.length) {
+                teleportRouteResult.innerHTML = '<div class="sky-pixel-teleport-warning">No teleport route found with the current network.</div>';
+                return;
+            }
+
+            const visibleCount = Math.min(skyPixelTeleportVisibleOptionCount || 3, options.length);
+            let html = '';
+            options.slice(0, visibleCount).forEach(function (option, pathIndex) {
+                const path = option.legs || [];
+                const layovers = Math.max(0, path.length - 1);
+                const seasonal = path.some(function (leg) { return leg.seasonal; });
+                const title = pathIndex === 0 ? '⭐ Option 1 · Recommended / Fastest route' : `Option ${pathIndex + 1} · Alternative route`;
+                const selectedClass = pathIndex === skyPixelSelectedTeleportOptionIndex ? ' is-selected' : '';
+                html += `<div class="sky-pixel-teleport-alt${selectedClass}">`;
+                html += `<div class="sky-pixel-teleport-alt-title">${title}<br><small>${path.length} teleport${path.length === 1 ? '' : 's'} · ${layovers} layover${layovers === 1 ? '' : 's'}${seasonal ? ' · seasonal connection' : ''}</small></div>`;
+                path.forEach(function (leg, index) {
+                    const legClass = getSkyPixelTeleportLegClass(index);
+                    const legLabel = getSkyPixelTeleportLegLabel(index);
+                    html += `<div class="sky-pixel-teleport-route-step"><strong>${escapeSkyPixelTeleportHtml(leg.from)}</strong><br><small>${escapeSkyPixelTeleportHtml(leg.fromCode || 'Tower')}</small></div>`;
+                    html += `<div class="sky-pixel-teleport-route-arrow ${legClass}">↓ ${legLabel}: ${leg.seasonal ? 'seasonal ' : ''}${escapeSkyPixelTeleportHtml(leg.toCode || leg.to)}</div>`;
+                    if (index === path.length - 1) {
+                        html += `<div class="sky-pixel-teleport-route-step"><strong>${escapeSkyPixelTeleportHtml(leg.to)}</strong><br><small>${escapeSkyPixelTeleportHtml(leg.toCode || 'Tower')}</small></div>`;
+                    }
+                });
+                html += `<button class="sky-pixel-teleport-option-map" type="button" data-sky-pixel-teleport-option="${pathIndex}">${pathIndex === skyPixelSelectedTeleportOptionIndex ? (pathIndex === 0 ? 'Recommended Route Showing' : 'Showing on Map') : 'Show on Map'}</button>`;
+                html += `</div>`;
+            });
+
+            if (options.length > visibleCount) {
+                const remaining = options.length - visibleCount;
+                const nextBatch = Math.min(3, remaining);
+                html += `<button class="sky-pixel-teleport-more-routes" type="button" data-sky-pixel-more-routes="true">Generate ${nextBatch} More Alternative Route${nextBatch === 1 ? '' : 's'}</button>`;
+            } else if (options.length > 3) {
+                html += `<button class="sky-pixel-teleport-more-routes" type="button" disabled>✅ No more unique routes available</button>`;
+            }
+
+            teleportRouteResult.innerHTML = html;
+        }
+
+        function findAndShowSkyPixelTeleportRoute() {
+            const stops = getSkyPixelTeleportRequestedStops();
+            if (stops.length < 2) {
+                if (teleportRouteResult) teleportRouteResult.innerHTML = '<div class="sky-pixel-teleport-warning">Choose at least two places to find a teleport path.</div>';
+                return;
+            }
+            skyPixelTeleportRouteOptions = combineSkyPixelTeleportTripOptions(stops, 5, 24);
+            skyPixelSelectedTeleportOptionIndex = 0;
+            skyPixelTeleportVisibleOptionCount = 3;
+            skyPixelSelectedTeleportPath = skyPixelTeleportRouteOptions[0] ? skyPixelTeleportRouteOptions[0].legs : null;
+            renderSkyPixelTeleportPlannerResult(skyPixelTeleportRouteOptions);
+            if (!skyPixelTeleportLayer.getVisible()) {
+                setSkyPixelTeleportRoutesVisible(true);
+            } else {
+                buildSkyPixelTeleportRoutes();
+            }
+            fitSkyPixelTeleportPathOnMap(skyPixelSelectedTeleportPath);
+        }
+
+        function clearSkyPixelTeleportRoutePlanner() {
+            skyPixelSelectedTeleportPath = null;
+            skyPixelTeleportRouteOptions = [];
+            skyPixelSelectedTeleportOptionIndex = 0;
+            skyPixelTeleportVisibleOptionCount = 3;
+            skyPixelTeleportExtraStopsList = [];
+            if (teleportExtraStopInput) teleportExtraStopInput.value = '';
+            renderSkyPixelTeleportExtraStops();
+            if (teleportRouteResult) teleportRouteResult.textContent = 'Choose two or more places to find a teleport path.';
+            refreshSkyPixelTeleportRoutes();
+        }
+
+        if (teleportRoutesToggle) {
+            teleportRoutesToggle.addEventListener('click', function () {
+                setSkyPixelTeleportRoutesVisible(!skyPixelTeleportLayer.getVisible());
+            });
+        }
+
+        [teleportShowDirect, teleportShowLayover, teleportShowThird, teleportShowLabels, teleportFocusCity].forEach(function (control) {
+            if (!control) return;
+            control.addEventListener('change', refreshSkyPixelTeleportRoutes);
+        });
+
+        if (teleportFindRoute) teleportFindRoute.addEventListener('click', findAndShowSkyPixelTeleportRoute);
+        if (teleportClearRoute) teleportClearRoute.addEventListener('click', clearSkyPixelTeleportRoutePlanner);
+        if (teleportAddStop) teleportAddStop.addEventListener('click', addSkyPixelTeleportExtraStop);
+        if (teleportExtraStopInput) {
+            teleportExtraStopInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    addSkyPixelTeleportExtraStop();
+                }
+            });
+        }
+        if (teleportExtraStops) {
+            teleportExtraStops.addEventListener('click', function (event) {
+                const button = event.target.closest('[data-remove-teleport-stop]');
+                if (!button) return;
+                const index = Number(button.getAttribute('data-remove-teleport-stop'));
+                skyPixelTeleportExtraStopsList.splice(index, 1);
+                renderSkyPixelTeleportExtraStops();
+            });
+        }
+        if (teleportRouteResult) {
+            teleportRouteResult.addEventListener('click', function (event) {
+                const moreButton = event.target.closest('[data-sky-pixel-more-routes]');
+                if (moreButton) {
+                    skyPixelTeleportVisibleOptionCount = Math.min(skyPixelTeleportVisibleOptionCount + 3, skyPixelTeleportRouteOptions.length);
+                    renderSkyPixelTeleportPlannerResult(skyPixelTeleportRouteOptions);
+                    return;
+                }
+                const button = event.target.closest('[data-sky-pixel-teleport-option]');
+                if (!button) return;
+                showSkyPixelTeleportOption(Number(button.getAttribute('data-sky-pixel-teleport-option')));
+            });
+        }
+        [teleportFromSelect, teleportToSelect].forEach(function (input) {
+            if (!input) return;
+            input.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    findAndShowSkyPixelTeleportRoute();
+                }
+            });
+        });
+        
 
         let skyPixelMeasureEnabled = false;
         let skyPixelMeasurePoints = [];
@@ -1509,6 +3348,7 @@
         });
 
         buildSkyPixelSearchIndex();
+        populateSkyPixelTeleportControls();
         renderSkyPixelTravelStops();
         renderSkyPixelExpedition();
         updateSkyPixelMiniMapPlaces();
@@ -1612,7 +3452,7 @@
             "Kusuah Island": "https://i.redd.it/c9yq59ty97kg1.png",
             "Prunelle Hydras Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-umob04jquajg1.png?width=1080&crop=smart&auto=webp&s=b8081f7b0d03baf6f3046e06741486d5abbf9674",
             "Harlow Grizzlies Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-76uuaalruajg1.png?width=1080&crop=smart&auto=webp&s=3317fb477c42773741f1b8a00bfec87d38f50575",
-            "Octavian Night Raven Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-rvia80uruajg1.png?width=1080&crop=smart&auto=webp&s=aa9954b61fd8947ec8d9060987dddd17ad0952ee",
+            "Octavian Night Ravens Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-rvia80uruajg1.png?width=1080&crop=smart&auto=webp&s=aa9954b61fd8947ec8d9060987dddd17ad0952ee",
             "La Morley Gators Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-b71e8w9ruajg1.png?width=1080&crop=smart&auto=webp&s=f29a1a872acaad7da839011e9153615c912708a5",
             "Quantum Dragons Stadium": "https://preview.redd.it/i-created-an-entire-sports-team-in-my-world-v0-ril0tg4quajg1.png?width=1080&crop=smart&auto=webp&s=2845a45ecb08dde774d6eaee87986ccfc94c5bb9",
             "Mount Noraker": "https://i.redd.it/djontbc7bz0g1.jpeg",
@@ -1626,19 +3466,19 @@
             "Rezjvik Glacier": "https://preview.redd.it/thoughts-on-my-landscape-builds-v0-bqh39zysebqd1.png?width=1080&crop=smart&auto=webp&s=57c25f5ee8a47c25810314f8c1ef75f95de4e898",
             "Mount Bellaquah": "https://preview.redd.it/thoughts-on-my-landscape-builds-v0-k2nrl8ztebqd1.png?width=1080&crop=smart&auto=webp&s=ada36bb14d52724eed59745385e009df7775c2af",
             "Sitkan": "https://preview.redd.it/thoughts-on-my-landscape-builds-v0-humcbrruebqd1.jpg?width=1080&crop=smart&auto=webp&s=ffd849ab1cb79418afce7e57043dd5c07ea2a7cc",
-            "Lullaby Fjord / Inlet": "https://i.redd.it/ff1akeg234ld1.jpeg",
+            "Lullaby Fjord": "https://i.redd.it/ff1akeg234ld1.jpeg",
             "Alouette": "https://preview.redd.it/when-minecraft-starts-to-feel-otherworldly-v0-ixe0dv4wa4pd1.jpg?width=1080&crop=smart&auto=webp&s=23de0c6663a483df9188a4d2a0d47935ad97bd22",
-            "Lottish Mountain Range": "https://preview.redd.it/i-attempted-a-scotland-themed-build-did-i-do-it-justice-v0-t5067mrifrmd1.jpg?width=1080&crop=smart&auto=webp&s=3b83b91d9d1cbe6a502e6e6d1f40e71533a25f03",
-            "Bosley Bayou Nature Reserve": "https://preview.redd.it/what-do-you-think-of-my-custom-blocks-i-made-v0-yy7gxeywxe1d1.jpg?width=1080&crop=smart&auto=webp&s=b2fa8586e1a4c8524b0544664f06ef02a2437198",
+            "Lottish Mountains": "https://preview.redd.it/i-attempted-a-scotland-themed-build-did-i-do-it-justice-v0-t5067mrifrmd1.jpg?width=1080&crop=smart&auto=webp&s=3b83b91d9d1cbe6a502e6e6d1f40e71533a25f03",
+            "Bosley Bayou Reserve": "https://preview.redd.it/what-do-you-think-of-my-custom-blocks-i-made-v0-yy7gxeywxe1d1.jpg?width=1080&crop=smart&auto=webp&s=b2fa8586e1a4c8524b0544664f06ef02a2437198",
             "Bourbon": "https://preview.redd.it/what-do-you-think-of-my-custom-blocks-i-made-v0-tkbw369xxe1d1.png?width=1080&crop=smart&auto=webp&s=2f238a072fa83f87f8cbfbd5f741e0d0551ebe94",
             "Lower North Coast Mountains": "https://preview.redd.it/rip-to-the-pc-v0-9wv402wxlmpc1.jpg?width=1080&crop=smart&auto=webp&s=cb67d1935000676bf6948987afddad211d322f39",
             "Upper North Coast Mountains": "https://i.redd.it/clbgf1ecqmnc1.jpeg",
-            "Cayenne Canyon Provincial Park": "https://preview.redd.it/scorching-sun-v0-ynikyl0r3qgc1.jpg?width=1080&crop=smart&auto=webp&s=7df3024b3fa8466c8fff3548df9e6f4cf6c51f43",
+            "Cayenne Canyon": "https://preview.redd.it/scorching-sun-v0-ynikyl0r3qgc1.jpg?width=1080&crop=smart&auto=webp&s=7df3024b3fa8466c8fff3548df9e6f4cf6c51f43",
             "Athena": "https://preview.redd.it/winter-mountain-roads-v0-a1sn0zkg4qac1.jpg?width=1080&crop=smart&auto=webp&s=84e04f672d8332c756091cddfe059df4856d3981",
             "Mount Blave": "https://i.redd.it/ctehiwlmqhwb1.jpg",
             "Mount Porter": "https://preview.redd.it/mountains-i-built-v0-0e8km7fakhwb1.jpg?width=1080&crop=smart&auto=webp&s=adb76e71ea69d4fd79244a7d1b76cb6225985dfe",
-            "South Mount Ellie": "https://preview.redd.it/extreme-landscapes-v0-l5z8h9frillb1.jpg?width=1080&crop=smart&auto=webp&s=ed9391ac8500fc046b458a4b7f5511342516be92",
-            "North Serra-Dor Mountains": "https://i.redd.it/l8jirbczm38h1.png",
+            "Mount Ellie": "https://preview.redd.it/extreme-landscapes-v0-l5z8h9frillb1.jpg?width=1080&crop=smart&auto=webp&s=ed9391ac8500fc046b458a4b7f5511342516be92",
+            "North Serra Dor Mountains": "https://i.redd.it/l8jirbczm38h1.png",
         };
 
         function getSkyPixelManualHeroImage(marker) {
