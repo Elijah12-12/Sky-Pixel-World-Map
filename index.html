@@ -40,118 +40,10 @@
     </style>
 
 
-    <style id="sky-pixel-mobile-panel-fix">
-        /* Mobile fix: when the Add Marker tools are minimized, shrink the overlay
-           so it does not sit on top of the location panel close button. */
+    <style id="sky-pixel-clean-mobile-modal-fix">
         @media (max-width: 720px) {
-            .sky-pixel-player-tools.is-collapsed {
-                width: auto !important;
-                min-width: 0 !important;
-                max-width: 76px !important;
-                height: auto !important;
-                padding: 8px !important;
-                background: transparent !important;
-                border: 0 !important;
-                box-shadow: none !important;
-                pointer-events: none !important;
-                overflow: visible !important;
-            }
-
-            .sky-pixel-player-tools.is-collapsed > *:not(.sky-pixel-player-minimize) {
-                display: none !important;
-            }
-
-            .sky-pixel-player-tools.is-collapsed .sky-pixel-player-minimize {
-                display: inline-flex !important;
-                pointer-events: auto !important;
-                position: relative !important;
-                z-index: 2147483647 !important;
-            }
-
-            #skyPixelPanel,
-            .sky-pixel-panel {
-                z-index: 5000 !important;
-            }
-
-            #skyPixelPanelClose,
-            .sky-pixel-panel-close {
-                z-index: 2147483647 !important;
-                pointer-events: auto !important;
-                touch-action: manipulation !important;
-            }
-
-            /* Mobile fix: let the location panel itself scroll.
-               Without this, the map/touch layer can capture vertical swipes. */
-            #skyPixelPanel,
-            .sky-pixel-panel {
-                max-height: calc(100dvh - 18px) !important;
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                -webkit-overflow-scrolling: touch !important;
-                touch-action: pan-y !important;
-                overscroll-behavior: contain !important;
-            }
-
-            .sky-pixel-panel-content {
-                touch-action: pan-y !important;
-            }
-        }
-    </style>
-
-
-    <style id="sky-pixel-mobile-panel-scroll-hard-fix">
-        @media (max-width: 720px) {
-            html, body {
-                height: 100% !important;
-                overflow: hidden !important;
-            }
-
-            #skyPixelPanel.sky-pixel-panel.is-visible,
-            .sky-pixel-panel.is-visible {
-                position: fixed !important;
-                top: 10px !important;
-                right: 10px !important;
-                bottom: 10px !important;
-                left: 10px !important;
-                width: auto !important;
-                max-width: none !important;
-                height: auto !important;
-                max-height: none !important;
-                display: flex !important;
-                flex-direction: column !important;
-                overflow: hidden !important;
-                touch-action: auto !important;
-                -webkit-overflow-scrolling: touch !important;
-            }
-
-            #skyPixelPanel .sky-pixel-panel-hero {
-                flex: 0 0 auto !important;
-                min-height: 135px !important;
-            }
-
-            #skyPixelPanel .sky-pixel-panel-content {
-                flex: 1 1 auto !important;
-                min-height: 0 !important;
-                overflow-y: auto !important;
-                overflow-x: hidden !important;
-                -webkit-overflow-scrolling: touch !important;
-                touch-action: pan-y !important;
-                overscroll-behavior: contain !important;
-                padding-bottom: 150px !important;
-            }
-
-            #skyPixelPanelBackdrop.is-visible {
-                touch-action: none !important;
-            }
-        }
-    </style>
-
-
-
-    <style id="sky-pixel-mobile-panel-final-fix">
-        @media (max-width: 720px) {
-            /* When a location panel is open on mobile, hide the floating tools so
-               they cannot sit on top of the close button or steal scroll gestures. */
+            /* While a location card is open, remove every floating map widget
+               from the touch layer. The panel becomes the only scroll target. */
             body.sky-pixel-location-panel-open .sky-pixel-search,
             body.sky-pixel-location-panel-open .sky-pixel-player-tools,
             body.sky-pixel-location-panel-open .sky-pixel-measure,
@@ -161,51 +53,55 @@
                 pointer-events: none !important;
             }
 
-            body.sky-pixel-location-panel-open #skyPixelPanelBackdrop {
-                z-index: 2147482998 !important;
+            body.sky-pixel-location-panel-open {
+                overflow: hidden !important;
+                touch-action: none !important;
             }
 
-            body.sky-pixel-location-panel-open #skyPixelPanel.sky-pixel-panel,
-            body.sky-pixel-location-panel-open .sky-pixel-panel.is-visible {
+            body.sky-pixel-location-panel-open #map {
+                touch-action: none !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelPanelBackdrop {
                 position: fixed !important;
-                inset: 10px !important;
+                inset: 0 !important;
+                z-index: 90000 !important;
+                pointer-events: auto !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelPanel.sky-pixel-panel {
+                position: fixed !important;
+                inset: 8px !important;
                 width: auto !important;
                 height: auto !important;
                 max-width: none !important;
-                max-height: none !important;
-                z-index: 2147482999 !important;
-                display: flex !important;
-                flex-direction: column !important;
-                overflow: hidden !important;
+                max-height: calc(100dvh - 16px) !important;
+                z-index: 90001 !important;
                 transform: none !important;
-                touch-action: pan-y !important;
-            }
-
-            body.sky-pixel-location-panel-open #skyPixelPanelHero {
-                flex: 0 0 140px !important;
-                min-height: 140px !important;
-                max-height: 140px !important;
-            }
-
-            body.sky-pixel-location-panel-open #skyPixelPanel .sky-pixel-panel-content {
-                flex: 1 1 auto !important;
-                min-height: 0 !important;
-                height: auto !important;
-                max-height: none !important;
-                overflow-y: scroll !important;
+                overflow-y: auto !important;
                 overflow-x: hidden !important;
                 -webkit-overflow-scrolling: touch !important;
                 overscroll-behavior: contain !important;
                 touch-action: pan-y !important;
-                padding-bottom: 220px !important;
+                padding-bottom: 120px !important;
             }
 
-            body.sky-pixel-location-panel-open #skyPixelPanelClose,
-            body.sky-pixel-location-panel-open .sky-pixel-panel-close {
+            body.sky-pixel-location-panel-open #skyPixelPanel .sky-pixel-panel-content {
+                overflow: visible !important;
+                max-height: none !important;
+                touch-action: pan-y !important;
+                padding-bottom: 160px !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelPanelHero {
+                min-height: 150px !important;
+            }
+
+            body.sky-pixel-location-panel-open #skyPixelPanelClose.sky-pixel-panel-close {
                 position: fixed !important;
                 top: 18px !important;
                 right: 18px !important;
-                z-index: 2147483000 !important;
+                z-index: 90002 !important;
                 pointer-events: auto !important;
                 touch-action: manipulation !important;
             }
@@ -402,15 +298,6 @@
         const panel = document.getElementById('skyPixelPanel');
         const panelBackdrop = document.getElementById('skyPixelPanelBackdrop');
         const panelClose = document.getElementById('skyPixelPanelClose');
-
-        // Mobile fix: keep map drag/touch handlers from stealing scroll gestures inside the side panel.
-        if (panel) {
-            ['touchstart', 'touchmove', 'wheel'].forEach(function (eventName) {
-                panel.addEventListener(eventName, function (event) {
-                    event.stopPropagation();
-                }, { passive: true });
-            });
-        }
         const panelType = document.getElementById('skyPixelPanelType');
         const panelTitle = document.getElementById('skyPixelPanelTitle');
         const panelDescription = document.getElementById('skyPixelPanelDescription');
@@ -494,6 +381,49 @@
         const passportReset = document.getElementById('skyPixelPassportReset');
         let activeSkyPixelMarker = null;
         let skyPixelSearchMarkers = [];
+
+        // Clean mobile modal behavior: disable OpenLayers map interactions while
+        // the location panel is open, so vertical swipes scroll the panel instead
+        // of panning/zooming the map behind it.
+        let skyPixelSavedMapInteractionStates = null;
+
+        function setSkyPixelMapInteractionsEnabled(enabled) {
+            if (!unmined || !unmined.olMap || !unmined.olMap.getInteractions) return;
+
+            const interactions = unmined.olMap.getInteractions().getArray();
+
+            if (!enabled) {
+                if (!skyPixelSavedMapInteractionStates) {
+                    skyPixelSavedMapInteractionStates = interactions.map(function (interaction) {
+                        return { interaction: interaction, active: interaction.getActive() };
+                    });
+                }
+                interactions.forEach(function (interaction) {
+                    interaction.setActive(false);
+                });
+                return;
+            }
+
+            if (skyPixelSavedMapInteractionStates) {
+                skyPixelSavedMapInteractionStates.forEach(function (item) {
+                    item.interaction.setActive(item.active);
+                });
+                skyPixelSavedMapInteractionStates = null;
+            }
+        }
+
+        function setSkyPixelLocationPanelOpenState(isOpen) {
+            document.body.classList.toggle('sky-pixel-location-panel-open', isOpen);
+            setSkyPixelMapInteractionsEnabled(!isOpen);
+        }
+
+        if (panel) {
+            ['touchstart', 'touchmove', 'pointerdown', 'pointermove', 'wheel'].forEach(function (eventName) {
+                panel.addEventListener(eventName, function (event) {
+                    event.stopPropagation();
+                }, { passive: true });
+            });
+        }
 
         const skyPixelPlaceLinks = window.SkyPixelPlaceLinks || {};
 
@@ -1706,6 +1636,8 @@
             aiModeLink.href = buildAiModeUrl(marker);
             panel.classList.add('is-visible');
             panelBackdrop.classList.add('is-visible');
+            setSkyPixelLocationPanelOpenState(true);
+            panel.scrollTop = 0;
 
             loadSkyPixelWikiPreview(marker);
         }
@@ -1824,6 +1756,7 @@
         function closeSkyPixelPanel() {
             panel.classList.remove('is-visible');
             panelBackdrop.classList.remove('is-visible');
+            setSkyPixelLocationPanelOpenState(false);
             activeSkyPixelMarker = null;
         }
 
@@ -1991,42 +1924,6 @@
         });
 
 
-    </script>
-
-    <script id="sky-pixel-mobile-panel-touch-fix">
-        (function () {
-            function stopMapTouchWhilePanelOpen(event) {
-                var panel = document.getElementById('skyPixelPanel');
-                if (!panel || !panel.classList.contains('is-visible')) return;
-                if (panel.contains(event.target)) {
-                    event.stopPropagation();
-                }
-            }
-
-            ['touchstart', 'touchmove', 'pointerdown', 'pointermove', 'wheel'].forEach(function (type) {
-                document.addEventListener(type, stopMapTouchWhilePanelOpen, { capture: true, passive: false });
-            });
-        })();
-    </script>
-
-
-
-    <script id="sky-pixel-mobile-panel-open-class-fix">
-        (function () {
-            var panel = document.getElementById('skyPixelPanel');
-            if (!panel) return;
-            function syncPanelOpenClass() {
-                document.body.classList.toggle('sky-pixel-location-panel-open', panel.classList.contains('is-visible'));
-            }
-            syncPanelOpenClass();
-            new MutationObserver(syncPanelOpenClass).observe(panel, { attributes: true, attributeFilter: ['class'] });
-            var close = document.getElementById('skyPixelPanelClose');
-            if (close) {
-                close.addEventListener('click', function () {
-                    document.body.classList.remove('sky-pixel-location-panel-open');
-                }, true);
-            }
-        })();
     </script>
 
 </body>
