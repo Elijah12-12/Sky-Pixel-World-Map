@@ -39,6 +39,49 @@
         
     </style>
 
+
+    <style id="sky-pixel-mobile-panel-fix">
+        /* Mobile fix: when the Add Marker tools are minimized, shrink the overlay
+           so it does not sit on top of the location panel close button. */
+        @media (max-width: 720px) {
+            .sky-pixel-player-tools.is-collapsed {
+                width: auto !important;
+                min-width: 0 !important;
+                max-width: 76px !important;
+                height: auto !important;
+                padding: 8px !important;
+                background: transparent !important;
+                border: 0 !important;
+                box-shadow: none !important;
+                pointer-events: none !important;
+                overflow: visible !important;
+            }
+
+            .sky-pixel-player-tools.is-collapsed > *:not(.sky-pixel-player-minimize) {
+                display: none !important;
+            }
+
+            .sky-pixel-player-tools.is-collapsed .sky-pixel-player-minimize {
+                display: inline-flex !important;
+                pointer-events: auto !important;
+                position: relative !important;
+                z-index: 2147483647 !important;
+            }
+
+            #skyPixelPanel,
+            .sky-pixel-panel {
+                z-index: 5000 !important;
+            }
+
+            #skyPixelPanelClose,
+            .sky-pixel-panel-close {
+                z-index: 2147483647 !important;
+                pointer-events: auto !important;
+                touch-action: manipulation !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
