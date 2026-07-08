@@ -573,6 +573,437 @@
             box-shadow: 0 0 18px rgba(0, 210, 255, 0.22);
         }
 
+
+
+        .sky-pixel-country-border-tools {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px;
+            margin: 10px 0 0;
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-country-border-tools button {
+            width: 100%;
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 900;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(255, 182, 72, 0.82), rgba(255, 92, 92, 0.82));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 0 18px rgba(255, 150, 70, 0.24);
+        }
+
+        .sky-pixel-country-border-tools button.is-active {
+            background: linear-gradient(135deg, rgba(255, 215, 95, 0.92), rgba(255, 120, 72, 0.92));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 24px rgba(255, 185, 70, 0.42);
+        }
+
+        .sky-pixel-country-border-panel {
+            margin-top: 10px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+
+        .sky-pixel-country-border-note {
+            margin-top: 8px;
+            padding: 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.88);
+        }
+
+        .sky-pixel-country-border-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+
+        .sky-pixel-country-layer-controls {
+            display: grid;
+            gap: 7px;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.18);
+            border: 1px solid rgba(255,255,255,0.11);
+        }
+
+        .sky-pixel-country-layer-controls label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.09);
+            cursor: pointer;
+        }
+
+        .sky-pixel-country-layer-controls input {
+            width: 16px;
+            height: 16px;
+            flex: 0 0 auto;
+        }
+
+        .sky-pixel-country-layer-controls .sky-pixel-country-all {
+            font-weight: 950;
+            background: rgba(255,255,255,0.11);
+        }
+
+        .sky-pixel-country-border-card {
+            padding: 8px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sky-pixel-country-border-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sky-pixel-country-popup {
+            min-width: 210px;
+            max-width: 270px;
+            padding: 10px 12px;
+            color: #ffffff;
+            background: rgba(10, 14, 22, 0.92);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.36);
+            backdrop-filter: blur(10px);
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        .sky-pixel-country-popup-title {
+            font-weight: 950;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .sky-pixel-country-popup-row {
+            display: grid;
+            grid-template-columns: 86px 1fr;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .sky-pixel-country-popup-row span {
+            color: rgba(255,255,255,0.68);
+            font-weight: 800;
+        }
+
+        .sky-pixel-country-popup-row strong {
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .sky-pixel-country-popup-hint {
+            margin-top: 7px;
+            padding-top: 7px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.82);
+            font-weight: 900;
+        }
+
+        .sky-pixel-political-legend {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 3550;
+            min-width: 190px;
+            padding: 11px 12px;
+            color: #ffffff;
+            background: rgba(10, 14, 22, 0.88);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 16px;
+            box-shadow: 0 10px 26px rgba(0,0,0,0.34);
+            backdrop-filter: blur(10px);
+            font-size: 13px;
+            font-weight: 850;
+        }
+
+        .sky-pixel-political-legend-title {
+            font-weight: 950;
+            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+        }
+
+        .sky-pixel-political-legend-list {
+            display: grid;
+            gap: 6px;
+        }
+
+        .sky-pixel-political-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sky-pixel-political-legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px currentColor;
+            flex: 0 0 auto;
+        }
+
+        @media (max-width: 720px) {
+            .sky-pixel-political-legend {
+                right: 10px;
+                bottom: 84px;
+                max-width: calc(100vw - 20px);
+                font-size: 12px;
+            }
+        }
+
+
+        .sky-pixel-country-info-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 88000;
+            background: rgba(0,0,0,0.48);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 180ms ease;
+        }
+
+        .sky-pixel-country-info-backdrop.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sky-pixel-country-info-panel {
+            position: fixed;
+            right: 22px;
+            top: 22px;
+            bottom: 22px;
+            z-index: 88001;
+            width: min(520px, calc(100vw - 44px));
+            overflow: hidden;
+            color: #ffffff;
+            background: rgba(10, 14, 22, 0.94);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 24px;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.52);
+            backdrop-filter: blur(14px);
+            transform: translateX(calc(100% + 36px));
+            transition: transform 220ms ease;
+        }
+
+        .sky-pixel-country-info-panel.is-open {
+            transform: translateX(0);
+        }
+
+        .sky-pixel-country-info-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 14px;
+            color: #ffffff;
+            background: rgba(0,0,0,0.42);
+            font-size: 24px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16);
+        }
+
+        .sky-pixel-country-info-hero {
+            min-height: 190px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 22px;
+            box-sizing: border-box;
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 20% 25%, rgba(255,255,255,0.22), transparent 28%),
+                linear-gradient(135deg, rgba(58,142,190,0.85), rgba(24,56,89,0.92) 45%, rgba(16,96,62,0.86));
+            background-size: cover;
+            background-position: center;
+        }
+
+        .sky-pixel-country-info-hero.jesla {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 25% 20%, rgba(255,255,255,0.18), transparent 26%),
+                linear-gradient(135deg, rgba(21,115,72,0.9), rgba(32,71,84,0.9) 48%, rgba(13,35,50,0.92));
+        }
+
+        .sky-pixel-country-info-hero.skyline {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 22% 22%, rgba(255,255,255,0.20), transparent 28%),
+                linear-gradient(135deg, rgba(52,160,225,0.92), rgba(44,75,145,0.88) 48%, rgba(12,28,64,0.94));
+        }
+
+        .sky-pixel-country-info-hero.vawlla {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 24% 18%, rgba(255,255,255,0.20), transparent 28%),
+                linear-gradient(135deg, rgba(230,135,35,0.92), rgba(138,82,34,0.88) 48%, rgba(62,42,22,0.94));
+        }
+
+        .sky-pixel-country-info-hero.kavarr {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 24% 18%, rgba(255,255,255,0.20), transparent 28%),
+                linear-gradient(135deg, rgba(135,80,255,0.92), rgba(91,47,158,0.88) 48%, rgba(36,22,70,0.94));
+        }
+
+        .sky-pixel-country-info-hero.sapphire {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 24% 18%, rgba(255,255,255,0.22), transparent 28%),
+                linear-gradient(135deg, rgba(255,118,190,0.92), rgba(185,66,138,0.88) 48%, rgba(72,24,58,0.94));
+        }
+        .sky-pixel-country-info-hero.hawkfall {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                radial-gradient(circle at 24% 18%, rgba(255,255,255,0.18), transparent 28%),
+                linear-gradient(135deg, rgba(255,72,72,0.92), rgba(145,36,44,0.9) 48%, rgba(58,18,24,0.94));
+        }
+
+
+        .sky-pixel-country-info-kicker {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 950;
+            color: rgba(255,255,255,0.82);
+        }
+
+        .sky-pixel-country-info-title {
+            margin: 5px 48px 0 0;
+            font-size: 30px;
+            line-height: 1.05;
+            font-weight: 950;
+            text-shadow: 0 3px 15px rgba(0,0,0,0.45);
+        }
+
+        .sky-pixel-country-info-body {
+            padding: 18px 20px 24px;
+            overflow-y: auto;
+            max-height: calc(100% - 190px);
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-country-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .sky-pixel-country-info-stat {
+            border-radius: 14px;
+            padding: 11px 12px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.11);
+        }
+
+        .sky-pixel-country-info-stat span {
+            display: block;
+            color: rgba(255,255,255,0.66);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 950;
+            margin-bottom: 4px;
+        }
+
+        .sky-pixel-country-info-stat strong {
+            font-size: 15px;
+            font-weight: 950;
+        }
+
+        .sky-pixel-country-info-description {
+            margin: 0 0 14px;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.48;
+            font-size: 14px;
+            font-weight: 650;
+        }
+
+        .sky-pixel-country-info-section-title {
+            margin: 15px 0 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.7);
+            font-weight: 950;
+        }
+
+        .sky-pixel-country-info-list {
+            display: grid;
+            gap: 7px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .sky-pixel-country-info-list li {
+            padding: 9px 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.09);
+            color: rgba(255,255,255,0.88);
+            font-size: 13px;
+            font-weight: 760;
+        }
+
+
+        .sky-pixel-country-info-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0 2px;
+        }
+
+        .sky-pixel-country-info-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 950;
+            background: linear-gradient(135deg, rgba(0, 190, 255, 0.78), rgba(105, 95, 255, 0.78));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 0 18px rgba(0, 190, 255, 0.22);
+        }
+
+        @media (max-width: 720px) {
+            .sky-pixel-country-info-panel {
+                inset: 8px;
+                width: auto;
+                border-radius: 20px;
+            }
+            .sky-pixel-country-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .sky-pixel-country-info-title {
+                font-size: 25px;
+            }
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-country-border-tools {
+            display: none !important;
+        }
+
         @media (max-width: 720px) {
             .sky-pixel-map-tools-panel {
                 left: 10px;
@@ -716,6 +1147,23 @@
         </div>
     </section>
 
+    <section class="sky-pixel-country-border-tools" aria-label="Sky Pixel country border tools">
+        <button id="skyPixelCountryBordersToggle" type="button" aria-pressed="false">🗺 Political Map</button>
+        <div id="skyPixelCountryBordersPanel" class="sky-pixel-country-border-panel" hidden>
+            <strong>Political Map</strong>
+            <div class="sky-pixel-country-border-note">Shows country borders as vector overlays using your Minecraft X/Z boundary points.</div>
+            <div id="skyPixelCountryLayerControls" class="sky-pixel-country-layer-controls" aria-label="Choose visible countries"></div>
+            <div class="sky-pixel-country-border-list">
+                <div class="sky-pixel-country-border-card"><strong>Skyline Country</strong>Capital: Octavian<br>Region: Central / Mid-Northern Sky Pixel<br>Founded: July 2014<br>Established: January 2015</div>
+                <div class="sky-pixel-country-border-card"><strong>Jesla Country</strong>Capital: Harlow<br>Region: Northern Sky Pixel<br>Founded: December 2019<br>Established: November 2020</div>
+                <div class="sky-pixel-country-border-card"><strong>Vawlla Country</strong>Capital: La Morley<br>Region: Southern / Mid-Southern Sky Pixel<br>Founded: January 2020<br>Established: October 2020</div>
+                <div class="sky-pixel-country-border-card"><strong>Kavarr Country</strong>Capital: Quantum<br>Region: Southernmost Sky Pixel<br>Founded: May 2025<br>Established: June 2025</div>
+                <div class="sky-pixel-country-border-card"><strong>Sapphire Country</strong>Capital: Prunelle<br>Region: Easternmost Country in Sky Pixel<br>Name originated: 2021<br>Founded: May 2023<br>Established: May 2023</div>
+                <div class="sky-pixel-country-border-card"><strong>Hawkfall Country</strong>Capital: No capital city currently<br>Region: Westernmost Sky Pixel Country for now<br>Status: Developing nation<br>Founded: May 2023<br>Established: Late November 2023</div>
+            </div>
+        </div>
+    </section>
+
 
     <div class="sky-pixel-player-tools" id="skyPixelPlayerTools" aria-label="Sky Pixel player explorer tools">
         <button id="skyPixelPlayerToolsMinimize" class="sky-pixel-player-minimize" type="button" aria-expanded="true" title="Collapse Add Marker controls">−</button>
@@ -833,6 +1281,36 @@
         </div>
     </section>
 
+
+
+    <div id="skyPixelCountryInfoBackdrop" class="sky-pixel-country-info-backdrop"></div>
+    <aside id="skyPixelCountryInfoPanel" class="sky-pixel-country-info-panel" aria-live="polite" aria-label="Sky Pixel country details">
+        <button id="skyPixelCountryInfoClose" class="sky-pixel-country-info-close" type="button" aria-label="Close country information">×</button>
+        <div id="skyPixelCountryInfoHero" class="sky-pixel-country-info-hero">
+            <div>
+                <div class="sky-pixel-country-info-kicker">Political Atlas</div>
+                <h2 id="skyPixelCountryInfoTitle" class="sky-pixel-country-info-title">Country</h2>
+            </div>
+        </div>
+        <div class="sky-pixel-country-info-body">
+            <div class="sky-pixel-country-info-grid">
+                <div class="sky-pixel-country-info-stat"><span>Capital</span><strong id="skyPixelCountryInfoCapital"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span>Region</span><strong id="skyPixelCountryInfoRegion"></strong></div>
+                <div id="skyPixelCountryInfoNameOriginatedStat" class="sky-pixel-country-info-stat" hidden><span>Name Originated</span><strong id="skyPixelCountryInfoNameOriginated"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span>Founded</span><strong id="skyPixelCountryInfoFounded"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span>Established</span><strong id="skyPixelCountryInfoEstablished"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span>Map Layer</span><strong>Political Map</strong></div>
+            </div>
+            <p id="skyPixelCountryInfoDescription" class="sky-pixel-country-info-description"></p>
+            <div class="sky-pixel-country-info-section-title">Border notes</div>
+            <ul id="skyPixelCountryInfoNotes" class="sky-pixel-country-info-list"></ul>
+            <div class="sky-pixel-country-info-actions">
+                <a id="skyPixelCountryAiModeLink" href="#" target="_blank" rel="noopener noreferrer">✨ Explore with AI</a>
+            </div>
+        </div>
+    </aside>
+
+
     <div id="skyPixelPanelBackdrop" class="sky-pixel-panel-backdrop"></div>
     <aside id="skyPixelPanel" class="sky-pixel-panel" aria-live="polite" aria-label="Sky Pixel location details">
         <button id="skyPixelPanelClose" class="sky-pixel-panel-close" aria-label="Close location panel">×</button>
@@ -870,6 +1348,11 @@
             </section>
         </div>
     </aside>
+
+    <div id="skyPixelPoliticalLegend" class="sky-pixel-political-legend" hidden aria-label="Sky Pixel Political Map legend">
+        <div class="sky-pixel-political-legend-title">🗺 Political Map</div>
+        <div id="skyPixelPoliticalLegendList" class="sky-pixel-political-legend-list"></div>
+    </div>
 
     <script type="text/javascript">
 
@@ -1105,6 +1588,583 @@
         if (skyPixelCloudCoverage) skyPixelCloudCoverage.addEventListener('change', function () { buildSkyPixelCloudSystems(true); skyPixelCloudCanvasSource.changed(); });
         unmined.olMap.getView().on('change:resolution', function () { if (skyPixelCloudLayerVisible) skyPixelCloudCanvasSource.changed(); });
         unmined.olMap.on('moveend', function () { if (skyPixelCloudLayerVisible) skyPixelCloudCanvasSource.changed(); });
+
+
+        // Sky Pixel Political Borders: OpenLayers vector overlay using Minecraft X/Z coordinates.
+        const skyPixelCountryBordersToggle = document.getElementById('skyPixelCountryBordersToggle');
+        const skyPixelCountryBordersPanel = document.getElementById('skyPixelCountryBordersPanel');
+        const skyPixelCountryLayerControls = document.getElementById('skyPixelCountryLayerControls');
+
+        const skyPixelCountryBorders = [
+            {
+                name: 'Skyline Country',
+                label: 'Skyline Country',
+                capital: 'Octavian',
+                region: 'Central / Mid-Northern Sky Pixel',
+                founded: 'July 2014',
+                establishment: 'January 2015',
+                heroClass: 'skyline',
+                description: 'Skyline Country is a central to mid-northern country in Sky Pixel, centered around Octavian and the high-profile urban, coastal, mountain, and 3D-map development regions of the world.',
+                notes: ['Founded in July 2014 during the earliest era of Sky Pixel.', 'Established as Skyline Country in January 2015.', 'Region: Central / Mid-Northern Sky Pixel.', 'Shares its northern border area with Jesla Country near the marked boundary line.'],
+                color: 'rgba(80, 190, 255, 0.98)',
+                glow: 'rgba(80, 190, 255, 0.28)',
+                fill: 'rgba(80, 190, 255, 0.08)',
+                points: [
+                    { x: -3993, z: -2553 },
+                    { x: -3179, z: 1792 },
+                    { x: -2496, z: 1792 },
+                    { x: -2496, z: 2559 },
+                    { x: 2559, z: 2559 },
+                    { x: 2559, z: 222 },
+                    { x: 3526, z: 116 },
+                    { x: 3482, z: -2553 },
+                    { x: -3993, z: -2553 }
+                ]
+            },
+            {
+                name: 'Jesla Country',
+                label: 'Jesla Country',
+                capital: 'Harlow',
+                region: 'Northern Sky Pixel',
+                founded: 'December 2019',
+                establishment: 'November 2020',
+                heroClass: 'jesla',
+                description: 'Jesla Country is a major northern country in Sky Pixel, with Harlow as its capital and a large border wrapping through fjords, mountain ranges, wilderness regions, and major settlement corridors.',
+                notes: ['Founded in December 2019 before becoming an established country.', 'Established as Jesla Country in November 2020.', 'Region: Northern Sky Pixel.', 'The border route follows the Minecraft X/Z boundary points provided for the political atlas layer.'],
+                color: 'rgba(92, 235, 142, 0.98)',
+                glow: 'rgba(92, 235, 142, 0.26)',
+                fill: 'rgba(92, 235, 142, 0.075)',
+                points: [
+                    { x: -5524, z: -2553 },
+                    { x: 3482, z: -2553 },
+                    { x: 9812, z: -19578 },
+                    { x: -9356, z: -35578 },
+                    { x: -25836, z: -22298 },
+                    { x: -21602, z: -8451 },
+                    { x: -9484, z: -3450 },
+                    { x: -8951, z: -1780 },
+                    { x: -6221, z: -1780 },
+                    { x: -5524, z: -2553 }
+                ]
+            },
+            {
+                name: 'Vawlla Country',
+                label: 'Vawlla Country',
+                capital: 'La Morley',
+                region: 'Southern / Mid-Southern Sky Pixel',
+                founded: 'January 2020',
+                establishment: 'October 2020',
+                heroClass: 'vawlla',
+                description: 'Vawlla Country is the southern to mid-southern country in Sky Pixel, anchored by La Morley and a wide political boundary stretching across southern settlement corridors and interior terrain.',
+                notes: ['Founded in January 2020 before becoming an established country.', 'Established as Vawlla Country in October 2020.', 'Region: Southern / Mid-Southern Sky Pixel.', 'The border connects with Skyline Country along the northern boundary near the shared political line.'],
+                color: 'rgba(255, 168, 64, 0.98)',
+                glow: 'rgba(255, 168, 64, 0.28)',
+                fill: 'rgba(255, 168, 64, 0.075)',
+                points: [
+                    { x: -3179, z: 1792 },
+                    { x: -6688, z: 1792 },
+                    { x: -12082, z: 7832 },
+                    { x: -7965, z: 7657 },
+                    { x: -6734, z: 7602 },
+                    { x: -6130, z: 6726 },
+                    { x: -4526, z: 7626 },
+                    { x: -1744, z: 10751 },
+                    { x: 383, z: 10751 },
+                    { x: 613, z: 10984 },
+                    { x: 822, z: 10936 },
+                    { x: 955, z: 10914 },
+                    { x: 1127, z: 10813 },
+                    { x: 1274, z: 10615 },
+                    { x: 1340, z: 10615 },
+                    { x: 4016, z: 9602 },
+                    { x: 4016, z: 6703 },
+                    { x: 2496, z: 4578 },
+                    { x: 2496, z: 2559 },
+                    { x: -2496, z: 2559 },
+                    { x: -2496, z: 1792 },
+                    { x: -3179, z: 1792 }
+                ]
+            },
+            {
+                name: 'Kavarr Country',
+                label: 'Kavarr Country',
+                capital: 'Quantum',
+                region: 'Southernmost Sky Pixel',
+                founded: 'May 2025',
+                establishment: 'June 2025',
+                heroClass: 'kavarr',
+                description: 'Kavarr Country is currently the southernmost country in Sky Pixel, with Quantum as its capital and a large purple-themed political boundary extending across the far southern reaches of the world.',
+                notes: ['Founded in May 2025.', 'Established as Kavarr Country in June 2025.', 'Region: Southernmost Sky Pixel.', 'Kavarr shares part of its northern border line with Vawlla Country before extending farther south.'],
+                color: 'rgba(178, 112, 255, 0.98)',
+                glow: 'rgba(178, 112, 255, 0.30)',
+                fill: 'rgba(178, 112, 255, 0.075)',
+                points: [
+                    { x: -12082, z: 7832 },
+                    { x: -7965, z: 7657 },
+                    { x: -6734, z: 7602 },
+                    { x: -6130, z: 6726 },
+                    { x: -4526, z: 7626 },
+                    { x: -1744, z: 10751 },
+                    { x: 383, z: 10751 },
+                    { x: 613, z: 10984 },
+                    { x: 822, z: 10936 },
+                    { x: 955, z: 10914 },
+                    { x: 1127, z: 10813 },
+                    { x: 1274, z: 10615 },
+                    { x: 1340, z: 10615 },
+                    { x: 4016, z: 9602 },
+                    { x: 10302, z: 20194 },
+                    { x: 10515, z: 22928 },
+                    { x: 12483, z: 26436 },
+                    { x: 24347, z: 31748 },
+                    { x: 2075, z: 33028 },
+                    { x: -14501, z: 21412 },
+                    { x: -16421, z: 16644 },
+                    { x: -12082, z: 7832 }
+                ]
+            },
+            {
+                name: 'Sapphire Country',
+                label: 'Sapphire Country',
+                capital: 'Prunelle',
+                region: 'Easternmost Country in Sky Pixel',
+                nameOriginated: '2021',
+                founded: 'May 2023',
+                establishment: 'May 2023',
+                heroClass: 'sapphire',
+                description: 'Sapphire Country is currently the easternmost country in Sky Pixel, with Prunelle as its capital and a pink-themed political boundary stretching across the far eastern reaches of the world.',
+                notes: ['The name Sapphire Country originated in 2021.', 'Founded in May 2023.', 'Established as Sapphire Country in May 2023.', 'Region: Easternmost Country in Sky Pixel.'],
+                color: 'rgba(255, 118, 190, 0.98)',
+                glow: 'rgba(255, 118, 190, 0.30)',
+                fill: 'rgba(255, 118, 190, 0.075)',
+                points: [
+                    { x: 5667, z: 12384 },
+                    { x: 14782, z: 10481 },
+                    { x: 33470, z: 3537 },
+                    { x: 42688, z: -12591 },
+                    { x: 32288, z: -33228 },
+                    { x: 13536, z: -35468 },
+                    { x: 5241, z: -23395 },
+                    { x: 9811, z: -19580 },
+                    { x: 3480, z: -2556 },
+                    { x: 3524, z: 115 },
+                    { x: 2558, z: 224 },
+                    { x: 2559, z: 2557 },
+                    { x: 2494, z: 2557 },
+                    { x: 2496, z: 4578 },
+                    { x: 4014, z: 6703 },
+                    { x: 4017, z: 9601 },
+                    { x: 5667, z: 12384 }
+                ]
+            },
+            {
+                name: 'Hawkfall Country',
+                label: 'Hawkfall Country',
+                capital: 'No capital city currently',
+                region: 'Westernmost Sky Pixel Country for now',
+                founded: 'May 2023',
+                establishment: 'Late November 2023',
+                heroClass: 'hawkfall',
+                description: 'Hawkfall Country is currently the westernmost country in Sky Pixel for now. It is a developing nation with no capital city currently, shown with a red political boundary across the far western reaches of the world.',
+                notes: ['Developing nation.', 'No capital city currently.', 'Founded in May 2023.', 'Established in late November 2023.', 'Region: Westernmost Sky Pixel Country for now.'],
+                color: 'rgba(255, 72, 72, 0.98)',
+                glow: 'rgba(255, 72, 72, 0.30)',
+                fill: 'rgba(255, 72, 72, 0.075)',
+                points: [
+                    { x: -3994, z: -2551 },
+                    { x: -5523, z: -2554 },
+                    { x: -6220, z: -1781 },
+                    { x: -8950, z: -1782 },
+                    { x: -9485, z: -3450 },
+                    { x: -21603, z: -8461 },
+                    { x: -35728, z: -9447 },
+                    { x: -38652, z: 12898 },
+                    { x: -18172, z: 18338 },
+                    { x: -16420, z: 16644 },
+                    { x: -12084, z: 7834 },
+                    { x: -6687, z: 1792 },
+                    { x: -3180, z: 1790 },
+                    { x: -3994, z: -2551 }
+                ]
+            }
+        ];
+
+        function skyPixelCountryBorderToViewCoord(point) {
+            return ol.proj.transform([point.x, point.z], unmined.dataProjection, unmined.viewProjection);
+        }
+
+        function buildSkyPixelCountryBorderFeatures() {
+            const features = [];
+
+            skyPixelCountryBorders.forEach(function (country) {
+                const ring = country.points.map(skyPixelCountryBorderToViewCoord);
+                const polygon = new ol.geom.Polygon([ring]);
+                const borderFeature = new ol.Feature({
+                    geometry: polygon,
+                    name: country.name,
+                    countryName: country.name,
+                    label: country.label,
+                    capital: country.capital,
+                    establishment: country.establishment,
+                    founded: country.founded,
+                    nameOriginated: country.nameOriginated || '',
+                    region: country.region,
+                    heroClass: country.heroClass,
+                    description: country.description,
+                    notes: country.notes,
+                    type: 'country-border',
+                    color: country.color,
+                    glow: country.glow,
+                    fill: country.fill
+                });
+                features.push(borderFeature);
+
+                const labelFeature = new ol.Feature({
+                    geometry: polygon.getInteriorPoint(),
+                    name: country.label,
+                    countryName: country.name,
+                    capital: country.capital,
+                    establishment: country.establishment,
+                    founded: country.founded,
+                    nameOriginated: country.nameOriginated || '',
+                    region: country.region,
+                    heroClass: country.heroClass,
+                    description: country.description,
+                    notes: country.notes,
+                    type: 'country-label',
+                    color: country.color
+                });
+                features.push(labelFeature);
+            });
+
+            return features;
+        }
+
+
+        const skyPixelVisibleCountryNames = new Set(skyPixelCountryBorders.map(function (country) { return country.name; }));
+
+        function isSkyPixelCountryFeatureVisible(feature) {
+            if (!feature || !feature.get) return false;
+            const countryName = feature.get('countryName') || feature.get('name');
+            return skyPixelVisibleCountryNames.has(countryName);
+        }
+
+        function setSkyPixelVisibleCountry(countryName, isVisible) {
+            if (isVisible) {
+                skyPixelVisibleCountryNames.add(countryName);
+            } else {
+                skyPixelVisibleCountryNames.delete(countryName);
+            }
+            skyPixelCountryBordersLayer.changed();
+            updateSkyPixelCountryLayerControls();
+            buildSkyPixelPoliticalLegend();
+        }
+
+        function setAllSkyPixelVisibleCountries(isVisible) {
+            skyPixelVisibleCountryNames.clear();
+            if (isVisible) {
+                skyPixelCountryBorders.forEach(function (country) {
+                    skyPixelVisibleCountryNames.add(country.name);
+                });
+            }
+            skyPixelCountryBordersLayer.changed();
+            updateSkyPixelCountryLayerControls();
+            buildSkyPixelPoliticalLegend();
+        }
+
+        function updateSkyPixelCountryLayerControls() {
+            if (!skyPixelCountryLayerControls) return;
+            const allChecked = skyPixelCountryBorders.length > 0 && skyPixelVisibleCountryNames.size === skyPixelCountryBorders.length;
+            const rows = [
+                '<label class="sky-pixel-country-all"><input id="skyPixelCountryToggleAll" type="checkbox" ' + (allChecked ? 'checked' : '') + '> All countries</label>'
+            ];
+            skyPixelCountryBorders.forEach(function (country, index) {
+                const checked = skyPixelVisibleCountryNames.has(country.name) ? 'checked' : '';
+                rows.push(
+                    '<label><input class="sky-pixel-country-toggle-one" type="checkbox" data-country-name="' + country.name.replace(/"/g, '&quot;') + '" ' + checked + '> ' +
+                    '<span style="color:' + country.color + '">■</span> ' + country.name + '</label>'
+                );
+            });
+            skyPixelCountryLayerControls.innerHTML = rows.join('');
+            const allToggle = document.getElementById('skyPixelCountryToggleAll');
+            if (allToggle) {
+                allToggle.addEventListener('change', function () {
+                    setAllSkyPixelVisibleCountries(allToggle.checked);
+                });
+            }
+            skyPixelCountryLayerControls.querySelectorAll('.sky-pixel-country-toggle-one').forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    setSkyPixelVisibleCountry(checkbox.getAttribute('data-country-name'), checkbox.checked);
+                });
+            });
+        }
+
+        function skyPixelCountryBorderStyle(feature) {
+            if (!isSkyPixelCountryFeatureVisible(feature)) return null;
+            const type = feature.get('type');
+            const color = feature.get('color') || 'rgba(255,255,255,0.95)';
+            const glow = feature.get('glow') || 'rgba(255,255,255,0.22)';
+            const isHovered = !!feature.get('isHovered');
+
+            if (type === 'country-label') {
+                const zoom = unmined.olMap.getView().getZoom ? (unmined.olMap.getView().getZoom() || 0) : 0;
+                const labelScale = zoom >= 0 ? 1 : 0.9;
+                return new ol.style.Style({
+                    text: new ol.style.Text({
+                        text: feature.get('name') || '',
+                        font: '900 15px Arial, sans-serif',
+                        scale: labelScale,
+                        fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.98)' }),
+                        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.78)', width: 4 }),
+                        padding: [4, 8, 4, 8],
+                        backgroundFill: new ol.style.Fill({ color: 'rgba(10, 14, 22, 0.66)' }),
+                        backgroundStroke: new ol.style.Stroke({ color: color, width: 1.2 })
+                    })
+                });
+            }
+
+            return [
+                new ol.style.Style({
+                    fill: new ol.style.Fill({ color: isHovered ? (feature.get('hoverFill') || feature.get('fill') || 'rgba(255,255,255,0.12)') : (feature.get('fill') || 'rgba(255,255,255,0.08)') }),
+                    stroke: new ol.style.Stroke({
+                        color: glow,
+                        width: isHovered ? 14 : 10,
+                        lineCap: 'round',
+                        lineJoin: 'round'
+                    })
+                }),
+                new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: color,
+                        width: isHovered ? 6 : 4,
+                        lineDash: [16, 10],
+                        lineCap: 'round',
+                        lineJoin: 'round'
+                    })
+                }),
+                new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'rgba(255,255,255,0.55)',
+                        width: 1.4,
+                        lineDash: [16, 10],
+                        lineCap: 'round',
+                        lineJoin: 'round'
+                    })
+                })
+            ];
+        }
+
+        const skyPixelCountryBordersLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: buildSkyPixelCountryBorderFeatures()
+            }),
+            visible: false,
+            zIndex: 1350,
+            style: skyPixelCountryBorderStyle
+        });
+
+        unmined.olMap.addLayer(skyPixelCountryBordersLayer);
+
+        const skyPixelCountryPopupElement = document.createElement('div');
+        skyPixelCountryPopupElement.className = 'sky-pixel-country-popup';
+        skyPixelCountryPopupElement.hidden = true;
+        document.body.appendChild(skyPixelCountryPopupElement);
+
+        const skyPixelCountryPopup = new ol.Overlay({
+            element: skyPixelCountryPopupElement,
+            positioning: 'bottom-center',
+            offset: [0, -12],
+            stopEvent: false
+        });
+        unmined.olMap.addOverlay(skyPixelCountryPopup);
+
+        const skyPixelCountryInfoBackdrop = document.getElementById('skyPixelCountryInfoBackdrop');
+        const skyPixelCountryInfoPanel = document.getElementById('skyPixelCountryInfoPanel');
+        const skyPixelCountryInfoClose = document.getElementById('skyPixelCountryInfoClose');
+        const skyPixelCountryInfoHero = document.getElementById('skyPixelCountryInfoHero');
+        const skyPixelCountryInfoTitle = document.getElementById('skyPixelCountryInfoTitle');
+        const skyPixelCountryInfoCapital = document.getElementById('skyPixelCountryInfoCapital');
+        const skyPixelCountryInfoRegion = document.getElementById('skyPixelCountryInfoRegion');
+        const skyPixelCountryInfoFounded = document.getElementById('skyPixelCountryInfoFounded');
+        const skyPixelCountryInfoEstablished = document.getElementById('skyPixelCountryInfoEstablished');
+        const skyPixelCountryInfoNameOriginated = document.getElementById('skyPixelCountryInfoNameOriginated');
+        const skyPixelCountryInfoNameOriginatedStat = document.getElementById('skyPixelCountryInfoNameOriginatedStat');
+        const skyPixelCountryInfoDescription = document.getElementById('skyPixelCountryInfoDescription');
+        const skyPixelCountryInfoNotes = document.getElementById('skyPixelCountryInfoNotes');
+        const skyPixelCountryAiModeLink = document.getElementById('skyPixelCountryAiModeLink');
+        const skyPixelPoliticalLegend = document.getElementById('skyPixelPoliticalLegend');
+        const skyPixelPoliticalLegendList = document.getElementById('skyPixelPoliticalLegendList');
+        let skyPixelHoveredCountryFeature = null;
+
+        function buildSkyPixelCountryAiModeUrl(feature) {
+            const countryName = feature && feature.get ? (feature.get('name') || 'Sky Pixel country') : 'Sky Pixel country';
+            const prompt = 'tell me something about ' + countryName + ' from the Sky Pixel minecraft world';
+            return 'https://www.google.com/search?udm=50&q=' + encodeURIComponent(prompt);
+        }
+
+        function buildSkyPixelPoliticalLegend() {
+            if (!skyPixelPoliticalLegendList) return;
+            skyPixelPoliticalLegendList.innerHTML = skyPixelCountryBorders.filter(function (country) {
+                return skyPixelVisibleCountryNames.has(country.name);
+            }).map(function (country) {
+                return '<div class="sky-pixel-political-legend-item"><span class="sky-pixel-political-legend-swatch" style="color:' + country.color + '; background:' + country.color + '"></span><span>' + country.name + '</span></div>';
+            }).join('') || '<div class="sky-pixel-political-legend-item"><span>No countries selected</span></div>';
+        }
+        updateSkyPixelCountryLayerControls();
+        buildSkyPixelPoliticalLegend();
+
+        function setSkyPixelHoveredCountry(feature) {
+            if (skyPixelHoveredCountryFeature === feature) return;
+            if (skyPixelHoveredCountryFeature) skyPixelHoveredCountryFeature.set('isHovered', false);
+            skyPixelHoveredCountryFeature = feature || null;
+            if (skyPixelHoveredCountryFeature) skyPixelHoveredCountryFeature.set('isHovered', true);
+            skyPixelCountryBordersLayer.changed();
+        }
+
+        function isSkyPixelMarkerClick(event) {
+            if (!event || !event.pixel || !UnminedMapProperties || !UnminedMapProperties.markers) return false;
+            const clickX = event.pixel[0];
+            const clickY = event.pixel[1];
+            return UnminedMapProperties.markers.some(function (marker) {
+                if (!marker || typeof marker.x !== 'number' || typeof marker.z !== 'number') return false;
+                const markerCoordinate = ol.proj.transform([marker.x, marker.z], unmined.dataProjection, unmined.viewProjection);
+                const markerPixel = unmined.olMap.getPixelFromCoordinate(markerCoordinate);
+                if (!markerPixel) return false;
+                const dx = Math.abs(markerPixel[0] - clickX);
+                const dy = Math.abs(markerPixel[1] - clickY);
+
+                // Prevent country fills from stealing clicks meant for cities,
+                // towns, landmarks, or their map labels.
+                if (dx <= 34 && dy <= 44) return true;
+                if ((marker.text || marker.popupTitle) && dx <= 95 && dy <= 36) return true;
+                return false;
+            });
+        }
+
+        function openSkyPixelCountryInfo(feature) {
+            if (!feature || feature.get('type') !== 'country-border') return;
+            if (skyPixelCountryInfoTitle) skyPixelCountryInfoTitle.textContent = feature.get('name') || 'Country';
+            if (skyPixelCountryInfoCapital) skyPixelCountryInfoCapital.textContent = feature.get('capital') || 'Unknown';
+            if (skyPixelCountryInfoRegion) skyPixelCountryInfoRegion.textContent = feature.get('region') || 'Unknown';
+            if (skyPixelCountryInfoFounded) skyPixelCountryInfoFounded.textContent = feature.get('founded') || 'Unknown';
+            if (skyPixelCountryInfoEstablished) skyPixelCountryInfoEstablished.textContent = feature.get('establishment') || 'Unknown';
+            const nameOriginated = feature.get('nameOriginated') || '';
+            if (skyPixelCountryInfoNameOriginated) skyPixelCountryInfoNameOriginated.textContent = nameOriginated;
+            if (skyPixelCountryInfoNameOriginatedStat) skyPixelCountryInfoNameOriginatedStat.hidden = !nameOriginated;
+            if (skyPixelCountryInfoDescription) skyPixelCountryInfoDescription.textContent = feature.get('description') || '';
+            if (skyPixelCountryAiModeLink) skyPixelCountryAiModeLink.href = buildSkyPixelCountryAiModeUrl(feature);
+            if (skyPixelCountryInfoHero) {
+                skyPixelCountryInfoHero.className = 'sky-pixel-country-info-hero ' + (feature.get('heroClass') || '');
+            }
+            if (skyPixelCountryInfoNotes) {
+                const notes = feature.get('notes') || [];
+                skyPixelCountryInfoNotes.innerHTML = notes.map(function (note) {
+                    return '<li>' + note + '</li>';
+                }).join('');
+            }
+            if (skyPixelCountryInfoBackdrop) skyPixelCountryInfoBackdrop.classList.add('is-open');
+            if (skyPixelCountryInfoPanel) skyPixelCountryInfoPanel.classList.add('is-open');
+            skyPixelCountryPopupElement.hidden = true;
+            skyPixelCountryPopup.setPosition(undefined);
+        }
+
+        function closeSkyPixelCountryInfo() {
+            if (skyPixelCountryInfoBackdrop) skyPixelCountryInfoBackdrop.classList.remove('is-open');
+            if (skyPixelCountryInfoPanel) skyPixelCountryInfoPanel.classList.remove('is-open');
+        }
+
+        if (skyPixelCountryInfoClose) skyPixelCountryInfoClose.addEventListener('click', closeSkyPixelCountryInfo);
+        if (skyPixelCountryInfoBackdrop) skyPixelCountryInfoBackdrop.addEventListener('click', closeSkyPixelCountryInfo);
+
+
+        function setSkyPixelCountryBordersVisible(isVisible) {
+            if (isVisible && skyPixelVisibleCountryNames.size === 0) {
+                skyPixelCountryBorders.forEach(function (country) {
+                    skyPixelVisibleCountryNames.add(country.name);
+                });
+            }
+            skyPixelCountryBordersLayer.setVisible(!!isVisible);
+            if (!isVisible) {
+                skyPixelCountryPopupElement.hidden = true;
+                skyPixelCountryPopup.setPosition(undefined);
+                closeSkyPixelCountryInfo();
+            }
+            if (skyPixelCountryBordersToggle) {
+                skyPixelCountryBordersToggle.classList.toggle('is-active', !!isVisible);
+                skyPixelCountryBordersToggle.setAttribute('aria-pressed', String(!!isVisible));
+            }
+            if (skyPixelCountryBordersPanel) skyPixelCountryBordersPanel.hidden = !isVisible;
+            if (skyPixelPoliticalLegend) skyPixelPoliticalLegend.hidden = !isVisible;
+            updateSkyPixelCountryLayerControls();
+            buildSkyPixelPoliticalLegend();
+            if (!isVisible) setSkyPixelHoveredCountry(null);
+        }
+
+        function showSkyPixelCountryPopup(feature, coordinate) {
+            // Hover popups are intentionally disabled. Hover now only brightens the country border.
+            skyPixelCountryPopupElement.hidden = true;
+            skyPixelCountryPopup.setPosition(undefined);
+        }
+
+
+        if (skyPixelCountryBordersToggle) {
+            skyPixelCountryBordersToggle.addEventListener('click', function () {
+                setSkyPixelCountryBordersVisible(!skyPixelCountryBordersLayer.getVisible());
+            });
+        }
+
+        unmined.olMap.on('pointermove', function (event) {
+            if (!skyPixelCountryBordersLayer.getVisible()) return;
+            if (event.dragging) return;
+
+            let hoveredCountry = null;
+            unmined.olMap.forEachFeatureAtPixel(event.pixel, function (feature) {
+                if (feature.get('type') === 'country-border' && isSkyPixelCountryFeatureVisible(feature)) {
+                    hoveredCountry = feature;
+                    return true;
+                }
+                return false;
+            }, {
+                layerFilter: function (layer) { return layer === skyPixelCountryBordersLayer; }
+            });
+
+            setSkyPixelHoveredCountry(hoveredCountry);
+            unmined.olMap.getTargetElement().style.cursor = hoveredCountry ? 'pointer' : '';
+            skyPixelCountryPopupElement.hidden = true;
+            skyPixelCountryPopup.setPosition(undefined);
+        });
+
+
+        unmined.olMap.on('singleclick', function (event) {
+            if (!skyPixelCountryBordersLayer.getVisible()) return;
+
+            // Do not let country polygons steal clicks from city/place markers.
+            if (isSkyPixelMarkerClick(event)) {
+                skyPixelCountryPopupElement.hidden = true;
+                skyPixelCountryPopup.setPosition(undefined);
+                return;
+            }
+
+            let clickedCountry = null;
+            unmined.olMap.forEachFeatureAtPixel(event.pixel, function (feature) {
+                if (feature.get('type') === 'country-border' && isSkyPixelCountryFeatureVisible(feature)) {
+                    clickedCountry = feature;
+                    return true;
+                }
+                return false;
+            }, {
+                layerFilter: function (layer) { return layer === skyPixelCountryBordersLayer; }
+            });
+            if (clickedCountry) {
+                window.setTimeout(function () {
+                    if (panel && panel.classList.contains('is-visible')) return;
+                    openSkyPixelCountryInfo(clickedCountry);
+                }, 0);
+            } else {
+                skyPixelCountryPopupElement.hidden = true;
+                skyPixelCountryPopup.setPosition(undefined);
+            }
+        });
 
 
         const adventurePanel = document.getElementById('skyPixelAdventurePanel');
@@ -3973,7 +5033,8 @@
                 SKY: 'Skyline Country',
                 SA: 'Sapphire Country',
                 KV: 'Kavarr Country',
-                VW: 'Vawlla Country'
+                VW: 'Vawlla Country',
+                KV: 'Kavarr Country'
             };
 
             for (let i = 0; i < parts.length; i++) {
