@@ -262,6 +262,7 @@
             <div class="sky-pixel-panel-actions">
                 <a id="skyPixelPanelLink" href="#" target="_blank" rel="noopener noreferrer">📖 Read on Wiki</a>
                 <a id="skyPixelAiModeLink" href="#" target="_blank" rel="noopener noreferrer">✨ Explore with AI</a>
+                <a id="skyPixelBlueMapLink" href="#" target="_blank" rel="noopener noreferrer">🌍 Open in 3D View</a>
             </div>
             <footer class="sky-pixel-panel-social" aria-label="Sky Pixel social links">
                 <div class="sky-pixel-social-title">Follow Sky Pixel / Elijah Jones</div>
@@ -306,6 +307,15 @@
         const panelCoords = document.getElementById('skyPixelPanelCoords');
         const panelMarkerType = document.getElementById('skyPixelPanelMarkerType');
         const aiModeLink = document.getElementById('skyPixelAiModeLink');
+        const blueMapLink = document.getElementById('skyPixelBlueMapLink');
+        if (blueMapLink) {
+            blueMapLink.addEventListener('click', function (event) {
+                const proceed = confirm('Sky Pixel 3D Mode is still in development. Right now it only renders Skyline Country, and the 3D view is currently low resolution. Open anyway?');
+                if (!proceed) {
+                    event.preventDefault();
+                }
+            });
+        }
         const wikiDetails = document.getElementById('skyPixelWikiDetails');
         const socialReddit = document.getElementById('skyPixelSocialReddit');
         const socialYouTube = document.getElementById('skyPixelSocialYouTube');
@@ -1610,6 +1620,30 @@
             return skyPixelManualHeroImages[cleanName] || '';
         }
 
+
+        // Sky Pixel 3D View / BlueMap integration.
+        // Sky Pixel BlueMap 5.17 uses full hash links:
+        // #mapId:x:y:z:distance:rotation:angle:tilt:ortho:viewMode
+        const SKY_PIXEL_BLUEMAP_BASE_URL = 'https://skypixel-bluemap-worker.elijahjones1322.workers.dev';
+        const SKY_PIXEL_BLUEMAP_MAP_ID = 'overworld';
+        const SKY_PIXEL_BLUEMAP_DEFAULT_Y = 100;
+        const SKY_PIXEL_BLUEMAP_DEFAULT_DISTANCE = 700;
+
+        function buildSkyPixelBlueMapUrl(marker) {
+            if (!marker || typeof marker.x !== 'number' || typeof marker.z !== 'number') {
+                return SKY_PIXEL_BLUEMAP_BASE_URL;
+            }
+
+            const x = Math.round(marker.x);
+            const y = Math.round(typeof marker.y === 'number' ? marker.y : SKY_PIXEL_BLUEMAP_DEFAULT_Y);
+            const z = Math.round(marker.z);
+
+            // BlueMap 5.17 requires all 10 hash values.
+            // Format: #mapId:x:y:z:distance:rotation:angle:tilt:ortho:viewMode
+            // angle 0.95 gives a tilted 3D perspective instead of a flat top-down view.
+            return `${SKY_PIXEL_BLUEMAP_BASE_URL}/#${encodeURIComponent(SKY_PIXEL_BLUEMAP_MAP_ID)}:${x}:${y}:${z}:${SKY_PIXEL_BLUEMAP_DEFAULT_DISTANCE}:0:0.95:0:0:perspective`;
+        }
+
         function openSkyPixelPanel(marker) {
             activeSkyPixelMarker = marker;
             const title = marker.popupTitle || marker.text || 'Location';
@@ -1634,6 +1668,7 @@
             panelLink.href = marker.url || '#';
             panelLink.style.display = marker.url ? 'inline-flex' : 'none';
             aiModeLink.href = buildAiModeUrl(marker);
+            blueMapLink.href = buildSkyPixelBlueMapUrl(marker);
             panel.classList.add('is-visible');
             panelBackdrop.classList.add('is-visible');
             setSkyPixelLocationPanelOpenState(true);
