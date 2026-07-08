@@ -1908,11 +1908,11 @@
 
             if (type === 'country-label') {
                 const zoom = unmined.olMap.getView().getZoom ? (unmined.olMap.getView().getZoom() || 0) : 0;
-                const labelScale = zoom >= 0 ? 1 : 0.9;
+                const labelScale = zoom >= 0 ? 1.1 : 1.0;
                 return new ol.style.Style({
                     text: new ol.style.Text({
                         text: feature.get('name') || '',
-                        font: '900 15px Arial, sans-serif',
+                        font: '900 16px Arial, sans-serif',
                         scale: labelScale,
                         fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.98)' }),
                         stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.78)', width: 4 }),
@@ -5075,8 +5075,235 @@
             return `https://www.google.com/search?udm=50&q=${encodeURIComponent(prompt)}`;
         }
 
-        // Make Sky Pixel city labels behave more like Google Earth:
-        // pins stay visible, but city names only appear after zooming in.
+        // Sky Pixel Atlas Label Engine
+        // Category-based zoom, typography, and color rules.
+        // No colored glow: labels keep a clean black outline for readability.
+        const skyPixelMajorCityNames = new Set([
+            'Octavian', 'Harlow', 'Prunelle', 'La Morley', 'Quantum',
+            'Xhaelis', 'Razalia', 'Elowah', 'Griffin', 'Oxland'
+        ]);
+
+        const skyPixelRegionalCityNames = new Set([
+            'Alouette', 'Adaline', 'Brooklyn C', 'Bourbon', 'Clementine', 'Saylor',
+            'Zalex', 'Klaxikin', 'Valance', 'Oliveto', 'Ruby', 'Emmiton',
+            'Reno', 'Sitkan', 'Lillooet', 'Little Ellie',
+            'Harlie', 'Eulalie', 'Eulaliè', 'Rosewood', 'Noland', 'Bellamy', 'Tayberry', 'Maria'
+        ]);
+
+        // Overall atlas label size bump. Increase these values if the whole map still
+        // feels too small after testing in-browser.
+        const skyPixelLabelGlobalScale = 1.16;
+        const skyPixelFeaturedCityScale = 1.42;
+        const skyPixelCapitalCityScale = 1.56;
+        const skyPixelMediumCityScale = 1.28;
+        const skyPixelValanceCityScale = 1.16;
+        const skyPixelRosewoodCityScale = 1.22;
+        const skyPixelMediumCityNames = new Set([
+            'Brooklyn C','La Aurielle','Skyhaven','Lilo'
+        ]);
+        const skyPixelValanceCityNames = new Set(['Valance']);
+        const skyPixelAdalineCityNames = new Set(['Adaline','Harlie','Eulalie','Eulaliè']);
+        const skyPixelRosewoodCityNames = new Set(['Rosewood','Noland','Bellamy','Tayberry','Maria']);
+        const skyPixelSmallCityNames = new Set(['Oliveto']);
+        const skyPixelFeaturedCityNames = new Set([
+            'Elowah'
+        ]);
+        const skyPixelCapitalCityNames = new Set([
+            'La Morley', 'Quantum', 'Octavian', 'Harlow', 'L\'Eulàlia', 'Prunelle'
+        ]);
+        const skyPixelFarZoomCityNames = new Set([
+            'Octavian', 'Harlow', 'La Morley', 'Quantum', 'L\'Eulàlia', 'Prunelle'
+        ]);
+
+        function scaleSkyPixelFont(font, scale) {
+            const baseFont = font || '600 12px Arial, sans-serif';
+            return baseFont.replace(/(\d+(?:\.\d+)?)px/i, function (match, size) {
+                const scaledSize = Math.round(Number(size) * scale * 10) / 10;
+                return scaledSize + 'px';
+            });
+        }
+
+        function getSkyPixelLabelScale(marker) {
+            const name = getSkyPixelBaseMarkerName(marker);
+            if (skyPixelCapitalCityNames.has(name)) return skyPixelCapitalCityScale;
+            if (skyPixelFeaturedCityNames.has(name)) return skyPixelFeaturedCityScale;
+            if (skyPixelMediumCityNames.has(name)) return skyPixelMediumCityScale;
+            if (skyPixelRosewoodCityNames.has(name)) return skyPixelRosewoodCityScale;
+            if (skyPixelAdalineCityNames.has(name)) return skyPixelValanceCityScale;
+            if (skyPixelValanceCityNames.has(name)) return skyPixelValanceCityScale;
+            if (skyPixelSmallCityNames.has(name)) return 1.16;
+            return skyPixelLabelGlobalScale;
+        }
+
+        function getSkyPixelBaseMarkerName(marker) {
+            const rawTitle = marker.popupTitle || marker.text || '';
+            return rawTitle.split(',')[0].replace(/\s+/g, ' ').trim();
+        }
+
+        function getSkyPixelMarkerCategory(marker) {
+            if (!marker) return 'landmark';
+            if (marker.skyPixelCategory) return marker.skyPixelCategory;
+            if (marker.category) return marker.category;
+            if (marker.type) return String(marker.type).toLowerCase().replace(/\s+/g, '_');
+
+            const name = getSkyPixelBaseMarkerName(marker);
+            const lower = name.toLowerCase();
+            const full = String(marker.popupTitle || marker.text || '').toLowerCase();
+
+            if (skyPixelMajorCityNames.has(name)) return 'major_city';
+            if (skyPixelRegionalCityNames.has(name)) return 'regional_city';
+
+            if (/\b(downtown|metro|district|neighborhood|quarter|suburb|borough|ward|old town|uptown|midtown|north |south |east |west )/.test(lower)) {
+                return 'metro_area';
+            }
+
+            if (/\b(mountain range|mountains|range|ranges)\b/.test(lower)) return 'mountain_range';
+            if (/\b(mount|mt\.?|peak|summit)\b/.test(lower)) return 'mountain_peak';
+
+            if (/\b(glacier|icefield|ice field)\b/.test(lower)) return 'glacier';
+            if (/\b(fjord|inlet|sound|bay|strait|channel)\b/.test(lower)) return 'water_feature';
+            if (/\b(river|lake|lagoon|reservoir)\b/.test(lower)) return 'water_feature';
+
+            if (/\b(desert|dunes|badlands)\b/.test(lower)) return 'desert';
+            if (/\b(canyon|gorge|ravine)\b/.test(lower)) return 'canyon';
+
+            if (/\b(national park|provincial park|state park)\b/.test(lower)) return 'park';
+            if (/\b(nature reserve|reserve|preserve|forest|woods|woodland|rainforest|bayou|wetland|swamp|marsh)\b/.test(lower)) return 'nature_reserve';
+
+            if (/\b(stadium|arena|ballpark|field)\b/.test(lower)) return 'stadium';
+            if (/\b(airport|airfield)\b/.test(lower)) return 'airport';
+            if (/\b(port|harbor|harbour|terminal|marina|dock)\b/.test(lower)) return 'port';
+            if (/\b(station|rail|metro)\b/.test(lower)) return 'transit';
+
+            // Existing marker size can still imply city hierarchy when names are not listed above.
+            const size = getMarkerFontSize(marker);
+            if (size >= 26) return 'major_city';
+            if (size >= 20) return 'regional_city';
+            if (size >= 16 && /\b(city|town|village)\b/.test(full)) return 'regional_city';
+
+            return 'landmark';
+        }
+
+        const skyPixelLabelRules = {
+            major_city: {
+                minZoom: 3.05,
+                font: '700 20px Arial, sans-serif',
+                color: '#ffffff',
+                stroke: '#000000',
+                strokeWidth: 4
+            },
+            regional_city: {
+                minZoom: 4.05,
+                font: '600 16px Arial, sans-serif',
+                color: '#ffffff',
+                stroke: '#000000',
+                strokeWidth: 4
+            },
+            metro_area: {
+                minZoom: 5.25,
+                font: '500 14px Arial, sans-serif',
+                color: '#d8d8d8',
+                stroke: '#000000',
+                strokeWidth: 3
+            },
+            mountain_range: {
+                minZoom: 3.65,
+                font: 'italic 600 15px Georgia, serif',
+                color: '#6b7280',
+                stroke: '#ffffff',
+                strokeWidth: 3
+            },
+            mountain_peak: {
+                minZoom: 5.55,
+                font: 'italic 500 14px Georgia, serif',
+                color: '#4b5563',
+                stroke: '#ffffff',
+                strokeWidth: 3
+            },
+            water_feature: {
+                minZoom: 4.05,
+                font: 'italic 600 15px Georgia, serif',
+                color: '#3b82f6',
+                stroke: '#ffffff',
+                strokeWidth: 3
+            },
+            glacier: {
+                minZoom: 5.05,
+                font: 'italic 600 14px Georgia, serif',
+                color: '#38bdf8',
+                stroke: '#ffffff',
+                strokeWidth: 3
+            },
+            park: {
+                minZoom: 4.35,
+                font: '700 14px Arial, sans-serif',
+                color: '#22c55e',
+                stroke: '#001a0a',
+                strokeWidth: 3
+            },
+            nature_reserve: {
+                minZoom: 5.25,
+                font: '500 14px Arial, sans-serif',
+                color: '#22c55e',
+                stroke: '#001a0a',
+                strokeWidth: 3
+            },
+            desert: {
+                minZoom: 4.45,
+                font: 'italic 600 15px Georgia, serif',
+                color: '#f59e0b',
+                stroke: '#2a1400',
+                strokeWidth: 3
+            },
+            canyon: {
+                minZoom: 4.8,
+                font: 'italic 600 14px Georgia, serif',
+                color: '#f97316',
+                stroke: '#2a1000',
+                strokeWidth: 3
+            },
+            stadium: {
+                minZoom: 5.55,
+                font: '700 14px Arial, sans-serif',
+                color: '#c084fc',
+                stroke: '#160026',
+                strokeWidth: 3
+            },
+            airport: {
+                minZoom: 4.75,
+                font: '600 14px Arial, sans-serif',
+                color: '#93c5fd',
+                stroke: '#00122a',
+                strokeWidth: 3
+            },
+            port: {
+                minZoom: 4.75,
+                font: '600 14px Arial, sans-serif',
+                color: '#60a5fa',
+                stroke: '#00122a',
+                strokeWidth: 3
+            },
+            transit: {
+                minZoom: 5.2,
+                font: '500 13px Arial, sans-serif',
+                color: '#d1d5db',
+                stroke: '#000000',
+                strokeWidth: 3
+            },
+            landmark: {
+                minZoom: 5.65,
+                font: '500 13px Arial, sans-serif',
+                color: '#eeeeee',
+                stroke: '#000000',
+                strokeWidth: 3
+            }
+        };
+
+        function getSkyPixelLabelRule(marker) {
+            const category = getSkyPixelMarkerCategory(marker);
+            return skyPixelLabelRules[category] || skyPixelLabelRules.landmark;
+        }
+
         function createSkyPixelMarkerStyle(marker, showLabel) {
             const style = new ol.style.Style();
 
@@ -5089,17 +5316,18 @@
             }
 
             if (showLabel && marker.text) {
+                const rule = getSkyPixelLabelRule(marker);
                 style.setText(new ol.style.Text({
                     text: marker.text,
-                    font: marker.font || 'bold 18px Arial',
+                    font: scaleSkyPixelFont(marker.labelFont || rule.font || marker.font || '600 12px Arial, sans-serif', getSkyPixelLabelScale(marker)),
                     offsetX: marker.offsetX || 0,
-                    offsetY: marker.offsetY || -44,
-                    fill: new ol.style.Fill({ color: marker.textColor || '#ffffff' }),
+                    offsetY: marker.offsetY || -48,
+                    fill: new ol.style.Fill({ color: marker.textColor || rule.color || '#ffffff' }),
                     stroke: new ol.style.Stroke({
-                        color: marker.textStrokeColor || '#000000',
-                        width: marker.textStrokeWidth || 4
+                        color: marker.textStrokeColor || rule.stroke || '#000000',
+                        width: marker.textStrokeWidth || rule.strokeWidth || 3
                     }),
-                    padding: marker.textPadding || [4, 8, 4, 8],
+                    padding: marker.textPadding || [3, 6, 3, 6],
                     backgroundFill: marker.textBackgroundColor
                         ? new ol.style.Fill({ color: marker.textBackgroundColor })
                         : null
@@ -5110,25 +5338,17 @@
         }
 
         function getMarkerFontSize(marker) {
-            const font = marker.font || '';
+            const font = marker.font || marker.labelFont || '';
             const match = font.match(/(\d+(?:\.\d+)?)px/i);
             return match ? Number(match[1]) : 18;
         }
 
         function getSkyPixelLabelMinZoom(marker) {
+            const name = getSkyPixelBaseMarkerName(marker);
+            if (skyPixelFarZoomCityNames.has(name)) return 2.05;
             if (marker.labelMinZoom !== undefined) return marker.labelMinZoom;
-            if ((marker.text || '').startsWith('Elowah,')) return 3.85;
-
-            const size = getMarkerFontSize(marker);
-
-            // Google Earth style: major city labels stay visible farther out,
-            // smaller town labels disappear sooner when zooming out.
-            if (size >= 32) return 3.25;  // largest cities / capitals
-            if (size >= 23) return 3.85;  // major cities
-            if (size >= 22) return 4.25;  // cities
-            if (size >= 18) return 4.75;  // medium towns
-            if (size >= 16) return 5.15;  // small towns
-            return 5.55;                  // smallest towns / minor places
+            const rule = getSkyPixelLabelRule(marker);
+            return rule.minZoom;
         }
 
         function applySkyPixelZoomLabels() {
@@ -5143,6 +5363,12 @@
                 const showLabel = currentZoom >= labelMinZoom;
                 feature.setStyle(createSkyPixelMarkerStyle(marker, showLabel));
             });
+        }
+
+        // Let OpenLayers declutter labels where supported. Higher-priority labels
+        // stay cleaner because lower-detail categories appear at closer zooms.
+        if (unmined.markersLayer && typeof unmined.markersLayer.setDeclutter === 'function') {
+            unmined.markersLayer.setDeclutter(true);
         }
 
         applySkyPixelZoomLabels();
