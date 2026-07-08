@@ -114,6 +114,73 @@
         }
 
 
+        .sky-pixel-map-brightness-tools {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 10px;
+            margin: 10px 0 0;
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-map-brightness-tools button {
+            width: 100%;
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            font-weight: 900;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(38, 54, 74, 0.86), rgba(90, 110, 140, 0.82));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 0 18px rgba(20, 32, 45, 0.26);
+        }
+
+        .sky-pixel-map-brightness-tools button.is-active {
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.78), rgba(50, 72, 115, 0.88));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), 0 0 24px rgba(0, 210, 255, 0.34);
+        }
+
+        .sky-pixel-map-brightness-panel {
+            margin-top: 10px;
+            display: grid;
+            gap: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .sky-pixel-map-brightness-title {
+            font-weight: 950;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            font-size: 11px;
+            opacity: 0.9;
+        }
+
+        .sky-pixel-map-brightness-panel label {
+            display: grid;
+            gap: 6px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .sky-pixel-map-brightness-value {
+            color: #8eeaff;
+            font-weight: 950;
+        }
+
+        .sky-pixel-map-brightness-reset {
+            background: rgba(255,255,255,0.16) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.13) !important;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-map-brightness-tools {
+            display: none !important;
+        }
+
+
         @media (max-width: 720px) {
             /* While a location card is open, remove every floating map widget
                from the touch layer. The panel becomes the only scroll target. */
@@ -496,6 +563,35 @@
             font-weight: 800;
         }
 
+
+
+
+        .sky-pixel-external-tower-popup {
+            min-width: 145px;
+            max-width: 220px;
+            padding: 8px 10px;
+            color: #ffffff;
+            background: rgba(10, 14, 22, 0.92);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.26), 0 10px 24px rgba(0,0,0,0.36);
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 1.25;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .sky-pixel-external-tower-popup small {
+            display: block;
+            margin-top: 3px;
+            color: rgba(255,255,255,0.72);
+            font-size: 10px;
+            font-weight: 850;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
 
         .sky-pixel-teleport-alt {
             border: 1px solid rgba(255,255,255,0.13);
@@ -1099,6 +1195,7 @@
                 <label><input id="skyPixelTeleportShowLayover" type="checkbox"> Layover</label>
                 <label><input id="skyPixelTeleportShowThird" type="checkbox"> Third layover</label>
                 <label><input id="skyPixelTeleportShowLabels" type="checkbox" checked> Labels</label>
+                <label><input id="skyPixelTeleportShowExternalTowers" type="checkbox" checked> ATL / XXL towers</label>
             </div>
 
             <label class="sky-pixel-teleport-field">City focus
@@ -1144,6 +1241,17 @@
                     <option value="overcast">Overcast</option>
                 </select>
             </label>
+        </div>
+    </section>
+
+    <section class="sky-pixel-map-brightness-tools" aria-label="Sky Pixel base map brightness tools">
+        <button id="skyPixelMapBrightnessToggle" type="button">🌘 Map Brightness</button>
+        <div id="skyPixelMapBrightnessPanel" class="sky-pixel-map-brightness-panel" hidden>
+            <div class="sky-pixel-map-brightness-title">Base Map Only</div>
+            <label class="sky-pixel-map-brightness-slider">Brightness <span id="skyPixelMapBrightnessValue" class="sky-pixel-map-brightness-value">82%</span>
+                <input id="skyPixelMapBrightness" type="range" min="35" max="140" value="82">
+            </label>
+            <button id="skyPixelMapBrightnessReset" class="sky-pixel-map-brightness-reset" type="button">Reset to Normal</button>
         </div>
     </section>
 
@@ -1366,6 +1474,76 @@
         }
         const mapElement = document.getElementById('map');
         const unmined = new Unmined(mapElement, UnminedMapProperties, UnminedRegions);
+
+
+        // Sky Pixel base-map brightness: applies only to the original map tile layers.
+        // Markers, labels, borders, clouds, route overlays, panels, and other UI layers remain full brightness.
+        const skyPixelMapBrightnessToggle = document.getElementById('skyPixelMapBrightnessToggle');
+        const skyPixelMapBrightnessPanel = document.getElementById('skyPixelMapBrightnessPanel');
+        const skyPixelMapBrightness = document.getElementById('skyPixelMapBrightness');
+        const skyPixelMapBrightnessValue = document.getElementById('skyPixelMapBrightnessValue');
+        const skyPixelMapBrightnessReset = document.getElementById('skyPixelMapBrightnessReset');
+        const skyPixelBaseMapBrightnessLayers = [];
+
+        function isSkyPixelBaseMapLayer(layer) {
+            if (!layer || typeof layer.getSource !== 'function') return false;
+            const source = layer.getSource();
+            if (!source) return false;
+            const isTileLayer = (ol.layer && ol.layer.Tile && layer instanceof ol.layer.Tile) || typeof source.getTileGrid === 'function';
+            const isVectorLayer = (ol.layer && ol.layer.Vector && layer instanceof ol.layer.Vector) || (source && typeof source.getFeatures === 'function');
+            return !!isTileLayer && !isVectorLayer;
+        }
+
+        function getSkyPixelMapBrightnessFilter() {
+            const value = skyPixelMapBrightness ? Number(skyPixelMapBrightness.value || 100) : 100;
+            return 'brightness(' + Math.max(0.35, Math.min(1.4, value / 100)).toFixed(2) + ')';
+        }
+
+        function updateSkyPixelMapBrightnessUI() {
+            const value = skyPixelMapBrightness ? Number(skyPixelMapBrightness.value || 100) : 100;
+            if (skyPixelMapBrightnessValue) skyPixelMapBrightnessValue.textContent = Math.round(value) + '%';
+            if (skyPixelMapBrightnessToggle) skyPixelMapBrightnessToggle.classList.toggle('is-active', value !== 100);
+            skyPixelBaseMapBrightnessLayers.forEach(function (layer) {
+                if (layer && typeof layer.changed === 'function') layer.changed();
+            });
+        }
+
+        function skyPixelBrightnessPreRender(event) {
+            if (!event || !event.context) return;
+            event.context.save();
+            event.context.filter = getSkyPixelMapBrightnessFilter();
+        }
+
+        function skyPixelBrightnessPostRender(event) {
+            if (!event || !event.context) return;
+            event.context.restore();
+        }
+
+        unmined.olMap.getLayers().forEach(function (layer) {
+            if (!isSkyPixelBaseMapLayer(layer)) return;
+            skyPixelBaseMapBrightnessLayers.push(layer);
+            layer.on('prerender', skyPixelBrightnessPreRender);
+            layer.on('postrender', skyPixelBrightnessPostRender);
+        });
+
+        if (skyPixelMapBrightnessToggle && skyPixelMapBrightnessPanel) {
+            skyPixelMapBrightnessToggle.addEventListener('click', function () {
+                skyPixelMapBrightnessPanel.hidden = !skyPixelMapBrightnessPanel.hidden;
+            });
+        }
+
+        if (skyPixelMapBrightness) {
+            skyPixelMapBrightness.addEventListener('input', updateSkyPixelMapBrightnessUI);
+        }
+
+        if (skyPixelMapBrightnessReset && skyPixelMapBrightness) {
+            skyPixelMapBrightnessReset.addEventListener('click', function () {
+                skyPixelMapBrightness.value = '100';
+                updateSkyPixelMapBrightnessUI();
+            });
+        }
+
+        updateSkyPixelMapBrightnessUI();
 
         // Sky Pixel clickable city side panel
         const panel = document.getElementById('skyPixelPanel');
@@ -3096,6 +3274,7 @@
         const teleportShowLayover = document.getElementById('skyPixelTeleportShowLayover');
         const teleportShowThird = document.getElementById('skyPixelTeleportShowThird');
         const teleportShowLabels = document.getElementById('skyPixelTeleportShowLabels');
+        const teleportShowExternalTowers = document.getElementById('skyPixelTeleportShowExternalTowers');
         const teleportFocusCity = document.getElementById('skyPixelTeleportFocusCity');
         const teleportFromSelect = document.getElementById('skyPixelTeleportFrom');
         const teleportToSelect = document.getElementById('skyPixelTeleportTo');
@@ -3114,6 +3293,34 @@
             visible: false,
             style: function (feature) {
                 const routeType = feature.get('routeType');
+
+                if (routeType === 'externalTower') {
+                    if (!teleportShowExternalTowers || !teleportShowExternalTowers.checked) return null;
+                    const isSelectedTower = feature === skyPixelSelectedExternalTower;
+                    return [
+                        new ol.style.Style({
+                            image: new ol.style.Circle({
+                                radius: isSelectedTower ? 18 : 14,
+                                fill: new ol.style.Fill({ color: 'rgba(255, 255, 255, 0.13)' }),
+                                stroke: new ol.style.Stroke({ color: isSelectedTower ? 'rgba(255, 255, 255, 0.42)' : 'rgba(255, 255, 255, 0.18)', width: isSelectedTower ? 10 : 8 })
+                            })
+                        }),
+                        new ol.style.Style({
+                            image: new ol.style.Circle({
+                                radius: isSelectedTower ? 10 : 8,
+                                fill: new ol.style.Fill({ color: 'rgba(255, 255, 255, 0.22)' }),
+                                stroke: new ol.style.Stroke({ color: 'rgba(255, 255, 255, 0.78)', width: 2 })
+                            })
+                        }),
+                        new ol.style.Style({
+                            image: new ol.style.Circle({
+                                radius: 3.2,
+                                fill: new ol.style.Fill({ color: 'rgba(255, 255, 255, 0.98)' }),
+                                stroke: new ol.style.Stroke({ color: 'rgba(10, 14, 22, 0.72)', width: 1 })
+                            })
+                        })
+                    ];
+                }
 
                 if (routeType === 'label') {
                     if (!teleportShowLabels || !teleportShowLabels.checked) return null;
@@ -3155,6 +3362,60 @@
         });
         unmined.olMap.addLayer(skyPixelTeleportLayer);
 
+        let skyPixelSelectedExternalTower = null;
+        const skyPixelExternalTowerPopupElement = document.createElement('div');
+        skyPixelExternalTowerPopupElement.className = 'sky-pixel-external-tower-popup';
+        skyPixelExternalTowerPopupElement.hidden = true;
+        const skyPixelExternalTowerPopup = new ol.Overlay({
+            element: skyPixelExternalTowerPopupElement,
+            positioning: 'bottom-center',
+            offset: [0, -18],
+            stopEvent: false
+        });
+        unmined.olMap.addOverlay(skyPixelExternalTowerPopup);
+
+        function hideSkyPixelExternalTowerPopup() {
+            skyPixelSelectedExternalTower = null;
+            skyPixelExternalTowerPopupElement.hidden = true;
+            skyPixelExternalTowerPopup.setPosition(undefined);
+        }
+
+        function showSkyPixelExternalTowerPopup(feature) {
+            if (!feature) {
+                hideSkyPixelExternalTowerPopup();
+                return;
+            }
+            skyPixelSelectedExternalTower = feature;
+            const name = feature.get('name') || 'External teleport tower';
+            const towerKind = name.includes('XXL') ? 'XXL external tower' : 'ATL external tower';
+            skyPixelExternalTowerPopupElement.innerHTML = `${name}<small>${towerKind}</small>`;
+            skyPixelExternalTowerPopupElement.hidden = false;
+            skyPixelExternalTowerPopup.setPosition(feature.getGeometry().getCoordinates());
+        }
+
+        unmined.olMap.on('singleclick', function (event) {
+            if (!skyPixelTeleportLayer.getVisible()) return;
+            let clickedExternalTower = null;
+            unmined.olMap.forEachFeatureAtPixel(event.pixel, function (feature) {
+                if (feature.get('routeType') === 'externalTower') {
+                    clickedExternalTower = feature;
+                    return true;
+                }
+                return false;
+            }, {
+                hitTolerance: 10,
+                layerFilter: function (layer) { return layer === skyPixelTeleportLayer; }
+            });
+
+            if (clickedExternalTower) {
+                showSkyPixelExternalTowerPopup(clickedExternalTower);
+                skyPixelTeleportLayer.changed();
+            } else {
+                hideSkyPixelExternalTowerPopup();
+                skyPixelTeleportLayer.changed();
+            }
+        });
+
         let skyPixelTeleportRoutesBuilt = false;
         let skyPixelSelectedTeleportPath = null;
         let skyPixelTeleportRouteOptions = [];
@@ -3193,6 +3454,28 @@
             return found ? found.marker : null;
         }
 
+
+        const skyPixelExternalTeleportTowers = [
+            { name: 'Octavian ATL-N', x: 65, z: 352 },
+            { name: 'Octavian ATL-S', x: 135, z: 418 },
+            { name: 'Octavian XXL Steam', x: 304, z: 350 },
+            { name: 'Octavian XXL Roblox', x: 229, z: 335 },
+            { name: 'Octavian XXL EA', x: 329, z: 390 },
+            { name: 'Harlow ATL', x: -2621, z: -3575 }
+        ];
+
+        function addSkyPixelExternalTeleportTowers() {
+            if (!teleportShowExternalTowers || !teleportShowExternalTowers.checked) return;
+
+            skyPixelExternalTeleportTowers.forEach(function (tower) {
+                const point = new ol.Feature({
+                    geometry: new ol.geom.Point(skyPixelBlocksToViewCoord(tower))
+                });
+                point.set('routeType', 'externalTower');
+                point.set('name', tower.name);
+                skyPixelTeleportSource.addFeature(point);
+            });
+        }
 
         function getSkyPixelTeleportLabelBg(layer) {
             if (layer === 'third') return 'rgba(220, 38, 38, 0.92)';
@@ -3413,9 +3696,12 @@
         }
 
         function buildSkyPixelTeleportRoutes() {
+            hideSkyPixelExternalTowerPopup();
             skyPixelTeleportSource.clear();
             const focusCity = teleportFocusCity ? teleportFocusCity.value : '';
             let routeIndex = 0;
+
+            addSkyPixelExternalTeleportTowers();
 
             skyPixelTeleportRoutes.forEach(function (route) {
                 if (!shouldShowTeleportRoute(route, 'direct', focusCity)) return;
@@ -3463,6 +3749,7 @@
                 buildSkyPixelTeleportRoutes();
                 if (teleportPlanner) teleportPlanner.hidden = false;
             } else {
+                hideSkyPixelExternalTowerPopup();
                 skyPixelTeleportSource.clear();
                 if (teleportPlanner) teleportPlanner.hidden = true;
             }
@@ -3737,7 +4024,7 @@
             });
         }
 
-        [teleportShowDirect, teleportShowLayover, teleportShowThird, teleportShowLabels, teleportFocusCity].forEach(function (control) {
+        [teleportShowDirect, teleportShowLayover, teleportShowThird, teleportShowLabels, teleportShowExternalTowers, teleportFocusCity].forEach(function (control) {
             if (!control) return;
             control.addEventListener('change', refreshSkyPixelTeleportRoutes);
         });
@@ -5304,10 +5591,60 @@
             return skyPixelLabelRules[category] || skyPixelLabelRules.landmark;
         }
 
+
+
+        // City/town markers use a small atlas-style city icon.
+        // Capital stars and non-city landmark icons stay untouched.
+        const SKY_PIXEL_SMALL_CITY_ICON_SRC = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+                <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.55"/>
+                </filter>
+                <g filter="url(#shadow)">
+                    <path d="M6 21V11h5v10H6zm6 0V7h5v14h-5zm6 0v-8h4v8h-4z" fill="#f8fafc" stroke="#111827" stroke-width="1.35" stroke-linejoin="round"/>
+                    <path d="M8 13h1.4M8 16h1.4M14 10h1.4M14 13h1.4M14 16h1.4M20 15h0.9M20 18h0.9" stroke="#111827" stroke-width="1" stroke-linecap="round" opacity="0.8"/>
+                    <path d="M5 22h18" stroke="#111827" stroke-width="1.35" stroke-linecap="round" opacity="0.9"/>
+                </g>
+            </svg>
+        `);
+
+        function isSkyPixelCapitalStarMarker(marker) {
+            const image = String(marker && marker.image ? marker.image : '').toLowerCase();
+            const name = getSkyPixelBaseMarkerName(marker);
+            return image.includes('star') || skyPixelCapitalCityNames.has(name);
+        }
+
+        function hasSkyPixelCountrySuffix(marker) {
+            const rawTitle = String(marker && (marker.popupTitle || marker.text) || '').trim();
+            return /(?:\s|,)(SKY|JC|VW|KV|SA)\s*$/i.test(rawTitle);
+        }
+
+        function shouldUseSmallSkyPixelCityIcon(marker) {
+            return !!marker && !isSkyPixelCapitalStarMarker(marker) && hasSkyPixelCountrySuffix(marker);
+        }
+
+        function shouldHideSkyPixelCityIcon(marker) {
+            if (!marker || isSkyPixelCapitalStarMarker(marker) || shouldUseSmallSkyPixelCityIcon(marker)) return false;
+            const category = getSkyPixelMarkerCategory(marker);
+            return category === 'major_city' || category === 'regional_city' || category === 'metro_area';
+        }
+
+        function getSkyPixelLabelOffsetY(marker) {
+            if (shouldUseSmallSkyPixelCityIcon(marker)) return marker.offsetY || -30;
+            if (shouldHideSkyPixelCityIcon(marker)) return marker.offsetY || -18;
+            return marker.offsetY || -48;
+        }
+
         function createSkyPixelMarkerStyle(marker, showLabel) {
             const style = new ol.style.Style();
 
-            if (marker.image) {
+            if (shouldUseSmallSkyPixelCityIcon(marker)) {
+                style.setImage(new ol.style.Icon({
+                    src: SKY_PIXEL_SMALL_CITY_ICON_SRC,
+                    anchor: [0.5, 0.5],
+                    scale: 0.58
+                }));
+            } else if (marker.image && !shouldHideSkyPixelCityIcon(marker)) {
                 style.setImage(new ol.style.Icon({
                     src: marker.image,
                     anchor: marker.imageAnchor,
@@ -5321,7 +5658,7 @@
                     text: marker.text,
                     font: scaleSkyPixelFont(marker.labelFont || rule.font || marker.font || '600 12px Arial, sans-serif', getSkyPixelLabelScale(marker)),
                     offsetX: marker.offsetX || 0,
-                    offsetY: marker.offsetY || -48,
+                    offsetY: getSkyPixelLabelOffsetY(marker),
                     fill: new ol.style.Fill({ color: marker.textColor || rule.color || '#ffffff' }),
                     stroke: new ol.style.Stroke({
                         color: marker.textStrokeColor || rule.stroke || '#000000',
