@@ -1932,7 +1932,7 @@
                     <button id="skyPixelRoadFindRoute" type="button">Show Road Route</button>
                     <button id="skyPixelRoadClearRoute" type="button">Hide Route</button>
                 </div>
-                <div id="skyPixelRoadRouteResult" class="sky-pixel-road-recorder-readout">Type two R101 stops, like Octavian to Baylie.</div>
+                <div id="skyPixelRoadRouteResult" class="sky-pixel-road-recorder-readout">DEVELOPING ROUTE TESTING PHASE NOT FINISHED</div>
             </div>
 
             <div id="skyPixelRoadRecorderReadout" class="sky-pixel-road-recorder-readout">Turn on Road Recorder, then click along the road curves in order.</div>
@@ -2738,19 +2738,45 @@
 
             if (type === 'country-label') {
                 const zoom = unmined.olMap.getView().getZoom ? (unmined.olMap.getView().getZoom() || 0) : 0;
-                const labelScale = zoom >= 0 ? 1.1 : 1.0;
-                return new ol.style.Style({
-                    text: new ol.style.Text({
-                        text: feature.get('name') || '',
-                        font: '900 16px Arial, sans-serif',
-                        scale: labelScale,
-                        fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.98)' }),
-                        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.78)', width: 4 }),
-                        padding: [4, 8, 4, 8],
-                        backgroundFill: new ol.style.Fill({ color: 'rgba(10, 14, 22, 0.66)' }),
-                        backgroundStroke: new ol.style.Stroke({ color: color, width: 1.2 })
+                const labelScale = zoom >= 0 ? 1.16 : 1.06;
+                const countryText = feature.get('name') || '';
+
+                // Political Map country names are intentionally rendered as a stacked
+                // glow-flare label so they sit visually in front of all other map text.
+                return [
+                    new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: countryText,
+                            font: '950 18px Arial, sans-serif',
+                            scale: labelScale,
+                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.01)' }),
+                            stroke: new ol.style.Stroke({ color: glow, width: 18 }),
+                            padding: [5, 10, 5, 10]
+                        })
+                    }),
+                    new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: countryText,
+                            font: '950 18px Arial, sans-serif',
+                            scale: labelScale,
+                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.01)' }),
+                            stroke: new ol.style.Stroke({ color: color, width: 10 }),
+                            padding: [5, 10, 5, 10]
+                        })
+                    }),
+                    new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: countryText,
+                            font: '950 18px Arial, sans-serif',
+                            scale: labelScale,
+                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.99)' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.88)', width: 5 }),
+                            padding: [5, 10, 5, 10],
+                            backgroundFill: new ol.style.Fill({ color: 'rgba(10, 14, 22, 0.72)' }),
+                            backgroundStroke: new ol.style.Stroke({ color: color, width: 1.6 })
+                        })
                     })
-                });
+                ];
             }
 
             return [
@@ -2789,7 +2815,13 @@
                 features: buildSkyPixelCountryBorderFeatures()
             }),
             visible: false,
-            zIndex: 1350,
+            zIndex: 999999,
+            renderOrder: function (featureA, featureB) {
+                const aIsLabel = featureA && featureA.get && featureA.get('type') === 'country-label';
+                const bIsLabel = featureB && featureB.get && featureB.get('type') === 'country-label';
+                if (aIsLabel === bIsLabel) return 0;
+                return aIsLabel ? 1 : -1;
+            },
             style: skyPixelCountryBorderStyle
         });
 
