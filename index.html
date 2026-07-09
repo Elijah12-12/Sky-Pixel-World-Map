@@ -1334,6 +1334,81 @@
             font-weight: 800;
         }
 
+
+        .sky-pixel-local-time-panel {
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.14), rgba(255,255,255,0.065));
+            border: 1px solid rgba(255,255,255,0.14);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05), 0 0 22px rgba(0, 210, 255, 0.12);
+        }
+
+        .sky-pixel-local-time-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .sky-pixel-local-time-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.68);
+            font-weight: 950;
+        }
+
+        .sky-pixel-local-time-city {
+            margin-top: 2px;
+            font-size: 14px;
+            line-height: 1.2;
+            font-weight: 950;
+        }
+
+        .sky-pixel-local-time-clock {
+            font-size: 24px;
+            line-height: 1;
+            font-weight: 950;
+            white-space: nowrap;
+            color: #ffffff;
+            text-shadow: 0 0 18px rgba(0, 210, 255, 0.26);
+        }
+
+        .sky-pixel-local-time-sky {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.10);
+        }
+
+        .sky-pixel-local-time-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: rgba(0,0,0,0.22);
+            font-size: 25px;
+        }
+
+        .sky-pixel-local-time-status {
+            font-weight: 950;
+            color: #ffffff;
+        }
+
+        .sky-pixel-local-time-note {
+            margin-top: 3px;
+            color: rgba(255,255,255,0.70);
+            font-size: 12px;
+            line-height: 1.35;
+            font-weight: 780;
+        }
+
         .sky-pixel-real-weather-weekly-title {
             margin: 13px 0 8px;
             font-size: 11px;
@@ -2038,6 +2113,22 @@
                 <div><span>Marker</span><strong id="skyPixelPanelMarkerType"></strong></div>
             </div>
             <section id="skyPixelRealWeather" class="sky-pixel-real-weather" hidden aria-live="polite">
+                <div id="skyPixelLocalTimePanel" class="sky-pixel-local-time-panel" hidden>
+                    <div class="sky-pixel-local-time-top">
+                        <div>
+                            <div class="sky-pixel-local-time-kicker">Local Time</div>
+                            <div id="skyPixelLocalTimeCity" class="sky-pixel-local-time-city">Reference city</div>
+                        </div>
+                        <div id="skyPixelLocalTimeClock" class="sky-pixel-local-time-clock">--:--</div>
+                    </div>
+                    <div class="sky-pixel-local-time-sky">
+                        <div id="skyPixelLocalTimeIcon" class="sky-pixel-local-time-icon" aria-hidden="true">☀️</div>
+                        <div>
+                            <div id="skyPixelLocalTimeStatus" class="sky-pixel-local-time-status">Daytime</div>
+                            <div id="skyPixelLocalTimeNote" class="sky-pixel-local-time-note">Synced to the real-world reference city.</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="sky-pixel-real-weather-head">
                     <div>
                         <div class="sky-pixel-real-weather-kicker">Weather</div>
@@ -2195,6 +2286,14 @@
         const realWeatherTitle = document.getElementById('skyPixelRealWeatherTitle');
         const realWeatherBody = document.getElementById('skyPixelRealWeatherBody');
         const realWeatherRefresh = document.getElementById('skyPixelRealWeatherRefresh');
+        const localTimePanel = document.getElementById('skyPixelLocalTimePanel');
+        const localTimeCity = document.getElementById('skyPixelLocalTimeCity');
+        const localTimeClock = document.getElementById('skyPixelLocalTimeClock');
+        const localTimeIcon = document.getElementById('skyPixelLocalTimeIcon');
+        const localTimeStatus = document.getElementById('skyPixelLocalTimeStatus');
+        const localTimeNote = document.getElementById('skyPixelLocalTimeNote');
+        let skyPixelLocalTimeTimer = null;
+        let skyPixelActiveLocalTimeContext = null;
         const aiModeLink = document.getElementById('skyPixelAiModeLink');
         const blueMapLink = document.getElementById('skyPixelBlueMapLink');
         if (blueMapLink) {
@@ -6660,6 +6759,7 @@
             "Baylie": { skyPixelLabel: "Baylie", label: "Centralia, WA", latitude: 46.7162, longitude: -122.9543 },
             "Bells": { skyPixelLabel: "Bells", label: "Oroville, WA", latitude: 48.9391, longitude: -119.4356 },
             "Tayberry": { skyPixelLabel: "Tayberry", label: "Vancouver, WA", latitude: 45.6387, longitude: -122.6615 },
+            "Bellamy": { skyPixelLabel: "Bellamy", label: "Vancouver, WA", latitude: 45.6387, longitude: -122.6615 },
             "Noland": { skyPixelLabel: "Noland", label: "Portland, OR", latitude: 45.5152, longitude: -122.6784 },
             "Valance": { skyPixelLabel: "Valance", label: "Santa Rosa, CA", latitude: 38.4404, longitude: -122.7144 },
             "Chaseloke": { skyPixelLabel: "Chaseloke", label: "Canyonville, OR", latitude: 42.9273, longitude: -123.2812 },
@@ -6687,6 +6787,7 @@
             "La Morley": { skyPixelLabel: "La Morley", label: "New Orleans, LA", latitude: 29.9511, longitude: -90.0715 },
             "Bourbon": { skyPixelLabel: "Bourbon", label: "Metairie, LA", latitude: 29.9841, longitude: -90.1529 },
             "Les Solenne": { skyPixelLabel: "Les Solenne", label: "Hopedale, LA", latitude: 29.8205, longitude: -89.654 },
+            "Les Solènne": { skyPixelLabel: "Les Solènne", label: "Hopedale, LA", latitude: 29.8205, longitude: -89.654 },
             "Belle Ombre": { skyPixelLabel: "Belle Ombre", label: "Hopedale, LA", latitude: 29.8205, longitude: -89.654 },
             "Gumbo": { skyPixelLabel: "Gumbo", label: "Hammond, LA", latitude: 30.5044, longitude: -90.4612 },
             "Malakai": { skyPixelLabel: "Malakai", label: "Honolulu, HI", latitude: 21.3099, longitude: -157.8581 },
@@ -6702,6 +6803,26 @@
             "Lenore": { skyPixelLabel: "Lenore", label: "Wilmington, NC", latitude: 34.2104, longitude: -77.8868 },
             "Morven": { skyPixelLabel: "Morven", label: "Winslow, AZ", latitude: 35.0242, longitude: -110.6974 },
             "Octavian": { skyPixelLabel: "Octavian", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 }
+        };
+
+        // Sky Pixel local-time regions.
+        // Weather can still use the real-world climate reference city, but the local time panel
+        // can follow the Sky Pixel world's east/west position instead.
+        const skyPixelLocalTimeZoneOverrides = {
+            "La Morley": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Bourbon": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Gumbo": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Les Solenne": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Les Solènne": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Belle Ombre": { timeZone: "America/Vancouver", abbreviation: "PT" },
+            "Quantum": { timeZone: "America/Anchorage", abbreviation: "AKT" },
+            "Valance": { timeZone: "America/Chicago", abbreviation: "CT" },
+            "Lenore": { timeZone: "America/Chicago", abbreviation: "CT" },
+            "Morven": { timeZone: "America/Chicago", abbreviation: "CT" },
+            "Orlaith": { timeZone: "Europe/Moscow", abbreviation: "MSK" },
+            "Cosme": { timeZone: "Etc/GMT+4", abbreviation: "GMT-4" },
+            "Bellamy": { timeZone: "America/Los_Angeles", abbreviation: "PT" },
+            "La Aurielle": { timeZone: "America/Vancouver", abbreviation: "PT" }
         };
         const skyPixelWeatherCodeInfo = {
             0: ["☀️", "Clear sky"],
@@ -6782,7 +6903,7 @@
                 + '?latitude=' + encodeURIComponent(config.latitude)
                 + '&longitude=' + encodeURIComponent(config.longitude)
                 + '&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m'
-                + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+                + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset'
                 + '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto';
         }
 
@@ -6802,10 +6923,142 @@
             return data;
         }
 
+
+        function getSkyPixelLocalDateInTimezone(timeZone) {
+            const parts = new Intl.DateTimeFormat('en-US', {
+                timeZone: timeZone,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            }).formatToParts(new Date()).reduce(function (acc, part) {
+                if (part.type !== 'literal') acc[part.type] = part.value;
+                return acc;
+            }, {});
+            return new Date(Number(parts.year), Number(parts.month) - 1, Number(parts.day), Number(parts.hour), Number(parts.minute), Number(parts.second));
+        }
+
+        function getSkyPixelMoonPhase(date) {
+            const lunarCycle = 29.530588853;
+            const knownNewMoon = new Date(2000, 0, 6, 18, 14, 0);
+            const daysSince = (date.getTime() - knownNewMoon.getTime()) / 86400000;
+            const age = ((daysSince % lunarCycle) + lunarCycle) % lunarCycle;
+            const phases = [
+                { limit: 1.84566, emoji: '🌑', name: 'New Moon' },
+                { limit: 5.53699, emoji: '🌒', name: 'Waxing Crescent' },
+                { limit: 9.22831, emoji: '🌓', name: 'First Quarter' },
+                { limit: 12.91963, emoji: '🌔', name: 'Waxing Gibbous' },
+                { limit: 16.61096, emoji: '🌕', name: 'Full Moon' },
+                { limit: 20.30228, emoji: '🌖', name: 'Waning Gibbous' },
+                { limit: 23.99361, emoji: '🌗', name: 'Last Quarter' },
+                { limit: 27.68493, emoji: '🌘', name: 'Waning Crescent' },
+                { limit: lunarCycle, emoji: '🌑', name: 'New Moon' }
+            ];
+            return phases.find(function (phase) { return age < phase.limit; }) || phases[0];
+        }
+
+        function getSkyPixelCurrentDateKey(timeZone) {
+            return new Intl.DateTimeFormat('en-CA', {
+                timeZone: timeZone,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).format(new Date());
+        }
+
+        function isSkyPixelDaytime(localDate, data, timeZone) {
+            const daily = data && data.daily ? data.daily : {};
+            const todayKey = getSkyPixelCurrentDateKey(timeZone);
+            const todayIndex = daily.time ? daily.time.indexOf(todayKey) : -1;
+            const sunrise = todayIndex >= 0 && daily.sunrise ? daily.sunrise[todayIndex] : null;
+            const sunset = todayIndex >= 0 && daily.sunset ? daily.sunset[todayIndex] : null;
+            if (sunrise && sunset) {
+                const sunriseTime = new Date(sunrise);
+                const sunsetTime = new Date(sunset);
+                const hour = Number(sunrise.slice(11, 13));
+                const minute = Number(sunrise.slice(14, 16));
+                const sunriseLocal = new Date(localDate.getFullYear(), localDate.getMonth(), localDate.getDate(), hour, minute, 0);
+                const sunsetHour = Number(sunset.slice(11, 13));
+                const sunsetMinute = Number(sunset.slice(14, 16));
+                const sunsetLocal = new Date(localDate.getFullYear(), localDate.getMonth(), localDate.getDate(), sunsetHour, sunsetMinute, 0);
+                return localDate >= sunriseLocal && localDate < sunsetLocal;
+            }
+            return localDate.getHours() >= 6 && localDate.getHours() < 18;
+        }
+
+        function updateSkyPixelLocalTimePanel() {
+            if (!localTimePanel || !skyPixelActiveLocalTimeContext) return;
+            const context = skyPixelActiveLocalTimeContext;
+            const timeZone = context.timeZone || 'UTC';
+            const localDate = getSkyPixelLocalDateInTimezone(timeZone);
+            const isDay = isSkyPixelDaytime(localDate, context.data, timeZone);
+            const moon = getSkyPixelMoonPhase(localDate);
+            const timeText = new Intl.DateTimeFormat(undefined, {
+                timeZone: timeZone,
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }).format(new Date());
+            const dateText = new Intl.DateTimeFormat(undefined, {
+                timeZone: timeZone,
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+            }).format(new Date());
+            const tzText = context.timezoneAbbreviation ? ' ' + context.timezoneAbbreviation : '';
+
+            localTimePanel.hidden = false;
+            if (localTimeCity) localTimeCity.textContent = context.config.skyPixelLabel || context.config.placeName || context.config.name || context.config.label;
+            if (localTimeClock) localTimeClock.textContent = timeText;
+            if (localTimeIcon) localTimeIcon.textContent = isDay ? '☀️' : moon.emoji;
+            if (localTimeStatus) localTimeStatus.textContent = isDay ? 'Daytime' : moon.name + ' Night';
+            if (localTimeNote) {
+                localTimeNote.textContent = isDay
+                    ? dateText + tzText + ' · Moon phase tonight: ' + moon.emoji + ' ' + moon.name
+                    : dateText + tzText + ' · Moon phase for this Sky Pixel location.';
+            }
+        }
+
+        function startSkyPixelLocalTimePanel(config, data) {
+            if (!localTimePanel) return;
+            const skyPixelName = config.skyPixelLabel || config.placeName || config.name || config.label;
+            const timeZoneOverride = skyPixelLocalTimeZoneOverrides[skyPixelName] || null;
+            const timeZone = (timeZoneOverride && timeZoneOverride.timeZone) || (data && data.timezone) || config.timezone || 'UTC';
+            skyPixelActiveLocalTimeContext = {
+                config: config,
+                data: data,
+                timeZone: timeZone,
+                timezoneAbbreviation: (timeZoneOverride && timeZoneOverride.abbreviation) || (data && data.timezone_abbreviation) || ''
+            };
+            updateSkyPixelLocalTimePanel();
+            if (skyPixelLocalTimeTimer) clearInterval(skyPixelLocalTimeTimer);
+            skyPixelLocalTimeTimer = setInterval(updateSkyPixelLocalTimePanel, 30000);
+        }
+
+        function stopSkyPixelLocalTimePanel() {
+            skyPixelActiveLocalTimeContext = null;
+            if (skyPixelLocalTimeTimer) {
+                clearInterval(skyPixelLocalTimeTimer);
+                skyPixelLocalTimeTimer = null;
+            }
+            if (localTimePanel) localTimePanel.hidden = true;
+        }
+
         function showSkyPixelWeatherLoading(config) {
             if (!realWeatherPanel || !realWeatherTitle || !realWeatherBody) return;
             realWeatherPanel.hidden = false;
             realWeatherTitle.textContent = config.skyPixelLabel || config.label;
+            if (localTimePanel) {
+                localTimePanel.hidden = false;
+                if (localTimeCity) localTimeCity.textContent = config.skyPixelLabel || config.placeName || config.name || config.label;
+                if (localTimeClock) localTimeClock.textContent = '--:--';
+                if (localTimeIcon) localTimeIcon.textContent = '🕒';
+                if (localTimeStatus) localTimeStatus.textContent = 'Loading local time';
+                if (localTimeNote) localTimeNote.textContent = 'Syncing to this Sky Pixel location.';
+            }
             realWeatherBody.innerHTML = '<div class="sky-pixel-real-weather-note">Loading live weather...</div>';
         }
 
@@ -6879,6 +7132,7 @@
             const safeIndex = Math.max(0, Math.min(Number(selectedIndex) || 0, Math.min((daily.time ? daily.time.length : 1), 7) - 1));
 
             if (realWeatherTitle) realWeatherTitle.textContent = config.skyPixelLabel || config.label;
+            startSkyPixelLocalTimePanel(config, data);
             realWeatherBody.innerHTML =
                 buildSkyPixelSelectedWeatherOutlook(config, data, safeIndex)
                 + buildSkyPixelWeeklyForecast(daily, safeIndex)
@@ -6900,6 +7154,7 @@
             if (!realWeatherPanel) return;
             const config = getSkyPixelRealWeatherConfig(marker);
             if (!config) {
+                stopSkyPixelLocalTimePanel();
                 realWeatherPanel.hidden = true;
                 return;
             }
