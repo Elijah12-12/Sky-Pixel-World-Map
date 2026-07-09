@@ -1161,6 +1161,232 @@
         }
     </style>
 
+    <style id="sky-pixel-real-weather-style">
+        .sky-pixel-real-weather {
+            margin: 12px 0 0;
+            padding: 12px;
+            border-radius: 16px;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.055));
+            border: 1px solid rgba(255,255,255,0.13);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+        }
+
+        .sky-pixel-real-weather[hidden] {
+            display: none !important;
+        }
+
+        .sky-pixel-real-weather-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .sky-pixel-real-weather-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.68);
+            font-weight: 950;
+        }
+
+        .sky-pixel-real-weather-title {
+            margin-top: 2px;
+            font-size: 15px;
+            line-height: 1.2;
+            font-weight: 950;
+        }
+
+        .sky-pixel-real-weather-refresh {
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 11px;
+            color: #ffffff;
+            background: rgba(255,255,255,0.14);
+            font-weight: 950;
+            cursor: pointer;
+            padding: 8px 10px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+        }
+
+        .sky-pixel-real-weather-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sky-pixel-real-weather-icon {
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            background: rgba(0,0,0,0.22);
+            font-size: 28px;
+        }
+
+        .sky-pixel-real-weather-temp {
+            font-size: 24px;
+            font-weight: 950;
+            line-height: 1;
+        }
+
+        .sky-pixel-real-weather-condition {
+            margin-top: 4px;
+            color: rgba(255,255,255,0.86);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .sky-pixel-real-weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        .sky-pixel-real-weather-details div {
+            border-radius: 11px;
+            padding: 8px;
+            background: rgba(0,0,0,0.18);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sky-pixel-real-weather-details span {
+            display: block;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: rgba(255,255,255,0.62);
+            font-weight: 950;
+            margin-bottom: 3px;
+        }
+
+        .sky-pixel-real-weather-details strong {
+            font-size: 13px;
+            font-weight: 950;
+        }
+
+
+        .sky-pixel-real-weather-reference-city {
+            color: #70d7ff;
+            font-weight: 950;
+        }
+        .sky-pixel-real-weather-note {
+            margin-top: 8px;
+            color: rgba(255,255,255,0.68);
+            font-size: 12px;
+            line-height: 1.35;
+            font-weight: 750;
+        }
+
+        .sky-pixel-real-weather-source {
+            margin-top: 3px;
+            color: rgba(255,255,255,0.66);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .sky-pixel-real-weather-weekly-title {
+            margin: 13px 0 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.68);
+            font-weight: 950;
+        }
+
+        .sky-pixel-real-weather-weekly {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 2px 0 6px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.36) rgba(255,255,255,0.06);
+        }
+
+        .sky-pixel-real-weather-day {
+            flex: 0 0 78px;
+            min-height: 94px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4px;
+            padding: 8px 7px;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.085);
+            border: 1px solid rgba(255,255,255,0.10);
+            color: #ffffff;
+            font: inherit;
+            font-size: 12px;
+            font-weight: 850;
+            text-align: center;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .sky-pixel-real-weather-day:hover,
+        .sky-pixel-real-weather-day:focus-visible {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.14);
+            border-color: rgba(255,255,255,0.22);
+        }
+
+        .sky-pixel-real-weather-day.is-selected {
+            background: rgba(0, 218, 255, 0.18);
+            border-color: rgba(0, 218, 255, 0.55);
+            box-shadow: 0 0 18px rgba(0, 210, 255, 0.24), inset 0 0 0 1px rgba(255,255,255,0.10);
+        }
+
+        .sky-pixel-real-weather-day:active {
+            transform: translateY(0);
+        }
+
+        .sky-pixel-real-weather-day-name {
+            font-weight: 950;
+            color: #ffffff;
+        }
+
+        .sky-pixel-real-weather-day-icon {
+            font-size: 24px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .sky-pixel-real-weather-day-condition {
+            display: none;
+        }
+
+        .sky-pixel-real-weather-day-rain {
+            color: rgba(255,255,255,0.66);
+            font-size: 10px;
+            font-weight: 850;
+            line-height: 1.1;
+        }
+
+        .sky-pixel-real-weather-day-temps {
+            font-weight: 950;
+            color: #ffffff;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+        @media (max-width: 720px) {
+            .sky-pixel-real-weather-details {
+                grid-template-columns: 1fr;
+            }
+
+            .sky-pixel-real-weather-day {
+                flex-basis: 72px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -1433,8 +1659,18 @@
                 <div><span>Coordinates</span><strong id="skyPixelPanelCoords"></strong></div>
                 <div><span>Marker</span><strong id="skyPixelPanelMarkerType"></strong></div>
             </div>
+            <section id="skyPixelRealWeather" class="sky-pixel-real-weather" hidden aria-live="polite">
+                <div class="sky-pixel-real-weather-head">
+                    <div>
+                        <div class="sky-pixel-real-weather-kicker">Weather</div>
+                        <div id="skyPixelRealWeatherTitle" class="sky-pixel-real-weather-title">Weather</div>
+                    </div>
+                    <button id="skyPixelRealWeatherRefresh" class="sky-pixel-real-weather-refresh" type="button">Refresh</button>
+                </div>
+                <div id="skyPixelRealWeatherBody">Loading weather...</div>
+            </section>
             <div id="skyPixelWikiDetails" class="sky-pixel-wiki-details" hidden></div>
-            <div class="sky-pixel-panel-actions">
+            <div class="sky-pixel-panel-actions" style="margin-top:18px;">
                 <a id="skyPixelPanelLink" href="#" target="_blank" rel="noopener noreferrer">📖 Read on Wiki</a>
                 <a id="skyPixelAiModeLink" href="#" target="_blank" rel="noopener noreferrer">✨ Explore with AI</a>
                 <a id="skyPixelBlueMapLink" href="#" target="_blank" rel="noopener noreferrer">🌍 Open in 3D View</a>
@@ -1556,6 +1792,10 @@
         const panelLink = document.getElementById('skyPixelPanelLink');
         const panelCoords = document.getElementById('skyPixelPanelCoords');
         const panelMarkerType = document.getElementById('skyPixelPanelMarkerType');
+        const realWeatherPanel = document.getElementById('skyPixelRealWeather');
+        const realWeatherTitle = document.getElementById('skyPixelRealWeatherTitle');
+        const realWeatherBody = document.getElementById('skyPixelRealWeatherBody');
+        const realWeatherRefresh = document.getElementById('skyPixelRealWeatherRefresh');
         const aiModeLink = document.getElementById('skyPixelAiModeLink');
         const blueMapLink = document.getElementById('skyPixelBlueMapLink');
         if (blueMapLink) {
@@ -5147,6 +5387,289 @@
             return `${SKY_PIXEL_BLUEMAP_BASE_URL}/#${encodeURIComponent(SKY_PIXEL_BLUEMAP_MAP_ID)}:${x}:${y}:${z}:${SKY_PIXEL_BLUEMAP_DEFAULT_DISTANCE}:0:0.95:0:0:perspective`;
         }
 
+
+        // Sky Pixel real-world weather mapping.
+        // These are real climate-reference cities for fictional Sky Pixel places.
+        // Each entry uses fixed latitude/longitude so the weather panel loads reliably without geocoding failures.
+        const skyPixelRealWeatherPlaces = {
+            "Harlow": { skyPixelLabel: "Harlow", label: "Vancouver, BC", latitude: 49.2827, longitude: -123.1207 },
+            "Elowah": { skyPixelLabel: "Elowah", label: "North Vancouver, BC", latitude: 49.32, longitude: -123.073 },
+            "Oxland": { skyPixelLabel: "Oxland", label: "Kamloops, BC", latitude: 50.6745, longitude: -120.3273 },
+            "Eizerfield": { skyPixelLabel: "Eizerfield", label: "Kamloops, BC", latitude: 50.6745, longitude: -120.3273 },
+            "Elodie": { skyPixelLabel: "Elodie", label: "Banff, AB", latitude: 51.1784, longitude: -115.5708 },
+            "Khaleesi": { skyPixelLabel: "Khaleesi", label: "Pemberton, BC", latitude: 50.3164, longitude: -122.8027 },
+            "North Harlow": { skyPixelLabel: "North Harlow", label: "Squamish, BC", latitude: 49.7016, longitude: -123.1558 },
+            "Saylor": { skyPixelLabel: "Saylor", label: "Richmond, BC", latitude: 49.1666, longitude: -123.1336 },
+            "Harlen": { skyPixelLabel: "Harlen", label: "Bella Coola, BC", latitude: 52.3742, longitude: -126.7531 },
+            "Alouette": { skyPixelLabel: "Alouette", label: "Girdwood, AK", latitude: 60.9425, longitude: -149.1664 },
+            "Little Ellie": { skyPixelLabel: "Little Ellie", label: "Seward, AK", latitude: 60.1042, longitude: -149.4422 },
+            "Sitkan": { skyPixelLabel: "Sitkan", label: "Cordova, AK", latitude: 60.5428, longitude: -145.7575 },
+            "Grizzly": { skyPixelLabel: "Grizzly", label: "Skagway, AK", latitude: 59.4583, longitude: -135.3139 },
+            "Porter": { skyPixelLabel: "Porter", label: "Juneau, AK", latitude: 58.3019, longitude: -134.4197 },
+            "Reno": { skyPixelLabel: "Reno", label: "Osoyoos, BC", latitude: 49.0323, longitude: -119.4682 },
+            "Taholah": { skyPixelLabel: "Taholah", label: "Tulameen, BC", latitude: 49.545, longitude: -120.758 },
+            "Coralie": { skyPixelLabel: "Coralie", label: "Hope, BC", latitude: 49.3795, longitude: -121.4414 },
+            "Razalia": { skyPixelLabel: "Razalia", label: "Seattle, WA", latitude: 47.6062, longitude: -122.3321 },
+            "Raspberry": { skyPixelLabel: "Raspberry", label: "Seattle, WA", latitude: 47.6062, longitude: -122.3321 },
+            "Baylie": { skyPixelLabel: "Baylie", label: "Centralia, WA", latitude: 46.7162, longitude: -122.9543 },
+            "Bells": { skyPixelLabel: "Bells", label: "Oroville, WA", latitude: 48.9391, longitude: -119.4356 },
+            "Tayberry": { skyPixelLabel: "Tayberry", label: "Vancouver, WA", latitude: 45.6387, longitude: -122.6615 },
+            "Noland": { skyPixelLabel: "Noland", label: "Portland, OR", latitude: 45.5152, longitude: -122.6784 },
+            "Valance": { skyPixelLabel: "Valance", label: "Santa Rosa, CA", latitude: 38.4404, longitude: -122.7144 },
+            "Chaseloke": { skyPixelLabel: "Chaseloke", label: "Canyonville, OR", latitude: 42.9273, longitude: -123.2812 },
+            "Harlie": { skyPixelLabel: "Harlie", label: "Grants Pass, OR", latitude: 42.439, longitude: -123.3284 },
+            "Griffin": { skyPixelLabel: "Griffin", label: "Redding, CA", latitude: 40.5865, longitude: -122.3917 },
+            "Maria": { skyPixelLabel: "Maria", label: "Elk Creek, CA", latitude: 39.606, longitude: -122.539 },
+            "Xhaelis": { skyPixelLabel: "Xhaelis", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 },
+            "Adaline": { skyPixelLabel: "Adaline", label: "Elk Grove, CA", latitude: 38.4088, longitude: -121.3716 },
+            "Rosewood": { skyPixelLabel: "Rosewood", label: "Freeport, CA", latitude: 38.4596, longitude: -121.5013 },
+            "Sphinx": { skyPixelLabel: "Sphinx", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 },
+            "Brooklyn": { skyPixelLabel: "Brooklyn", label: "Bakersfield, CA", latitude: 35.3733, longitude: -119.0187 },
+            "Jackson": { skyPixelLabel: "Jackson", label: "Fresno, CA", latitude: 36.7378, longitude: -119.7871 },
+            "Lemons": { skyPixelLabel: "Lemons", label: "Fresno, CA", latitude: 36.7378, longitude: -119.7871 },
+            "Savia": { skyPixelLabel: "Savia", label: "McFarland, CA", latitude: 35.678, longitude: -119.2293 },
+            "Klaxikin": { skyPixelLabel: "Klaxikin", label: "San Diego, CA", latitude: 32.7157, longitude: -117.1611 },
+            "Skyhaven": { skyPixelLabel: "Skyhaven", label: "Monterey, CA", latitude: 36.6002, longitude: -121.8947 },
+            "Zalex": { skyPixelLabel: "Zalex", label: "Ensenada, Mexico", latitude: 31.8667, longitude: -116.5964 },
+            "Malani": { skyPixelLabel: "Malani", label: "Catalina Island, CA", latitude: 33.3879, longitude: -118.4163 },
+            "Ruby": { skyPixelLabel: "Ruby", label: "San Quintín, Baja California, Mexico", latitude: 30.4833, longitude: -115.95 },
+            "Castello": { skyPixelLabel: "Castello", label: "Blossom Valley, CA", latitude: 32.8448, longitude: -116.9828 },
+            "Verdante": { skyPixelLabel: "Verdante", label: "Poway, CA", latitude: 32.9628, longitude: -117.0359 },
+            "Oliveto": { skyPixelLabel: "Oliveto", label: "Jamul, CA", latitude: 32.717, longitude: -116.8761 },
+            "Damase": { skyPixelLabel: "Damase", label: "San Quintín, Baja California, Mexico", latitude: 30.4833, longitude: -115.95 },
+            "La Aurielle": { skyPixelLabel: "La Aurielle", label: "Baton Rouge, LA", latitude: 30.4515, longitude: -91.1871 },
+            "La Morley": { skyPixelLabel: "La Morley", label: "New Orleans, LA", latitude: 29.9511, longitude: -90.0715 },
+            "Bourbon": { skyPixelLabel: "Bourbon", label: "Metairie, LA", latitude: 29.9841, longitude: -90.1529 },
+            "Les Solenne": { skyPixelLabel: "Les Solenne", label: "Hopedale, LA", latitude: 29.8205, longitude: -89.654 },
+            "Belle Ombre": { skyPixelLabel: "Belle Ombre", label: "Hopedale, LA", latitude: 29.8205, longitude: -89.654 },
+            "Gumbo": { skyPixelLabel: "Gumbo", label: "Hammond, LA", latitude: 30.5044, longitude: -90.4612 },
+            "Malakai": { skyPixelLabel: "Malakai", label: "Honolulu, HI", latitude: 21.3099, longitude: -157.8581 },
+            "Malu": { skyPixelLabel: "Malu", label: "Hauula, HI", latitude: 21.6106, longitude: -157.9108 },
+            "Lilo": { skyPixelLabel: "Lilo", label: "Hilo, HI", latitude: 19.7071, longitude: -155.0885 },
+            "Quantum": { skyPixelLabel: "Quantum", label: "Hong Kong, China", latitude: 22.3193, longitude: 114.1694 },
+            "Lilinoe": { skyPixelLabel: "Lilinoe", label: "Hauula, HI", latitude: 21.6106, longitude: -157.9108 },
+            "Cosme": { skyPixelLabel: "Cosme", label: "Cairo, Egypt", latitude: 30.0444, longitude: 31.2357 },
+            "L'Eulàlia": { skyPixelLabel: "L'Eulàlia", label: "Barcelona, Spain", latitude: 41.3874, longitude: 2.1686 },
+            "Prunelle": { skyPixelLabel: "Prunelle", label: "Paris, France", latitude: 48.8566, longitude: 2.3522 },
+            "Eulaliè": { skyPixelLabel: "Eulaliè", label: "Paris, France", latitude: 48.8566, longitude: 2.3522 },
+            "Orlaith": { skyPixelLabel: "Orlaith", label: "Edinburgh, Scotland", latitude: 55.9533, longitude: -3.1883 },
+            "Lenore": { skyPixelLabel: "Lenore", label: "Wilmington, NC", latitude: 34.2104, longitude: -77.8868 },
+            "Morven": { skyPixelLabel: "Morven", label: "Winslow, AZ", latitude: 35.0242, longitude: -110.6974 },
+            "Octavian": { skyPixelLabel: "Octavian", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 }
+        };
+        const skyPixelWeatherCodeInfo = {
+            0: ["☀️", "Clear sky"],
+            1: ["🌤️", "Mainly clear"],
+            2: ["⛅", "Partly cloudy"],
+            3: ["☁️", "Overcast"],
+            45: ["🌫️", "Fog"],
+            48: ["🌫️", "Rime fog"],
+            51: ["🌦️", "Light drizzle"],
+            53: ["🌦️", "Drizzle"],
+            55: ["🌧️", "Heavy drizzle"],
+            56: ["🌧️", "Freezing drizzle"],
+            57: ["🌧️", "Heavy freezing drizzle"],
+            61: ["🌧️", "Light rain"],
+            63: ["🌧️", "Rain"],
+            65: ["🌧️", "Heavy rain"],
+            66: ["🌧️", "Freezing rain"],
+            67: ["🌧️", "Heavy freezing rain"],
+            71: ["🌨️", "Light snow"],
+            73: ["🌨️", "Snow"],
+            75: ["❄️", "Heavy snow"],
+            77: ["❄️", "Snow grains"],
+            80: ["🌦️", "Light rain showers"],
+            81: ["🌧️", "Rain showers"],
+            82: ["⛈️", "Heavy rain showers"],
+            85: ["🌨️", "Snow showers"],
+            86: ["❄️", "Heavy snow showers"],
+            95: ["⛈️", "Thunderstorm"],
+            96: ["⛈️", "Thunderstorm with hail"],
+            99: ["⛈️", "Heavy thunderstorm with hail"]
+        };
+
+        const skyPixelRealWeatherCache = {};
+        const skyPixelWeatherGeocodeCache = {};
+
+        async function resolveSkyPixelWeatherConfig(config) {
+            if (config.latitude !== undefined && config.longitude !== undefined) return config;
+
+            const geocodeKey = config.label;
+            if (skyPixelWeatherGeocodeCache[geocodeKey]) {
+                return Object.assign({}, config, skyPixelWeatherGeocodeCache[geocodeKey]);
+            }
+
+            const geoUrl = 'https://geocoding-api.open-meteo.com/v1/search'
+                + '?name=' + encodeURIComponent(config.label)
+                + '&count=1&language=en&format=json';
+            const geoResponse = await fetch(geoUrl);
+            if (!geoResponse.ok) throw new Error('Weather location lookup failed');
+            const geoData = await geoResponse.json();
+            if (!geoData.results || !geoData.results.length) throw new Error('Weather reference city not found');
+
+            const bestMatch = geoData.results[0];
+            const resolved = {
+                latitude: bestMatch.latitude,
+                longitude: bestMatch.longitude,
+                resolvedLabel: [bestMatch.name, bestMatch.admin1, bestMatch.country].filter(Boolean).join(', ')
+            };
+            skyPixelWeatherGeocodeCache[geocodeKey] = resolved;
+            return Object.assign({}, config, resolved);
+        }
+
+        function getSkyPixelRealWeatherConfig(marker) {
+            const cleanName = cleanSkyPixelPlaceName(marker);
+            return skyPixelRealWeatherPlaces[cleanName] || null;
+        }
+
+        function formatSkyPixelWeatherValue(value, suffix) {
+            if (value === null || value === undefined || Number.isNaN(Number(value))) return '—';
+            return Math.round(Number(value)) + suffix;
+        }
+
+        function getSkyPixelWeatherCondition(code) {
+            return skyPixelWeatherCodeInfo[Number(code)] || ["🌡️", "Weather update"];
+        }
+
+        function buildSkyPixelWeatherUrl(config) {
+            return 'https://api.open-meteo.com/v1/forecast'
+                + '?latitude=' + encodeURIComponent(config.latitude)
+                + '&longitude=' + encodeURIComponent(config.longitude)
+                + '&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m'
+                + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
+                + '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto';
+        }
+
+        async function fetchSkyPixelRealWeather(config, forceRefresh) {
+            const resolvedConfig = await resolveSkyPixelWeatherConfig(config);
+            const cacheKey = resolvedConfig.label + ':' + resolvedConfig.latitude + ',' + resolvedConfig.longitude;
+            const cached = skyPixelRealWeatherCache[cacheKey];
+            const now = Date.now();
+            if (!forceRefresh && cached && (now - cached.time) < 10 * 60 * 1000) {
+                return cached.data;
+            }
+
+            const response = await fetch(buildSkyPixelWeatherUrl(resolvedConfig));
+            if (!response.ok) throw new Error('Weather request failed');
+            const data = await response.json();
+            skyPixelRealWeatherCache[cacheKey] = { time: now, data: data };
+            return data;
+        }
+
+        function showSkyPixelWeatherLoading(config) {
+            if (!realWeatherPanel || !realWeatherTitle || !realWeatherBody) return;
+            realWeatherPanel.hidden = false;
+            realWeatherTitle.textContent = config.skyPixelLabel || config.label;
+            realWeatherBody.innerHTML = '<div class="sky-pixel-real-weather-note">Loading live weather...</div>';
+        }
+
+        function formatSkyPixelWeatherDay(dateValue) {
+            if (!dateValue) return '—';
+            const date = new Date(dateValue + 'T12:00:00');
+            return date.toLocaleDateString(undefined, { weekday: 'short' });
+        }
+
+        function formatSkyPixelWeatherFullDay(dateValue) {
+            if (!dateValue) return 'Forecast';
+            const date = new Date(dateValue + 'T12:00:00');
+            return date.toLocaleDateString(undefined, { weekday: 'long' }) + ' Forecast';
+        }
+
+        function buildSkyPixelSelectedWeatherOutlook(config, data, selectedIndex) {
+            const current = data && data.current ? data.current : {};
+            const daily = data && data.daily ? data.daily : {};
+            const index = Number(selectedIndex) || 0;
+            const isToday = index === 0;
+            const condition = isToday
+                ? getSkyPixelWeatherCondition(current.weather_code)
+                : getSkyPixelWeatherCondition(daily.weather_code && daily.weather_code[index]);
+            const high = daily.temperature_2m_max ? daily.temperature_2m_max[index] : null;
+            const low = daily.temperature_2m_min ? daily.temperature_2m_min[index] : null;
+            const rainChance = daily.precipitation_probability_max ? daily.precipitation_probability_max[index] : null;
+            const tempText = isToday
+                ? formatSkyPixelWeatherValue(current.temperature_2m, '°F')
+                : formatSkyPixelWeatherValue(high, '°F');
+            const subtitle = isToday ? condition[1] : formatSkyPixelWeatherFullDay(daily.time && daily.time[index]) + ' · ' + condition[1];
+
+            return '<div class="sky-pixel-real-weather-main">'
+                    + '<div class="sky-pixel-real-weather-icon" aria-hidden="true">' + condition[0] + '</div>'
+                    + '<div>'
+                        + '<div class="sky-pixel-real-weather-temp">' + tempText + '</div>'
+                        + '<div class="sky-pixel-real-weather-condition">' + subtitle + '</div>'
+                    + '</div>'
+                + '</div>'
+                + '<div class="sky-pixel-real-weather-details">'
+                    + (isToday ? '<div><span>Feels like</span><strong>' + formatSkyPixelWeatherValue(current.apparent_temperature, '°F') + '</strong></div>' : '')
+                    + (isToday ? '<div><span>Wind</span><strong>' + formatSkyPixelWeatherValue(current.wind_speed_10m, ' mph') + '</strong></div>' : '')
+                    + (isToday ? '<div><span>Humidity</span><strong>' + formatSkyPixelWeatherValue(current.relative_humidity_2m, '%') + '</strong></div>' : '')
+                    + '<div><span>' + (isToday ? 'Today' : 'High / Low') + '</span><strong>' + formatSkyPixelWeatherValue(low, '°F') + ' / ' + formatSkyPixelWeatherValue(high, '°F') + '</strong></div>'
+                    + '<div><span>Rain chance</span><strong>' + formatSkyPixelWeatherValue(rainChance, '%') + '</strong></div>'
+                + '</div>';
+        }
+
+        function buildSkyPixelWeeklyForecast(daily, selectedIndex) {
+            if (!daily || !daily.time || !daily.time.length) return '';
+            const rows = daily.time.slice(0, 7).map(function (dateValue, index) {
+                const dayCondition = getSkyPixelWeatherCondition(daily.weather_code && daily.weather_code[index]);
+                const high = daily.temperature_2m_max ? daily.temperature_2m_max[index] : null;
+                const low = daily.temperature_2m_min ? daily.temperature_2m_min[index] : null;
+                const rain = daily.precipitation_probability_max ? daily.precipitation_probability_max[index] : null;
+                const selectedClass = index === selectedIndex ? ' is-selected' : '';
+                return '<button class="sky-pixel-real-weather-day' + selectedClass + '" type="button" data-weather-day-index="' + index + '" title="Show ' + formatSkyPixelWeatherDay(dateValue) + ': ' + dayCondition[1] + ' · ' + formatSkyPixelWeatherValue(rain, '%') + ' rain">'
+                    + '<div class="sky-pixel-real-weather-day-name">' + formatSkyPixelWeatherDay(dateValue) + '</div>'
+                    + '<div class="sky-pixel-real-weather-day-icon" aria-hidden="true">' + dayCondition[0] + '</div>'
+                    + '<div class="sky-pixel-real-weather-day-temps">' + formatSkyPixelWeatherValue(high, '°') + ' ' + formatSkyPixelWeatherValue(low, '°') + '</div>'
+                    + '<div class="sky-pixel-real-weather-day-rain">' + formatSkyPixelWeatherValue(rain, '%') + ' rain</div>'
+                    + '<div class="sky-pixel-real-weather-day-condition">' + dayCondition[1] + '</div>'
+                + '</button>';
+            }).join('');
+            return '<div class="sky-pixel-real-weather-weekly-title">Weekly forecast</div>'
+                + '<div class="sky-pixel-real-weather-weekly" aria-label="Choose forecast day">' + rows + '</div>';
+        }
+
+        function renderSkyPixelWeatherData(marker, config, data, selectedIndex) {
+            if (!realWeatherPanel || !realWeatherBody || activeSkyPixelMarker !== marker) return;
+            const daily = data && data.daily ? data.daily : {};
+            const safeIndex = Math.max(0, Math.min(Number(selectedIndex) || 0, Math.min((daily.time ? daily.time.length : 1), 7) - 1));
+
+            if (realWeatherTitle) realWeatherTitle.textContent = config.skyPixelLabel || config.label;
+            realWeatherBody.innerHTML =
+                buildSkyPixelSelectedWeatherOutlook(config, data, safeIndex)
+                + buildSkyPixelWeeklyForecast(daily, safeIndex)
+                + '<div class="sky-pixel-real-weather-note">Live weather is mapped to this Sky Pixel location using its real-world climate reference <span class="sky-pixel-real-weather-reference-city">' + config.label + '</span>.</div>';
+
+            realWeatherBody.querySelectorAll('[data-weather-day-index]').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    renderSkyPixelWeatherData(marker, config, data, Number(button.getAttribute('data-weather-day-index')) || 0);
+                });
+            });
+        }
+
+        function renderSkyPixelWeatherError(marker, config) {
+            if (!realWeatherPanel || !realWeatherBody || activeSkyPixelMarker !== marker) return;
+            realWeatherBody.innerHTML = '<div class="sky-pixel-real-weather-note">Could not load live weather for ' + config.label + '. Check your connection or try Refresh.</div>';
+        }
+
+        function renderSkyPixelRealWeather(marker, forceRefresh) {
+            if (!realWeatherPanel) return;
+            const config = getSkyPixelRealWeatherConfig(marker);
+            if (!config) {
+                realWeatherPanel.hidden = true;
+                return;
+            }
+
+            showSkyPixelWeatherLoading(config);
+            fetchSkyPixelRealWeather(config, forceRefresh)
+                .then(function (data) { renderSkyPixelWeatherData(marker, config, data); })
+                .catch(function () { renderSkyPixelWeatherError(marker, config); });
+        }
+
+        if (realWeatherRefresh) {
+            realWeatherRefresh.addEventListener('click', function () {
+                if (activeSkyPixelMarker) renderSkyPixelRealWeather(activeSkyPixelMarker, true);
+            });
+        }
+
         function openSkyPixelPanel(marker) {
             activeSkyPixelMarker = marker;
             const title = getSkyPixelPanelDisplayTitle(marker);
@@ -5163,6 +5686,7 @@
             panelDescription.textContent = marker.popupDescription || `Explore ${cleanName} in the Sky Pixel Minecraft world.`;
             panelCoords.textContent = `${marker.x}, ${marker.z}`;
             panelMarkerType.textContent = marker.popupType || (marker.image && marker.image.includes('star') ? 'Major city' : 'City / place');
+            renderSkyPixelRealWeather(marker);
             setSkyPixelWikiDetails([]);
             renderSkyPixelNearbyPlaces(marker);
 
