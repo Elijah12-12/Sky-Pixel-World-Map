@@ -1529,7 +1529,7 @@
         <button id="skyPixelNightModeToggle" type="button" aria-pressed="false">🌙 Night Mode</button>
         <div id="skyPixelNightModePanel" class="sky-pixel-night-mode-panel" hidden>
             <div class="sky-pixel-map-brightness-title">Map Only + City Glow</div>
-            <div class="sky-pixel-night-mode-note">Darkens only the base map layer. Labels, panels, weather, routes, borders, and other UI stay clear while cities receive a blended warm flare sized by city importance.</div>
+            <div class="sky-pixel-night-mode-note">Darkens only the base map layer. Labels, panels, weather, routes, borders, and other UI stay clear while cities receive soft procedural night lights sized by city importance.</div>
         </div>
     </section>
 
@@ -1806,6 +1806,7 @@
             skyPixelBaseMapBrightnessLayers.forEach(function (layer) {
                 if (layer && typeof layer.changed === 'function') layer.changed();
             });
+            if (window.skyPixelNightCityLightLayerReady) updateSkyPixelNightCityLightLayer();
         }
 
         function skyPixelBrightnessPreRender(event) {
@@ -6206,81 +6207,84 @@
         `);
 
 
-        // Night Mode city flare: two-layer blended light bloom underneath city labels/icons.
-        // Outer halo = large soft atmospheric light spread. Inner core = smaller brighter city center.
-        const SKY_PIXEL_NIGHT_CITY_FLARE_OUTER_SRC = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220">
-                <defs>
-                    <radialGradient id="outerCityFlare" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#fff7d6" stop-opacity="0.58"/>
-                        <stop offset="11%" stop-color="#ffd36c" stop-opacity="0.46"/>
-                        <stop offset="26%" stop-color="#ff9f24" stop-opacity="0.28"/>
-                        <stop offset="48%" stop-color="#ff7a00" stop-opacity="0.14"/>
-                        <stop offset="72%" stop-color="#ff9a22" stop-opacity="0.055"/>
-                        <stop offset="100%" stop-color="#ff9a22" stop-opacity="0"/>
-                    </radialGradient>
-                    <filter id="outerBlur" x="-35%" y="-35%" width="170%" height="170%">
-                        <feGaussianBlur stdDeviation="5.5"/>
-                    </filter>
-                </defs>
-                <circle cx="110" cy="110" r="104" fill="url(#outerCityFlare)" filter="url(#outerBlur)"/>
-            </svg>
-        `);
+        // Night Mode city lights: procedural radial glow layer.
+        // Drawn on its own OpenLayers layer so it sits above teleport route lines but below city labels/icons.
+        const skyPixelNightCityLightCache = new Map();
 
-        const SKY_PIXEL_NIGHT_CITY_FLARE_CORE_SRC = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
-            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
-                <defs>
-                    <radialGradient id="coreCityFlare" cx="50%" cy="50%" r="50%">
-                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-                        <stop offset="10%" stop-color="#fffbed" stop-opacity="0.98"/>
-                        <stop offset="24%" stop-color="#ffe58d" stop-opacity="0.82"/>
-                        <stop offset="42%" stop-color="#ffc047" stop-opacity="0.48"/>
-                        <stop offset="62%" stop-color="#ff901f" stop-opacity="0.18"/>
-                        <stop offset="100%" stop-color="#ff901f" stop-opacity="0"/>
-                    </radialGradient>
-                    <filter id="coreBlur" x="-25%" y="-25%" width="150%" height="150%">
-                        <feGaussianBlur stdDeviation="1.1"/>
-                    </filter>
-                </defs>
-                <circle cx="60" cy="60" r="56" fill="url(#coreCityFlare)" filter="url(#coreBlur)"/>
-                <circle cx="60" cy="60" r="5" fill="#fffdf4" opacity="0.9"/>
-            </svg>
-        `);
-
-        function getSkyPixelNightCityFlareScale(marker) {
+        function getSkyPixelNightCityLightTier(marker) {
             const name = getSkyPixelBaseMarkerName(marker);
-
-            // Base scale for the outer halo; the inner core uses a separate multiplier below.
-            if (skyPixelCapitalCityNames.has(name)) return 3.45;
-            if (skyPixelFeaturedCityNames.has(name)) return 3.05;
-            if (skyPixelMajorCityNames.has(name)) return 2.75;
-            if (skyPixelAdalineCityNames.has(name) || skyPixelRosewoodCityNames.has(name) || skyPixelValanceCityNames.has(name)) return 2.25;
-            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 1.75;
-            return 1.35;
+            if (skyPixelCapitalCityNames.has(name)) return 'capital';
+            if (skyPixelFeaturedCityNames.has(name)) return 'featured';
+            if (skyPixelMajorCityNames.has(name)) return 'major';
+            if (skyPixelAdalineCityNames.has(name) || skyPixelRosewoodCityNames.has(name) || skyPixelValanceCityNames.has(name)) return 'large';
+            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 'regional';
+            return 'small';
         }
 
-        function getSkyPixelNightCityFlareCoreScale(marker) {
-            return getSkyPixelNightCityFlareScale(marker) * 0.48;
+        function getSkyPixelNightCityLightProfile(marker) {
+            const tier = getSkyPixelNightCityLightTier(marker);
+            const profiles = {
+                capital:  { size: 360, outer: 0.22, mid: 0.14, core: 0.42, coreRadius: 0.055 },
+                featured: { size: 315, outer: 0.19, mid: 0.12, core: 0.36, coreRadius: 0.052 },
+                major:    { size: 285, outer: 0.17, mid: 0.105, core: 0.32, coreRadius: 0.050 },
+                large:    { size: 235, outer: 0.145, mid: 0.09, core: 0.28, coreRadius: 0.048 },
+                regional: { size: 185, outer: 0.115, mid: 0.07, core: 0.23, coreRadius: 0.046 },
+                small:    { size: 145, outer: 0.09, mid: 0.055, core: 0.18, coreRadius: 0.044 }
+            };
+            return profiles[tier] || profiles.small;
         }
 
-        function getSkyPixelNightCityFlareOuterOpacity(marker) {
-            const name = getSkyPixelBaseMarkerName(marker);
+        function getSkyPixelNightCityLightSrc(marker) {
+            const tier = getSkyPixelNightCityLightTier(marker);
+            const profile = getSkyPixelNightCityLightProfile(marker);
+            const key = tier + ':' + profile.size;
+            if (skyPixelNightCityLightCache.has(key)) return skyPixelNightCityLightCache.get(key);
 
-            // Softer outer halo so the glow blends into the dark map instead of looking pasted on.
-            if (skyPixelCapitalCityNames.has(name)) return 0.52;
-            if (skyPixelFeaturedCityNames.has(name) || skyPixelMajorCityNames.has(name)) return 0.46;
-            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 0.38;
-            return 0.32;
-        }
+            const canvas = document.createElement('canvas');
+            const size = profile.size;
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            const c = size / 2;
 
-        function getSkyPixelNightCityFlareCoreOpacity(marker) {
-            const name = getSkyPixelBaseMarkerName(marker);
+            ctx.clearRect(0, 0, size, size);
+            ctx.globalCompositeOperation = 'lighter';
 
-            // Brighter but smaller core for the actual city center.
-            if (skyPixelCapitalCityNames.has(name)) return 0.86;
-            if (skyPixelFeaturedCityNames.has(name) || skyPixelMajorCityNames.has(name)) return 0.76;
-            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 0.62;
-            return 0.52;
+            // Broad atmospheric amber bloom.
+            let gradient = ctx.createRadialGradient(c, c, 0, c, c, size * 0.48);
+            gradient.addColorStop(0.00, 'rgba(255, 238, 176,' + profile.outer + ')');
+            gradient.addColorStop(0.18, 'rgba(255, 185, 84,' + (profile.outer * 0.72).toFixed(3) + ')');
+            gradient.addColorStop(0.44, 'rgba(255, 128, 38,' + (profile.outer * 0.34).toFixed(3) + ')');
+            gradient.addColorStop(0.74, 'rgba(255, 111, 20,' + (profile.outer * 0.10).toFixed(3) + ')');
+            gradient.addColorStop(1.00, 'rgba(255, 111, 20,0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(c, c, size * 0.49, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Secondary softer inner city spread.
+            gradient = ctx.createRadialGradient(c, c, 0, c, c, size * 0.25);
+            gradient.addColorStop(0.00, 'rgba(255, 246, 213,' + profile.mid + ')');
+            gradient.addColorStop(0.40, 'rgba(255, 205, 105,' + (profile.mid * 0.68).toFixed(3) + ')');
+            gradient.addColorStop(1.00, 'rgba(255, 170, 64,0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(c, c, size * 0.26, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Compact urban core. Kept small so it glows without becoming a pasted flare.
+            gradient = ctx.createRadialGradient(c, c, 0, c, c, size * profile.coreRadius * 3.2);
+            gradient.addColorStop(0.00, 'rgba(255, 255, 246,' + profile.core + ')');
+            gradient.addColorStop(0.36, 'rgba(255, 232, 156,' + (profile.core * 0.52).toFixed(3) + ')');
+            gradient.addColorStop(1.00, 'rgba(255, 192, 82,0)');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(c, c, size * profile.coreRadius * 3.25, 0, Math.PI * 2);
+            ctx.fill();
+
+            const dataUrl = canvas.toDataURL('image/png');
+            skyPixelNightCityLightCache.set(key, dataUrl);
+            return dataUrl;
         }
 
         function isSkyPixelCapitalStarMarker(marker) {
@@ -6310,33 +6314,59 @@
             return marker.offsetY || -48;
         }
 
+        function shouldShowSkyPixelNightCityLight(marker) {
+            return !!marker && (shouldUseSmallSkyPixelCityIcon(marker) || isSkyPixelCapitalStarMarker(marker) || getSkyPixelMarkerCategory(marker) === 'major_city' || getSkyPixelMarkerCategory(marker) === 'regional_city');
+        }
+
+        const skyPixelNightCityLightSource = new ol.source.Vector({ features: [] });
+        const skyPixelNightCityLightLayer = new ol.layer.Vector({
+            source: skyPixelNightCityLightSource,
+            visible: false,
+            // Route lines are zIndex 2050. This layer is above them, while the marker/label layer is pushed above this.
+            zIndex: 2075,
+            style: function (feature) {
+                const marker = feature.get('markerData');
+                if (!skyPixelNightModeEnabled || !shouldShowSkyPixelNightCityLight(marker)) return null;
+                return new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: getSkyPixelNightCityLightSrc(marker),
+                        anchor: [0.5, 0.5],
+                        opacity: 1,
+                        scale: 1
+                    })
+                });
+            }
+        });
+        unmined.olMap.addLayer(skyPixelNightCityLightLayer);
+        window.skyPixelNightCityLightLayerReady = true;
+
+        function rebuildSkyPixelNightCityLightLayer() {
+            if (!unmined.markersLayer || !unmined.markersLayer.getSource) return;
+            const markerSource = unmined.markersLayer.getSource();
+            if (!markerSource || !markerSource.getFeatures) return;
+            skyPixelNightCityLightSource.clear();
+            markerSource.getFeatures().forEach(function (feature) {
+                const marker = feature.get('markerData');
+                const geometry = feature.getGeometry && feature.getGeometry();
+                if (!marker || !geometry || !shouldShowSkyPixelNightCityLight(marker)) return;
+                const lightFeature = new ol.Feature({ geometry: geometry.clone() });
+                lightFeature.set('markerData', marker);
+                skyPixelNightCityLightSource.addFeature(lightFeature);
+            });
+            skyPixelNightCityLightLayer.setVisible(!!skyPixelNightModeEnabled);
+            skyPixelNightCityLightSource.changed();
+        }
+
+        function updateSkyPixelNightCityLightLayer() {
+            if (skyPixelNightCityLightLayer) skyPixelNightCityLightLayer.setVisible(!!skyPixelNightModeEnabled);
+            if (skyPixelNightCityLightSource) skyPixelNightCityLightSource.changed();
+        }
+
         function createSkyPixelMarkerStyle(marker, showLabel) {
             const style = new ol.style.Style();
             const styles = [];
             const isCityMarker = shouldUseSmallSkyPixelCityIcon(marker) || isSkyPixelCapitalStarMarker(marker) || getSkyPixelMarkerCategory(marker) === 'major_city' || getSkyPixelMarkerCategory(marker) === 'regional_city';
 
-            if (skyPixelNightModeEnabled && isCityMarker) {
-                // Two separate icon layers blend more naturally on the OpenLayers canvas:
-                // a wide low-opacity halo first, then a smaller bright core on top.
-                styles.push(new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: SKY_PIXEL_NIGHT_CITY_FLARE_OUTER_SRC,
-                        anchor: [0.5, 0.5],
-                        opacity: getSkyPixelNightCityFlareOuterOpacity(marker),
-                        scale: getSkyPixelNightCityFlareScale(marker)
-                    }),
-                    zIndex: 1
-                }));
-                styles.push(new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: SKY_PIXEL_NIGHT_CITY_FLARE_CORE_SRC,
-                        anchor: [0.5, 0.5],
-                        opacity: getSkyPixelNightCityFlareCoreOpacity(marker),
-                        scale: getSkyPixelNightCityFlareCoreScale(marker)
-                    }),
-                    zIndex: 2
-                }));
-            }
 
             if (shouldUseSmallSkyPixelCityIcon(marker)) {
                 style.setImage(new ol.style.Icon({
@@ -6408,7 +6438,12 @@
         if (unmined.markersLayer && typeof unmined.markersLayer.setDeclutter === 'function') {
             unmined.markersLayer.setDeclutter(true);
         }
+        if (unmined.markersLayer && typeof unmined.markersLayer.setZIndex === 'function') {
+            // Keep city labels/icons crisp in front of the glow while the glow remains in front of teleport route lines.
+            unmined.markersLayer.setZIndex(2150);
+        }
 
+        rebuildSkyPixelNightCityLightLayer();
         applySkyPixelZoomLabels();
         unmined.olMap.getView().on('change:resolution', applySkyPixelZoomLabels);
 
