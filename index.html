@@ -1431,6 +1431,257 @@
         }
     </style>
 
+
+
+    <style id="sky-pixel-road-recorder-style">
+        .sky-pixel-road-recorder {
+            position: fixed;
+            right: 20px;
+            top: 132px;
+            z-index: 3520;
+            width: 320px;
+            color: #ffffff;
+            background: rgba(10, 14, 22, 0.88);
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.34);
+            backdrop-filter: blur(12px);
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-road-recorder-main {
+            width: 100%;
+            border: 0;
+            border-radius: 14px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-weight: 950;
+            cursor: pointer;
+            background: linear-gradient(135deg, rgba(20, 150, 255, 0.84), rgba(60, 100, 255, 0.84));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18), 0 0 18px rgba(20, 150, 255, 0.28);
+        }
+
+        .sky-pixel-road-recorder-main.is-active {
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.90), rgba(46, 126, 255, 0.92));
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.30), 0 0 26px rgba(0, 210, 255, 0.48);
+        }
+
+        .sky-pixel-road-recorder-panel {
+            margin-top: 10px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .sky-pixel-road-recorder-panel label {
+            display: grid;
+            gap: 5px;
+            font-weight: 850;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .sky-pixel-road-recorder-panel input {
+            width: 100%;
+            border: 0;
+            border-radius: 9px;
+            padding: 8px;
+            box-sizing: border-box;
+            color: #111827;
+            background: rgba(255,255,255,0.96);
+            font-weight: 850;
+        }
+
+        .sky-pixel-road-recorder-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+        }
+
+        .sky-pixel-road-recorder-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 7px;
+        }
+
+        .sky-pixel-road-recorder-actions button {
+            border: 0;
+            border-radius: 10px;
+            padding: 8px 7px;
+            color: #ffffff;
+            font-weight: 950;
+            cursor: pointer;
+            background: rgba(255,255,255,0.16);
+        }
+
+        .sky-pixel-road-recorder-actions button:first-child {
+            background: rgba(255, 165, 40, 0.78);
+        }
+
+        .sky-pixel-road-recorder-actions button:last-child {
+            background: rgba(0, 190, 255, 0.72);
+        }
+
+        .sky-pixel-road-recorder-actions button:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+
+        .sky-pixel-road-route-preview {
+            padding: 8px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.18);
+            border: 1px solid rgba(255,255,255,0.10);
+            display: grid;
+            gap: 7px;
+        }
+
+        .sky-pixel-road-route-preview-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.68);
+            font-weight: 950;
+        }
+
+        .sky-pixel-road-route-preview select {
+            width: 100%;
+            border: 0;
+            border-radius: 9px;
+            padding: 8px;
+            color: #111827;
+            background: rgba(255,255,255,0.96);
+            font-weight: 900;
+            box-sizing: border-box;
+        }
+
+        .sky-pixel-road-route-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+        }
+
+        .sky-pixel-road-route-actions button {
+            border: 0;
+            border-radius: 10px;
+            padding: 8px 7px;
+            color: #ffffff;
+            font-weight: 950;
+            cursor: pointer;
+            background: rgba(0, 190, 255, 0.72);
+        }
+
+        .sky-pixel-road-route-actions button:last-child {
+            background: rgba(255,255,255,0.16);
+        }
+
+        .sky-pixel-road-recorder-readout {
+            min-height: 38px;
+            padding: 8px;
+            border-radius: 10px;
+            color: rgba(255,255,255,0.86);
+            background: rgba(0,0,0,0.24);
+            border: 1px solid rgba(255,255,255,0.10);
+            line-height: 1.35;
+            font-weight: 800;
+        }
+
+        @media (max-width: 720px) {
+            body.sky-pixel-location-panel-open .sky-pixel-road-recorder {
+                display: none !important;
+                pointer-events: none !important;
+            }
+
+            .sky-pixel-road-recorder {
+                left: 10px;
+                right: 10px;
+                top: auto;
+                bottom: 74px;
+                width: auto;
+            }
+        }
+    </style>
+
+<style id="sky-pixel-final-tools-layout-fix">
+
+        /* Full-collapse Sky Pixel tools: leaves only the + button visible. */
+        .sky-pixel-map-tools-panel.is-collapsed {
+            width: 46px !important;
+            min-width: 46px !important;
+            max-width: 46px !important;
+            height: 46px !important;
+            min-height: 46px !important;
+            max-height: 46px !important;
+            padding: 8px !important;
+            overflow: hidden !important;
+            border-radius: 14px !important;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-map-tools-title,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-teleport-toggle,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-cloud-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-map-brightness-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-night-mode-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-country-border-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-player-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-adventure-tools,
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-road-recorder {
+            display: none !important;
+        }
+
+        .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-map-tools-minimize {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            top: 8px !important;
+            right: 8px !important;
+            width: 30px !important;
+            height: 30px !important;
+            min-height: 30px !important;
+        }
+
+        /* Road Recorder lives at the bottom of the Sky Pixel Tools panel. */
+        .sky-pixel-map-tools-panel .sky-pixel-road-recorder {
+            position: static !important;
+            right: auto !important;
+            left: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            z-index: auto !important;
+            width: auto !important;
+            max-width: none !important;
+            margin: 10px 0 0 !important;
+            color: #ffffff;
+            background: rgba(255,255,255,0.07) !important;
+            border: 1px solid rgba(255,255,255,0.12) !important;
+            border-radius: 14px !important;
+            padding: 10px !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 720px) {
+            .sky-pixel-map-tools-panel.is-collapsed {
+                left: 12px !important;
+                right: auto !important;
+                bottom: 126px !important;
+                top: auto !important;
+                width: 54px !important;
+                min-width: 54px !important;
+                max-width: 54px !important;
+                height: 54px !important;
+                min-height: 54px !important;
+                max-height: 54px !important;
+                padding: 8px !important;
+                overflow: hidden !important;
+            }
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -1529,7 +1780,7 @@
         <button id="skyPixelNightModeToggle" type="button" aria-pressed="false">🌙 Night Mode</button>
         <div id="skyPixelNightModePanel" class="sky-pixel-night-mode-panel" hidden>
             <div class="sky-pixel-map-brightness-title">Map Only + City Glow</div>
-            <div class="sky-pixel-night-mode-note">Darkens only the base map layer. Labels, panels, weather, routes, borders, and other UI stay clear while cities receive soft procedural night lights sized by city importance.</div>
+            <div class="sky-pixel-night-mode-note">Darkens only the base map layer. Labels, panels, weather, routes, borders, and other UI stay clear while cities receive a blended warm flare sized by city importance.</div>
         </div>
     </section>
 
@@ -1612,6 +1863,45 @@
             </div>
         </div>
     </section>
+
+    <div class="sky-pixel-road-recorder" aria-label="Sky Pixel road route recorder">
+        <button id="skyPixelRoadRecorderToggle" class="sky-pixel-road-recorder-main" type="button" aria-pressed="false">🛣 Road Recorder</button>
+        <div id="skyPixelRoadRecorderPanel" class="sky-pixel-road-recorder-panel" hidden>
+            <div class="sky-pixel-road-recorder-row">
+                <label>Road
+                    <input id="skyPixelRoadRecorderRoad" type="text" value="R101" placeholder="R101">
+                </label>
+                <label>ID
+                    <input id="skyPixelRoadRecorderId" type="text" value="R101_Octavian_Razalia" placeholder="R101_Octavian_Razalia">
+                </label>
+            </div>
+            <div class="sky-pixel-road-recorder-row">
+                <label>From
+                    <input id="skyPixelRoadRecorderFrom" type="text" value="Octavian" placeholder="Octavian">
+                </label>
+                <label>To
+                    <input id="skyPixelRoadRecorderTo" type="text" value="Razalia" placeholder="Razalia">
+                </label>
+            </div>
+            <div class="sky-pixel-road-recorder-actions">
+                <button id="skyPixelRoadRecorderUndo" type="button" disabled>Undo</button>
+                <button id="skyPixelRoadRecorderClear" type="button" disabled>Clear</button>
+                <button id="skyPixelRoadRecorderCopy" type="button" disabled>Copy Route</button>
+            </div>
+
+            <div class="sky-pixel-road-route-preview" aria-label="Saved road route preview">
+                <div class="sky-pixel-road-route-preview-title">Saved Road Route Test</div>
+                <select id="skyPixelRoadRouteSelect" aria-label="Saved road route">
+                    <option value="R101_Octavian_Razalia">R101 · Octavian → Razalia</option>
+                </select>
+                <div class="sky-pixel-road-route-actions">
+                    <button id="skyPixelRoadRouteShow" type="button">Show Route</button>
+                    <button id="skyPixelRoadRouteClear" type="button">Hide Route</button>
+                </div>
+            </div>
+            <div id="skyPixelRoadRecorderReadout" class="sky-pixel-road-recorder-readout">Turn on Road Recorder, then click along the road curves in order.</div>
+        </div>
+    </div>
     </div>
 
 
@@ -1806,7 +2096,6 @@
             skyPixelBaseMapBrightnessLayers.forEach(function (layer) {
                 if (layer && typeof layer.changed === 'function') layer.changed();
             });
-            if (window.skyPixelNightCityLightLayerReady) updateSkyPixelNightCityLightLayer();
         }
 
         function skyPixelBrightnessPreRender(event) {
@@ -1891,6 +2180,19 @@
         const measureToggle = document.getElementById('skyPixelMeasureToggle');
         const measureClear = document.getElementById('skyPixelMeasureClear');
         const measureReadout = document.getElementById('skyPixelMeasureReadout');
+        const roadRecorderToggle = document.getElementById('skyPixelRoadRecorderToggle');
+        const roadRecorderPanel = document.getElementById('skyPixelRoadRecorderPanel');
+        const roadRecorderRoadInput = document.getElementById('skyPixelRoadRecorderRoad');
+        const roadRecorderIdInput = document.getElementById('skyPixelRoadRecorderId');
+        const roadRecorderFromInput = document.getElementById('skyPixelRoadRecorderFrom');
+        const roadRecorderToInput = document.getElementById('skyPixelRoadRecorderTo');
+        const roadRecorderUndo = document.getElementById('skyPixelRoadRecorderUndo');
+        const roadRecorderClear = document.getElementById('skyPixelRoadRecorderClear');
+        const roadRecorderCopy = document.getElementById('skyPixelRoadRecorderCopy');
+        const roadRecorderReadout = document.getElementById('skyPixelRoadRecorderReadout');
+        const roadRouteSelect = document.getElementById('skyPixelRoadRouteSelect');
+        const roadRouteShow = document.getElementById('skyPixelRoadRouteShow');
+        const roadRouteClear = document.getElementById('skyPixelRoadRouteClear');
         const teleportRoutesToggle = document.getElementById('skyPixelTeleportRoutesToggle');
         const nearbySection = document.getElementById('skyPixelNearby');
         const nearbyList = document.getElementById('skyPixelNearbyList');
@@ -2879,6 +3181,581 @@
         });
         unmined.olMap.addLayer(skyPixelMeasureLayer);
 
+        // Sky Pixel Road Recorder: separate from the Measure tool.
+        // Click along road curves, then copy a ready-to-paste route object.
+        const skyPixelRoadRecorderSource = new ol.source.Vector({ features: [] });
+        const skyPixelRoadRecorderLayer = new ol.layer.Vector({
+            source: skyPixelRoadRecorderSource,
+            zIndex: 2250,
+            style: function (feature) {
+                const type = feature.get('roadRecorderType');
+                if (type === 'point') {
+                    return new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 6,
+                            fill: new ol.style.Fill({ color: 'rgba(0, 210, 255, 0.98)' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(255,255,255,0.96)', width: 2 })
+                        }),
+                        text: new ol.style.Text({
+                            text: String(feature.get('pointNumber') || ''),
+                            font: 'bold 10px Calibri, sans-serif',
+                            fill: new ol.style.Fill({ color: '#ffffff' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.92)', width: 3 }),
+                            offsetY: -15
+                        })
+                    });
+                }
+
+                return [
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(0,0,0,0.72)',
+                            width: 9,
+                            lineCap: 'round',
+                            lineJoin: 'round'
+                        })
+                    }),
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(0, 165, 255, 0.95)',
+                            width: 5,
+                            lineCap: 'round',
+                            lineJoin: 'round'
+                        })
+                    })
+                ];
+            }
+        });
+        unmined.olMap.addLayer(skyPixelRoadRecorderLayer);
+
+
+        // Sky Pixel saved road routes: first Google Maps-style test route.
+        const skyPixelSavedRoadRoutes = [
+            {
+                        "id": "R101_Octavian_Razalia",
+                        "road": "R101",
+                        "from": "Octavian",
+                        "to": "Razalia",
+                        "points": [
+                                    [
+                                                160.3,
+                                                -157
+                                    ],
+                                    [
+                                                204.3,
+                                                -182
+                                    ],
+                                    [
+                                                212.3,
+                                                -229
+                                    ],
+                                    [
+                                                210.3,
+                                                -312
+                                    ],
+                                    [
+                                                205.3,
+                                                -379
+                                    ],
+                                    [
+                                                174.3,
+                                                -401
+                                    ],
+                                    [
+                                                160.3,
+                                                -408
+                                    ],
+                                    [
+                                                154.3,
+                                                -435
+                                    ],
+                                    [
+                                                149.3,
+                                                -467
+                                    ],
+                                    [
+                                                130.3,
+                                                -480
+                                    ],
+                                    [
+                                                99.3,
+                                                -482
+                                    ],
+                                    [
+                                                75.3,
+                                                -488
+                                    ],
+                                    [
+                                                36.3,
+                                                -512
+                                    ],
+                                    [
+                                                6.3,
+                                                -542
+                                    ],
+                                    [
+                                                4.3,
+                                                -628
+                                    ],
+                                    [
+                                                4.3,
+                                                -677
+                                    ],
+                                    [
+                                                -19.7,
+                                                -693
+                                    ],
+                                    [
+                                                -46.7,
+                                                -713
+                                    ],
+                                    [
+                                                -74.7,
+                                                -749
+                                    ],
+                                    [
+                                                -79.7,
+                                                -784
+                                    ],
+                                    [
+                                                -107.7,
+                                                -802
+                                    ],
+                                    [
+                                                -144.7,
+                                                -831
+                                    ],
+                                    [
+                                                -157.7,
+                                                -859
+                                    ],
+                                    [
+                                                -175.7,
+                                                -884
+                                    ],
+                                    [
+                                                -198.7,
+                                                -910
+                                    ],
+                                    [
+                                                -207.7,
+                                                -940
+                                    ],
+                                    [
+                                                -215.7,
+                                                -967
+                                    ],
+                                    [
+                                                -257.7,
+                                                -979
+                                    ],
+                                    [
+                                                -294.7,
+                                                -978
+                                    ],
+                                    [
+                                                -305.7,
+                                                -1006
+                                    ],
+                                    [
+                                                -279.7,
+                                                -1043
+                                    ],
+                                    [
+                                                -263.7,
+                                                -1068
+                                    ],
+                                    [
+                                                -256.7,
+                                                -1115
+                                    ],
+                                    [
+                                                -239.7,
+                                                -1154
+                                    ],
+                                    [
+                                                -238.7,
+                                                -1211
+                                    ],
+                                    [
+                                                -260.7,
+                                                -1239
+                                    ],
+                                    [
+                                                -274.7,
+                                                -1265
+                                    ],
+                                    [
+                                                -272.7,
+                                                -1350
+                                    ],
+                                    [
+                                                -250.7,
+                                                -1375
+                                    ],
+                                    [
+                                                -247.5,
+                                                -1439.8
+                                    ],
+                                    [
+                                                -210.5,
+                                                -1465.8
+                                    ],
+                                    [
+                                                -148.5,
+                                                -1468.8
+                                    ],
+                                    [
+                                                -123.5,
+                                                -1506.8
+                                    ],
+                                    [
+                                                -123.5,
+                                                -1597.8
+                                    ],
+                                    [
+                                                -97.5,
+                                                -1619.8
+                                    ],
+                                    [
+                                                -54.5,
+                                                -1632.8
+                                    ],
+                                    [
+                                                -49.5,
+                                                -1686.8
+                                    ],
+                                    [
+                                                -49.5,
+                                                -1751.8
+                                    ],
+                                    [
+                                                -63.5,
+                                                -1789.8
+                                    ],
+                                    [
+                                                -93.5,
+                                                -1823.8
+                                    ],
+                                    [
+                                                -142.5,
+                                                -1877.8
+                                    ],
+                                    [
+                                                -164.5,
+                                                -1902.8
+                                    ],
+                                    [
+                                                -162.5,
+                                                -2007.8
+                                    ],
+                                    [
+                                                -140.5,
+                                                -2029.8
+                                    ],
+                                    [
+                                                -102.5,
+                                                -2035.8
+                                    ],
+                                    [
+                                                -77.5,
+                                                -2050.8
+                                    ],
+                                    [
+                                                -87.5,
+                                                -2079.8
+                                    ],
+                                    [
+                                                -114.5,
+                                                -2106.8
+                                    ],
+                                    [
+                                                -147.5,
+                                                -2147.8
+                                    ],
+                                    [
+                                                -158.5,
+                                                -2196.8
+                                    ],
+                                    [
+                                                -190.5,
+                                                -2230.8
+                                    ],
+                                    [
+                                                -237.5,
+                                                -2230.8
+                                    ],
+                                    [
+                                                -312.5,
+                                                -2229.8
+                                    ],
+                                    [
+                                                -363.5,
+                                                -2249.8
+                                    ],
+                                    [
+                                                -403.5,
+                                                -2250.8
+                                    ],
+                                    [
+                                                -438.5,
+                                                -2274.8
+                                    ],
+                                    [
+                                                -510.5,
+                                                -2274.8
+                                    ],
+                                    [
+                                                -580.5,
+                                                -2302.8
+                                    ],
+                                    [
+                                                -585.5,
+                                                -2343.8
+                                    ],
+                                    [
+                                                -613.5,
+                                                -2380.8
+                                    ],
+                                    [
+                                                -620.5,
+                                                -2423.8
+                                    ],
+                                    [
+                                                -648.5,
+                                                -2438.8
+                                    ],
+                                    [
+                                                -669.5,
+                                                -2483.8
+                                    ],
+                                    [
+                                                -739.5,
+                                                -2492.8
+                                    ],
+                                    [
+                                                -787.5,
+                                                -2476.8
+                                    ],
+                                    [
+                                                -816.5,
+                                                -2476.8
+                                    ],
+                                    [
+                                                -852.5,
+                                                -2446.8
+                                    ],
+                                    [
+                                                -922.5,
+                                                -2442.8
+                                    ],
+                                    [
+                                                -930.5,
+                                                -2482.8
+                                    ],
+                                    [
+                                                -970.5,
+                                                -2521.8
+                                    ],
+                                    [
+                                                -1076.5,
+                                                -2521.8
+                                    ],
+                                    [
+                                                -1151.5,
+                                                -2468.8
+                                    ],
+                                    [
+                                                -1266.5,
+                                                -2469.8
+                                    ],
+                                    [
+                                                -1310.5,
+                                                -2435.8
+                                    ],
+                                    [
+                                                -1374.5,
+                                                -2437.8
+                                    ],
+                                    [
+                                                -1402.5,
+                                                -2474.8
+                                    ],
+                                    [
+                                                -1429.5,
+                                                -2488.8
+                                    ],
+                                    [
+                                                -1488.5,
+                                                -2485.8
+                                    ],
+                                    [
+                                                -1573.5,
+                                                -2513.8
+                                    ],
+                                    [
+                                                -1663.8,
+                                                -2513.9
+                                    ],
+                                    [
+                                                -1720.8,
+                                                -2469.9
+                                    ],
+                                    [
+                                                -1770.8,
+                                                -2465.9
+                                    ],
+                                    [
+                                                -1790.8,
+                                                -2425.9
+                                    ],
+                                    [
+                                                -1796.8,
+                                                -2370.9
+                                    ],
+                                    [
+                                                -1837.8,
+                                                -2347.9
+                                    ],
+                                    [
+                                                -1858.8,
+                                                -2296.9
+                                    ],
+                                    [
+                                                -1882.8,
+                                                -2289.9
+                                    ],
+                                    [
+                                                -1901.8,
+                                                -2257.9
+                                    ],
+                                    [
+                                                -1953.8,
+                                                -2237.9
+                                    ],
+                                    [
+                                                -1980.8,
+                                                -2202.9
+                                    ],
+                                    [
+                                                -2032.7,
+                                                -2182.2
+                                    ],
+                                    [
+                                                -2046.7,
+                                                -2157.2
+                                    ],
+                                    [
+                                                -2089.7,
+                                                -2155.2
+                                    ],
+                                    [
+                                                -2171.7,
+                                                -2077.2
+                                    ],
+                                    [
+                                                -2241.7,
+                                                -2131.2
+                                    ],
+                                    [
+                                                -2257.7,
+                                                -2169.2
+                                    ],
+                                    [
+                                                -2258.7,
+                                                -2278.2
+                                    ],
+                                    [
+                                                -2256.7,
+                                                -2349.2
+                                    ],
+                                    [
+                                                -2244.7,
+                                                -2375.2
+                                    ],
+                                    [
+                                                -2243.7,
+                                                -2416.2
+                                    ],
+                                    [
+                                                -2275.7,
+                                                -2448.2
+                                    ],
+                                    [
+                                                -2387.7,
+                                                -2444.2
+                                    ]
+                        ]
+            }
+];
+
+        const skyPixelRoadRouteSource = new ol.source.Vector({ features: [] });
+        const skyPixelRoadRouteLayer = new ol.layer.Vector({
+            source: skyPixelRoadRouteSource,
+            zIndex: 2235,
+            style: function (feature) {
+                const type = feature.get('roadRouteType');
+                if (type === 'endpoint') {
+                    const isStart = feature.get('endpointKind') === 'start';
+                    return new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: 8,
+                            fill: new ol.style.Fill({ color: isStart ? 'rgba(44, 215, 120, 0.98)' : 'rgba(255, 82, 82, 0.98)' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(255,255,255,0.96)', width: 3 })
+                        }),
+                        text: new ol.style.Text({
+                            text: feature.get('label') || '',
+                            font: 'bold 12px Calibri, sans-serif',
+                            fill: new ol.style.Fill({ color: '#ffffff' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.95)', width: 4 }),
+                            offsetY: -20
+                        })
+                    });
+                }
+                if (type === 'label') {
+                    return new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: feature.get('label') || '',
+                            font: 'bold 13px Calibri, sans-serif',
+                            fill: new ol.style.Fill({ color: '#ffffff' }),
+                            stroke: new ol.style.Stroke({ color: 'rgba(0, 68, 155, 0.95)', width: 5 }),
+                            backgroundFill: new ol.style.Fill({ color: 'rgba(0, 126, 255, 0.72)' }),
+                            padding: [4, 8, 4, 8],
+                            offsetY: -16
+                        })
+                    });
+                }
+                return [
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(255,255,255,0.95)',
+                            width: 11,
+                            lineCap: 'round',
+                            lineJoin: 'round'
+                        })
+                    }),
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(0, 118, 255, 0.98)',
+                            width: 7,
+                            lineCap: 'round',
+                            lineJoin: 'round'
+                        })
+                    }),
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(120, 210, 255, 0.82)',
+                            width: 2,
+                            lineCap: 'round',
+                            lineJoin: 'round'
+                        })
+                    })
+                ];
+            }
+        });
+        unmined.olMap.addLayer(skyPixelRoadRouteLayer);
+
+
         // Sky Pixel Teleport Network: airline-style direct routes + automatic layover planner.
         const skyPixelTeleportRoutes = [
             {
@@ -3603,7 +4480,8 @@
         const skyPixelTeleportSource = new ol.source.Vector({ features: [] });
         const skyPixelTeleportLayer = new ol.layer.Vector({
             source: skyPixelTeleportSource,
-            zIndex: 2050,
+            // Below city glow/text layer; night glow should visually sit on top of network routes.
+            zIndex: 1850,
             visible: false,
             style: function (feature) {
                 const routeType = feature.get('routeType');
@@ -4672,6 +5550,9 @@
         }
 
         function setSkyPixelMeasureEnabled(enabled) {
+            if (enabled && skyPixelRoadRecorderEnabled) {
+                setSkyPixelRoadRecorderEnabled(false);
+            }
             if (enabled && typeof setSkyPixelPlayerAddMode === 'function' && skyPixelPlayerAddMode) {
                 setSkyPixelPlayerAddMode(false);
             }
@@ -4721,7 +5602,228 @@
                 skyPixelMeasurePoints.pop();
                 updateSkyPixelMeasureLayer();
             }
+            if ((event.key === 'Backspace' || event.key === 'Delete') && skyPixelRoadRecorderEnabled && skyPixelRoadRecorderPoints.length > 0) {
+                event.preventDefault();
+                skyPixelRoadRecorderPoints.pop();
+                updateSkyPixelRoadRecorderLayer();
+            }
+            if (event.key === 'Escape' && skyPixelRoadRecorderEnabled) {
+                setSkyPixelRoadRecorderEnabled(false);
+            }
         });
+
+
+        let skyPixelRoadRecorderEnabled = false;
+        let skyPixelRoadRecorderPoints = [];
+
+        function getSkyPixelRoadRecorderSegments() {
+            const segments = [];
+            for (let i = 1; i < skyPixelRoadRecorderPoints.length; i++) {
+                const a = skyPixelRoadRecorderPoints[i - 1];
+                const b = skyPixelRoadRecorderPoints[i];
+                segments.push({ distance: Math.hypot(b.x - a.x, b.z - a.z) });
+            }
+            return segments;
+        }
+
+        function getSkyPixelRoadRecorderTotal() {
+            return getSkyPixelRoadRecorderSegments().reduce((sum, segment) => sum + segment.distance, 0);
+        }
+
+        function updateSkyPixelRoadRecorderLayer() {
+            skyPixelRoadRecorderSource.clear();
+
+            if (skyPixelRoadRecorderPoints.length > 1) {
+                const lineFeature = new ol.Feature({
+                    geometry: new ol.geom.LineString(skyPixelRoadRecorderPoints.map(function (point) {
+                        return skyPixelBlocksToViewCoord(point);
+                    }))
+                });
+                lineFeature.set('roadRecorderType', 'line');
+                skyPixelRoadRecorderSource.addFeature(lineFeature);
+            }
+
+            skyPixelRoadRecorderPoints.forEach(function (point, index) {
+                const pointFeature = new ol.Feature({
+                    geometry: new ol.geom.Point(skyPixelBlocksToViewCoord(point))
+                });
+                pointFeature.set('roadRecorderType', 'point');
+                pointFeature.set('pointNumber', index + 1);
+                skyPixelRoadRecorderSource.addFeature(pointFeature);
+            });
+
+            const hasPoints = skyPixelRoadRecorderPoints.length > 0;
+            roadRecorderUndo.disabled = !hasPoints;
+            roadRecorderClear.disabled = !hasPoints;
+            roadRecorderCopy.disabled = !hasPoints;
+
+            if (!skyPixelRoadRecorderEnabled && !hasPoints) {
+                roadRecorderReadout.textContent = 'Turn on Road Recorder, then click along the road curves in order.';
+            } else if (!hasPoints) {
+                roadRecorderReadout.textContent = 'Recording: click the first point on the road.';
+            } else {
+                const last = skyPixelRoadRecorderPoints[skyPixelRoadRecorderPoints.length - 1];
+                roadRecorderReadout.textContent = `${skyPixelRoadRecorderPoints.length} vertices · ${formatSkyPixelDistance(getSkyPixelRoadRecorderTotal())} · Last X ${Math.round(last.x)}, Z ${Math.round(last.z)}`;
+            }
+        }
+
+        function setSkyPixelRoadRecorderEnabled(enabled) {
+            if (enabled) {
+                if (skyPixelMeasureEnabled) setSkyPixelMeasureEnabled(false);
+                if (typeof setSkyPixelPlayerAddMode === 'function' && skyPixelPlayerAddMode) {
+                    setSkyPixelPlayerAddMode(false);
+                }
+            }
+            skyPixelRoadRecorderEnabled = enabled;
+            roadRecorderToggle.classList.toggle('is-active', enabled);
+            roadRecorderToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+            roadRecorderToggle.textContent = enabled ? '🛣 Recording Road' : '🛣 Road Recorder';
+            roadRecorderPanel.hidden = !enabled && skyPixelRoadRecorderPoints.length === 0;
+            mapElement.classList.toggle('is-recording-road', enabled);
+            updateSkyPixelRoadRecorderLayer();
+        }
+
+        function addSkyPixelRoadRecorderPoint(evt) {
+            const blockCoord = viewCoordToSkyPixelBlocks(evt.coordinate.slice());
+            skyPixelRoadRecorderPoints.push({
+                x: blockCoord[0],
+                z: blockCoord[1]
+            });
+            updateSkyPixelRoadRecorderLayer();
+        }
+
+        function getSkyPixelRoadRecorderExportText() {
+            const roundCoord = function (value) {
+                return Number(Number(value).toFixed(1));
+            };
+            const route = {
+                id: (roadRecorderIdInput.value || 'Road_Route').trim(),
+                road: (roadRecorderRoadInput.value || '').trim(),
+                from: (roadRecorderFromInput.value || '').trim(),
+                to: (roadRecorderToInput.value || '').trim(),
+                points: skyPixelRoadRecorderPoints.map(function (point) {
+                    return [roundCoord(point.x), roundCoord(point.z)];
+                })
+            };
+            return JSON.stringify(route, null, 2);
+        }
+
+        async function copySkyPixelRoadRecorderRoute() {
+            const text = getSkyPixelRoadRecorderExportText();
+            try {
+                await navigator.clipboard.writeText(text);
+                roadRecorderReadout.textContent = `Copied ${skyPixelRoadRecorderPoints.length} vertices. Paste it into ChatGPT when ready.`;
+            } catch (error) {
+                const box = document.createElement('textarea');
+                box.value = text;
+                box.style.position = 'fixed';
+                box.style.left = '-9999px';
+                document.body.appendChild(box);
+                box.focus();
+                box.select();
+                try {
+                    document.execCommand('copy');
+                    roadRecorderReadout.textContent = `Copied ${skyPixelRoadRecorderPoints.length} vertices. Paste it into ChatGPT when ready.`;
+                } catch (copyError) {
+                    alert(text);
+                }
+                box.remove();
+            }
+        }
+
+        roadRecorderToggle.addEventListener('click', function () {
+            setSkyPixelRoadRecorderEnabled(!skyPixelRoadRecorderEnabled);
+        });
+
+        roadRecorderUndo.addEventListener('click', function () {
+            skyPixelRoadRecorderPoints.pop();
+            updateSkyPixelRoadRecorderLayer();
+        });
+
+        roadRecorderClear.addEventListener('click', function () {
+            skyPixelRoadRecorderPoints = [];
+            updateSkyPixelRoadRecorderLayer();
+        });
+
+        roadRecorderCopy.addEventListener('click', copySkyPixelRoadRecorderRoute);
+
+
+        function getSkyPixelSavedRoadRouteById(id) {
+            return skyPixelSavedRoadRoutes.find(function (route) { return route.id === id; }) || null;
+        }
+
+        function getSkyPixelSavedRoadRouteLength(route) {
+            if (!route || !Array.isArray(route.points)) return 0;
+            let total = 0;
+            for (let i = 1; i < route.points.length; i++) {
+                const a = route.points[i - 1];
+                const b = route.points[i];
+                total += Math.hypot(b[0] - a[0], b[1] - a[1]);
+            }
+            return total;
+        }
+
+        function showSkyPixelSavedRoadRoute(routeId) {
+            const route = getSkyPixelSavedRoadRouteById(routeId);
+            skyPixelRoadRouteSource.clear();
+            if (!route || !Array.isArray(route.points) || route.points.length < 2) {
+                roadRecorderReadout.textContent = 'No saved road route found.';
+                return;
+            }
+
+            const viewPoints = route.points.map(function (point) {
+                return skyPixelBlocksToViewCoord({ x: point[0], z: point[1] });
+            });
+
+            const routeFeature = new ol.Feature({
+                geometry: new ol.geom.LineString(viewPoints)
+            });
+            routeFeature.set('roadRouteType', 'line');
+            routeFeature.set('routeId', route.id);
+            skyPixelRoadRouteSource.addFeature(routeFeature);
+
+            const startFeature = new ol.Feature({ geometry: new ol.geom.Point(viewPoints[0]) });
+            startFeature.set('roadRouteType', 'endpoint');
+            startFeature.set('endpointKind', 'start');
+            startFeature.set('label', route.from || 'Start');
+            skyPixelRoadRouteSource.addFeature(startFeature);
+
+            const endFeature = new ol.Feature({ geometry: new ol.geom.Point(viewPoints[viewPoints.length - 1]) });
+            endFeature.set('roadRouteType', 'endpoint');
+            endFeature.set('endpointKind', 'end');
+            endFeature.set('label', route.to || 'End');
+            skyPixelRoadRouteSource.addFeature(endFeature);
+
+            const midPoint = viewPoints[Math.floor(viewPoints.length / 2)];
+            const labelFeature = new ol.Feature({ geometry: new ol.geom.Point(midPoint) });
+            labelFeature.set('roadRouteType', 'label');
+            labelFeature.set('label', `${route.road || 'Road'} · ${route.from || ''} → ${route.to || ''}`);
+            skyPixelRoadRouteSource.addFeature(labelFeature);
+
+            const extent = routeFeature.getGeometry().getExtent();
+            unmined.olMap.getView().fit(extent, {
+                padding: [90, 90, 90, 90],
+                duration: 650,
+                maxZoom: 5.6
+            });
+
+            roadRecorderReadout.textContent = `Showing ${route.road || route.id}: ${route.from || 'Start'} → ${route.to || 'End'} · ${route.points.length} vertices · ${formatSkyPixelDistance(getSkyPixelSavedRoadRouteLength(route))}`;
+        }
+
+        function clearSkyPixelSavedRoadRoute() {
+            skyPixelRoadRouteSource.clear();
+            roadRecorderReadout.textContent = 'Saved road route hidden. Use Show Route to preview R101 again.';
+        }
+
+        if (roadRouteShow) {
+            roadRouteShow.addEventListener('click', function () {
+                showSkyPixelSavedRoadRoute(roadRouteSelect ? roadRouteSelect.value : 'R101_Octavian_Razalia');
+            });
+        }
+
+        if (roadRouteClear) {
+            roadRouteClear.addEventListener('click', clearSkyPixelSavedRoadRoute);
+        }
 
 
         // Player Explorer Toolkit: personal notes/markers saved only in this browser.
@@ -6207,84 +7309,54 @@
         `);
 
 
-        // Night Mode city lights: procedural radial glow layer.
-        // Drawn on its own OpenLayers layer so it sits above teleport route lines but below city labels/icons.
-        const skyPixelNightCityLightCache = new Map();
+        // Night Mode city flare: transparent radial light bloom layered underneath city labels/icons.
+        // This replaces the old simple circle glow with a blended orange-white flare.
+        const SKY_PIXEL_NIGHT_CITY_FLARE_SRC = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+            <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+                <defs>
+                    <radialGradient id="cityFlare" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+                        <stop offset="7%" stop-color="#fff7d6" stop-opacity="0.96"/>
+                        <stop offset="18%" stop-color="#ffd56a" stop-opacity="0.78"/>
+                        <stop offset="34%" stop-color="#ff9f22" stop-opacity="0.44"/>
+                        <stop offset="55%" stop-color="#ff6a00" stop-opacity="0.18"/>
+                        <stop offset="78%" stop-color="#ff8a00" stop-opacity="0.055"/>
+                        <stop offset="100%" stop-color="#ff8a00" stop-opacity="0"/>
+                    </radialGradient>
+                    <filter id="softBlur" x="-25%" y="-25%" width="150%" height="150%">
+                        <feGaussianBlur stdDeviation="1.2"/>
+                    </filter>
+                </defs>
+                <circle cx="80" cy="80" r="76" fill="url(#cityFlare)" filter="url(#softBlur)"/>
+                <circle cx="80" cy="80" r="7" fill="#fffaf0" opacity="0.95"/>
+            </svg>
+        `);
 
-        function getSkyPixelNightCityLightTier(marker) {
+        function getSkyPixelNightCityFlareScale(marker) {
             const name = getSkyPixelBaseMarkerName(marker);
-            if (skyPixelCapitalCityNames.has(name)) return 'capital';
-            if (skyPixelFeaturedCityNames.has(name)) return 'featured';
-            if (skyPixelMajorCityNames.has(name)) return 'major';
-            if (skyPixelAdalineCityNames.has(name) || skyPixelRosewoodCityNames.has(name) || skyPixelValanceCityNames.has(name)) return 'large';
-            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 'regional';
-            return 'small';
+
+            // Night-city flare sizes are intentionally large and soft, like a satellite city-light bloom.
+            // The flare remains behind the label/icon, and scales by city importance.
+            if (skyPixelCapitalCityNames.has(name)) return 2.55;
+            if (skyPixelFeaturedCityNames.has(name)) return 2.25;
+            if (skyPixelMajorCityNames.has(name)) return 2.05;
+            if (skyPixelAdalineCityNames.has(name) || skyPixelRosewoodCityNames.has(name) || skyPixelValanceCityNames.has(name)) return 1.75;
+            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 1.38;
+            return 1.12;
         }
 
-        function getSkyPixelNightCityLightProfile(marker) {
-            const tier = getSkyPixelNightCityLightTier(marker);
-            const profiles = {
-                capital:  { size: 360, outer: 0.22, mid: 0.14, core: 0.42, coreRadius: 0.055 },
-                featured: { size: 315, outer: 0.19, mid: 0.12, core: 0.36, coreRadius: 0.052 },
-                major:    { size: 285, outer: 0.17, mid: 0.105, core: 0.32, coreRadius: 0.050 },
-                large:    { size: 235, outer: 0.145, mid: 0.09, core: 0.28, coreRadius: 0.048 },
-                regional: { size: 185, outer: 0.115, mid: 0.07, core: 0.23, coreRadius: 0.046 },
-                small:    { size: 145, outer: 0.09, mid: 0.055, core: 0.18, coreRadius: 0.044 }
-            };
-            return profiles[tier] || profiles.small;
+        function getSkyPixelNightCityFlareOpacity(marker) {
+            const name = getSkyPixelBaseMarkerName(marker);
+
+            // Bigger flares need slightly softer opacity so they blend into the darkened map.
+            if (skyPixelCapitalCityNames.has(name)) return 0.78;
+            if (skyPixelFeaturedCityNames.has(name) || skyPixelMajorCityNames.has(name)) return 0.70;
+            if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 0.58;
+            return 0.48;
         }
 
-        function getSkyPixelNightCityLightSrc(marker) {
-            const tier = getSkyPixelNightCityLightTier(marker);
-            const profile = getSkyPixelNightCityLightProfile(marker);
-            const key = tier + ':' + profile.size;
-            if (skyPixelNightCityLightCache.has(key)) return skyPixelNightCityLightCache.get(key);
-
-            const canvas = document.createElement('canvas');
-            const size = profile.size;
-            canvas.width = size;
-            canvas.height = size;
-            const ctx = canvas.getContext('2d');
-            const c = size / 2;
-
-            ctx.clearRect(0, 0, size, size);
-            ctx.globalCompositeOperation = 'lighter';
-
-            // Broad atmospheric amber bloom.
-            let gradient = ctx.createRadialGradient(c, c, 0, c, c, size * 0.48);
-            gradient.addColorStop(0.00, 'rgba(255, 238, 176,' + profile.outer + ')');
-            gradient.addColorStop(0.18, 'rgba(255, 185, 84,' + (profile.outer * 0.72).toFixed(3) + ')');
-            gradient.addColorStop(0.44, 'rgba(255, 128, 38,' + (profile.outer * 0.34).toFixed(3) + ')');
-            gradient.addColorStop(0.74, 'rgba(255, 111, 20,' + (profile.outer * 0.10).toFixed(3) + ')');
-            gradient.addColorStop(1.00, 'rgba(255, 111, 20,0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(c, c, size * 0.49, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Secondary softer inner city spread.
-            gradient = ctx.createRadialGradient(c, c, 0, c, c, size * 0.25);
-            gradient.addColorStop(0.00, 'rgba(255, 246, 213,' + profile.mid + ')');
-            gradient.addColorStop(0.40, 'rgba(255, 205, 105,' + (profile.mid * 0.68).toFixed(3) + ')');
-            gradient.addColorStop(1.00, 'rgba(255, 170, 64,0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(c, c, size * 0.26, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Compact urban core. Kept small so it glows without becoming a pasted flare.
-            gradient = ctx.createRadialGradient(c, c, 0, c, c, size * profile.coreRadius * 3.2);
-            gradient.addColorStop(0.00, 'rgba(255, 255, 246,' + profile.core + ')');
-            gradient.addColorStop(0.36, 'rgba(255, 232, 156,' + (profile.core * 0.52).toFixed(3) + ')');
-            gradient.addColorStop(1.00, 'rgba(255, 192, 82,0)');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(c, c, size * profile.coreRadius * 3.25, 0, Math.PI * 2);
-            ctx.fill();
-
-            const dataUrl = canvas.toDataURL('image/png');
-            skyPixelNightCityLightCache.set(key, dataUrl);
-            return dataUrl;
+        function getSkyPixelNightCityFlareSrc(marker) {
+            return SKY_PIXEL_NIGHT_CITY_FLARE_SRC;
         }
 
         function isSkyPixelCapitalStarMarker(marker) {
@@ -6314,59 +7386,23 @@
             return marker.offsetY || -48;
         }
 
-        function shouldShowSkyPixelNightCityLight(marker) {
-            return !!marker && (shouldUseSmallSkyPixelCityIcon(marker) || isSkyPixelCapitalStarMarker(marker) || getSkyPixelMarkerCategory(marker) === 'major_city' || getSkyPixelMarkerCategory(marker) === 'regional_city');
-        }
-
-        const skyPixelNightCityLightSource = new ol.source.Vector({ features: [] });
-        const skyPixelNightCityLightLayer = new ol.layer.Vector({
-            source: skyPixelNightCityLightSource,
-            visible: false,
-            // Route lines are zIndex 2050. This layer is above them, while the marker/label layer is pushed above this.
-            zIndex: 2075,
-            style: function (feature) {
-                const marker = feature.get('markerData');
-                if (!skyPixelNightModeEnabled || !shouldShowSkyPixelNightCityLight(marker)) return null;
-                return new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: getSkyPixelNightCityLightSrc(marker),
-                        anchor: [0.5, 0.5],
-                        opacity: 1,
-                        scale: 1
-                    })
-                });
-            }
-        });
-        unmined.olMap.addLayer(skyPixelNightCityLightLayer);
-        window.skyPixelNightCityLightLayerReady = true;
-
-        function rebuildSkyPixelNightCityLightLayer() {
-            if (!unmined.markersLayer || !unmined.markersLayer.getSource) return;
-            const markerSource = unmined.markersLayer.getSource();
-            if (!markerSource || !markerSource.getFeatures) return;
-            skyPixelNightCityLightSource.clear();
-            markerSource.getFeatures().forEach(function (feature) {
-                const marker = feature.get('markerData');
-                const geometry = feature.getGeometry && feature.getGeometry();
-                if (!marker || !geometry || !shouldShowSkyPixelNightCityLight(marker)) return;
-                const lightFeature = new ol.Feature({ geometry: geometry.clone() });
-                lightFeature.set('markerData', marker);
-                skyPixelNightCityLightSource.addFeature(lightFeature);
-            });
-            skyPixelNightCityLightLayer.setVisible(!!skyPixelNightModeEnabled);
-            skyPixelNightCityLightSource.changed();
-        }
-
-        function updateSkyPixelNightCityLightLayer() {
-            if (skyPixelNightCityLightLayer) skyPixelNightCityLightLayer.setVisible(!!skyPixelNightModeEnabled);
-            if (skyPixelNightCityLightSource) skyPixelNightCityLightSource.changed();
-        }
-
         function createSkyPixelMarkerStyle(marker, showLabel) {
             const style = new ol.style.Style();
             const styles = [];
             const isCityMarker = shouldUseSmallSkyPixelCityIcon(marker) || isSkyPixelCapitalStarMarker(marker) || getSkyPixelMarkerCategory(marker) === 'major_city' || getSkyPixelMarkerCategory(marker) === 'regional_city';
 
+            if (skyPixelNightModeEnabled && isCityMarker) {
+                styles.push(new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: getSkyPixelNightCityFlareSrc(marker),
+                        anchor: [0.5, 0.5],
+                        opacity: getSkyPixelNightCityFlareOpacity(marker),
+                        scale: getSkyPixelNightCityFlareScale(marker)
+                    }),
+                    // City glow should sit below city text/icons but above teleport route lines.
+                    zIndex: 20
+                }));
+            }
 
             if (shouldUseSmallSkyPixelCityIcon(marker)) {
                 style.setImage(new ol.style.Icon({
@@ -6401,6 +7437,8 @@
                 }));
             }
 
+            // Keep the actual city icon + text above the night glow flare.
+            style.setZIndex(120);
             styles.push(style);
             return styles;
         }
@@ -6438,16 +7476,24 @@
         if (unmined.markersLayer && typeof unmined.markersLayer.setDeclutter === 'function') {
             unmined.markersLayer.setDeclutter(true);
         }
+
+        // Actual layer stack for map content:
+        // teleport route lines (1850) < city night glow + city labels (2100) < road preview route (2235).
+        // This keeps city text above both the teleport network routes and the night glow,
+        // while the glow still appears in front of the teleport route lines.
         if (unmined.markersLayer && typeof unmined.markersLayer.setZIndex === 'function') {
-            // Keep city labels/icons crisp in front of the glow while the glow remains in front of teleport route lines.
-            unmined.markersLayer.setZIndex(2150);
+            unmined.markersLayer.setZIndex(2100);
         }
 
-        rebuildSkyPixelNightCityLightLayer();
         applySkyPixelZoomLabels();
         unmined.olMap.getView().on('change:resolution', applySkyPixelZoomLabels);
 
         unmined.olMap.on('singleclick', function (evt) {
+            if (skyPixelRoadRecorderEnabled) {
+                addSkyPixelRoadRecorderPoint(evt);
+                return;
+            }
+
             if (skyPixelMeasureEnabled) {
                 addSkyPixelMeasurePoint(evt);
                 return;
@@ -6483,7 +7529,7 @@
         });
 
         unmined.olMap.on('pointermove', function (evt) {
-            if (skyPixelMeasureEnabled || skyPixelPlayerAddMode) {
+            if (skyPixelMeasureEnabled || skyPixelRoadRecorderEnabled || skyPixelPlayerAddMode) {
                 mapElement.style.cursor = 'crosshair';
                 return;
             }
