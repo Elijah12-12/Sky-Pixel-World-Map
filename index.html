@@ -1016,6 +1016,13 @@
                 linear-gradient(135deg, rgba(255,72,72,0.92), rgba(145,36,44,0.9) 48%, rgba(58,18,24,0.94));
         }
 
+        .sky-pixel-country-info-hero.truce-territory {
+            background-image:
+                linear-gradient(180deg, rgba(10,14,22,0.04), rgba(10,14,22,0.92)),
+                repeating-linear-gradient(135deg, rgba(80,190,255,0.34) 0 18px, rgba(92,235,142,0.28) 18px 36px),
+                linear-gradient(135deg, rgba(28,62,82,0.95), rgba(34,68,54,0.95));
+        }
+
 
         .sky-pixel-country-info-kicker {
             font-size: 12px;
@@ -1891,6 +1898,7 @@
                 <div class="sky-pixel-country-border-card"><strong>Kavarr Country</strong>Capital: Quantum<br>Region: Southernmost Sky Pixel<br>Founded: May 2025<br>Established: June 2025</div>
                 <div class="sky-pixel-country-border-card"><strong>Sapphire Country</strong>Capital: Prunelle<br>Region: Easternmost Country in Sky Pixel<br>Name originated: 2021<br>Founded: May 2023<br>Established: May 2023</div>
                 <div class="sky-pixel-country-border-card"><strong>Hawkfall Country</strong>Capital: No capital city currently<br>Region: Westernmost Sky Pixel Country for now<br>Status: Developing nation<br>Founded: May 2023<br>Established: Late November 2023</div>
+                <div class="sky-pixel-country-border-card"><strong>Jesla / Skyline - Truce Territory</strong>Land ownership: Jesla Country<br>Governance: Skyline Country<br>Purpose: Maritime trade territory serving the Port of Razalia</div>
             </div>
         </div>
     </section>
@@ -2081,11 +2089,11 @@
         </div>
         <div class="sky-pixel-country-info-body">
             <div class="sky-pixel-country-info-grid">
-                <div class="sky-pixel-country-info-stat"><span>Capital</span><strong id="skyPixelCountryInfoCapital"></strong></div>
-                <div class="sky-pixel-country-info-stat"><span>Region</span><strong id="skyPixelCountryInfoRegion"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span id="skyPixelCountryInfoCapitalLabel">Capital</span><strong id="skyPixelCountryInfoCapital"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span id="skyPixelCountryInfoRegionLabel">Region</span><strong id="skyPixelCountryInfoRegion"></strong></div>
                 <div id="skyPixelCountryInfoNameOriginatedStat" class="sky-pixel-country-info-stat" hidden><span>Name Originated</span><strong id="skyPixelCountryInfoNameOriginated"></strong></div>
-                <div class="sky-pixel-country-info-stat"><span>Founded</span><strong id="skyPixelCountryInfoFounded"></strong></div>
-                <div class="sky-pixel-country-info-stat"><span>Established</span><strong id="skyPixelCountryInfoEstablished"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span id="skyPixelCountryInfoFoundedLabel">Founded</span><strong id="skyPixelCountryInfoFounded"></strong></div>
+                <div class="sky-pixel-country-info-stat"><span id="skyPixelCountryInfoEstablishedLabel">Established</span><strong id="skyPixelCountryInfoEstablished"></strong></div>
                 <div class="sky-pixel-country-info-stat"><span>Map Layer</span><strong>Political Map</strong></div>
             </div>
             <p id="skyPixelCountryInfoDescription" class="sky-pixel-country-info-description"></p>
@@ -2715,6 +2723,39 @@
                     { x: -3180, z: 1790 },
                     { x: -3994, z: -2551 }
                 ]
+            },
+            {
+                name: 'Jesla / Skyline - Truce Territory',
+                label: 'Jesla / Skyline\nTruce Territory',
+                capital: 'Skyline Country',
+                capitalLabel: 'Governance',
+                region: 'Jesla Country',
+                regionLabel: 'Land ownership',
+                founded: 'Maritime trade zone',
+                foundedLabel: 'Purpose',
+                establishment: 'Port of Razalia route',
+                establishmentLabel: 'Trade connection',
+                heroClass: 'truce-territory',
+                isTruceTerritory: true,
+                description: 'The Jesla / Skyline Truce Territory is land technically owned by Jesla Country but governed and administered by Skyline Country under the truce arrangement.',
+                notes: [
+                    'Land ownership remains with Jesla Country.',
+                    'Political governance and day-to-day administration are handled by Skyline Country.',
+                    'The territory was designed as a shared trade area between Jesla Country and Skyline Country.',
+                    'Its primary strategic purpose is to support the maritime trade route operating through the Port of Razalia.'
+                ],
+                color: 'rgba(235, 225, 188, 0.98)',
+                fill: 'rgba(210, 198, 155, 0.10)',
+                points: [
+                    { x: -2648, z: -2557 },
+                    { x: -2755, z: -2766 },
+                    { x: -3156, z: -3003 },
+                    { x: -3397, z: -2975 },
+                    { x: -3409, z: -2770 },
+                    { x: -3294, z: -2628 },
+                    { x: -3330, z: -2556 },
+                    { x: -2648, z: -2557 }
+                ]
             }
         ];
 
@@ -2744,7 +2785,12 @@
                     type: 'country-border',
                     color: country.color,
                     glow: country.glow,
-                    fill: country.fill
+                    fill: country.fill,
+                    isTruceTerritory: !!country.isTruceTerritory,
+                    capitalLabel: country.capitalLabel || 'Capital',
+                    regionLabel: country.regionLabel || 'Region',
+                    foundedLabel: country.foundedLabel || 'Founded',
+                    establishmentLabel: country.establishmentLabel || 'Established'
                 });
                 features.push(borderFeature);
 
@@ -2761,7 +2807,12 @@
                     description: country.description,
                     notes: country.notes,
                     type: 'country-label',
-                    color: country.color
+                    color: country.color,
+                    isTruceTerritory: !!country.isTruceTerritory,
+                    capitalLabel: country.capitalLabel || 'Capital',
+                    regionLabel: country.regionLabel || 'Region',
+                    foundedLabel: country.foundedLabel || 'Founded',
+                    establishmentLabel: country.establishmentLabel || 'Established'
                 });
                 features.push(labelFeature);
             });
@@ -2805,7 +2856,7 @@
             if (!skyPixelCountryLayerControls) return;
             const allChecked = skyPixelCountryBorders.length > 0 && skyPixelVisibleCountryNames.size === skyPixelCountryBorders.length;
             const rows = [
-                '<label class="sky-pixel-country-all"><input id="skyPixelCountryToggleAll" type="checkbox" ' + (allChecked ? 'checked' : '') + '> All countries</label>'
+                '<label class="sky-pixel-country-all"><input id="skyPixelCountryToggleAll" type="checkbox" ' + (allChecked ? 'checked' : '') + '> All political layers</label>'
             ];
             skyPixelCountryBorders.forEach(function (country, index) {
                 const checked = skyPixelVisibleCountryNames.has(country.name) ? 'checked' : '';
@@ -2832,78 +2883,62 @@
             if (!isSkyPixelCountryFeatureVisible(feature)) return null;
             const type = feature.get('type');
             const color = feature.get('color') || 'rgba(255,255,255,0.95)';
-            const glow = feature.get('glow') || 'rgba(255,255,255,0.22)';
             const isHovered = !!feature.get('isHovered');
+            const isTruceTerritory = !!feature.get('isTruceTerritory');
 
             if (type === 'country-label') {
                 const zoom = unmined.olMap.getView().getZoom ? (unmined.olMap.getView().getZoom() || 0) : 0;
-                const labelScale = zoom >= 0 ? 1.16 : 1.06;
                 const countryText = feature.get('name') || '';
 
-                // Political Map country names are intentionally rendered as a stacked
-                // glow-flare label so they sit visually in front of all other map text.
-                return [
-                    new ol.style.Style({
-                        text: new ol.style.Text({
-                            text: countryText,
-                            font: '950 18px Arial, sans-serif',
-                            scale: labelScale,
-                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.01)' }),
-                            stroke: new ol.style.Stroke({ color: glow, width: 18 }),
-                            padding: [5, 10, 5, 10]
-                        })
-                    }),
-                    new ol.style.Style({
-                        text: new ol.style.Text({
-                            text: countryText,
-                            font: '950 18px Arial, sans-serif',
-                            scale: labelScale,
-                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.01)' }),
-                            stroke: new ol.style.Stroke({ color: color, width: 10 }),
-                            padding: [5, 10, 5, 10]
-                        })
-                    }),
-                    new ol.style.Style({
-                        text: new ol.style.Text({
-                            text: countryText,
-                            font: '950 18px Arial, sans-serif',
-                            scale: labelScale,
-                            fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.99)' }),
-                            stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.88)', width: 5 }),
-                            padding: [5, 10, 5, 10],
-                            backgroundFill: new ol.style.Fill({ color: 'rgba(10, 14, 22, 0.72)' }),
-                            backgroundStroke: new ol.style.Stroke({ color: color, width: 1.6 })
-                        })
+                // Country identity is carried only by the thin colored outline
+                // around the label box. The boundary itself remains neutral.
+                const labelScale = isTruceTerritory
+                    ? (zoom >= 0 ? 0.78 : 0.70)
+                    : (zoom >= 0 ? 1.10 : 1.00);
+                const labelFont = isTruceTerritory
+                    ? '850 13px Arial, sans-serif'
+                    : '950 18px Arial, sans-serif';
+                const labelPadding = isTruceTerritory
+                    ? [2, 5, 2, 5]
+                    : [4, 9, 4, 9];
+
+                return new ol.style.Style({
+                    text: new ol.style.Text({
+                        text: countryText,
+                        font: labelFont,
+                        scale: labelScale,
+                        fill: new ol.style.Fill({ color: 'rgba(255,255,255,0.98)' }),
+                        stroke: new ol.style.Stroke({ color: 'rgba(0,0,0,0.92)', width: isTruceTerritory ? 3 : 4 }),
+                        padding: labelPadding,
+                        backgroundFill: new ol.style.Fill({ color: isTruceTerritory ? 'rgba(10,14,22,0.82)' : 'rgba(10,14,22,0.76)' }),
+                        backgroundStroke: new ol.style.Stroke({ color: color, width: isTruceTerritory ? 1.1 : 1.6 })
                     })
-                ];
+                });
             }
+
+            // Realistic political boundary treatment: a subtle dark casing
+            // beneath a clean white dashed border. Country colors are reserved for labels.
+            const fillColor = isTruceTerritory
+                ? (isHovered ? 'rgba(210,198,155,0.15)' : 'rgba(210,198,155,0.075)')
+                : (isHovered ? 'rgba(12,16,20,0.10)' : 'rgba(12,16,20,0.035)');
 
             return [
                 new ol.style.Style({
-                    fill: new ol.style.Fill({ color: isHovered ? (feature.get('hoverFill') || feature.get('fill') || 'rgba(255,255,255,0.12)') : (feature.get('fill') || 'rgba(255,255,255,0.08)') }),
+                    fill: new ol.style.Fill({ color: fillColor }),
                     stroke: new ol.style.Stroke({
-                        color: glow,
-                        width: isHovered ? 14 : 10,
-                        lineCap: 'round',
-                        lineJoin: 'round'
+                        color: 'rgba(8,11,15,0.78)',
+                        width: isHovered ? 4.4 : 3.4,
+                        lineCap: 'butt',
+                        lineJoin: 'miter'
                     })
                 }),
                 new ol.style.Style({
                     stroke: new ol.style.Stroke({
-                        color: color,
-                        width: isHovered ? 6 : 4,
-                        lineDash: [16, 10],
-                        lineCap: 'round',
-                        lineJoin: 'round'
-                    })
-                }),
-                new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: 'rgba(255,255,255,0.55)',
-                        width: 1.4,
-                        lineDash: [16, 10],
-                        lineCap: 'round',
-                        lineJoin: 'round'
+                        color: 'rgba(255,255,255,0.98)',
+                        width: isHovered ? 2.5 : 2.0,
+                        lineDash: isTruceTerritory ? [7, 5] : [9, 6],
+                        lineCap: 'butt',
+                        lineJoin: 'miter'
                     })
                 })
             ];
@@ -2945,9 +2980,13 @@
         const skyPixelCountryInfoHero = document.getElementById('skyPixelCountryInfoHero');
         const skyPixelCountryInfoTitle = document.getElementById('skyPixelCountryInfoTitle');
         const skyPixelCountryInfoCapital = document.getElementById('skyPixelCountryInfoCapital');
+        const skyPixelCountryInfoCapitalLabel = document.getElementById('skyPixelCountryInfoCapitalLabel');
         const skyPixelCountryInfoRegion = document.getElementById('skyPixelCountryInfoRegion');
+        const skyPixelCountryInfoRegionLabel = document.getElementById('skyPixelCountryInfoRegionLabel');
         const skyPixelCountryInfoFounded = document.getElementById('skyPixelCountryInfoFounded');
+        const skyPixelCountryInfoFoundedLabel = document.getElementById('skyPixelCountryInfoFoundedLabel');
         const skyPixelCountryInfoEstablished = document.getElementById('skyPixelCountryInfoEstablished');
+        const skyPixelCountryInfoEstablishedLabel = document.getElementById('skyPixelCountryInfoEstablishedLabel');
         const skyPixelCountryInfoNameOriginated = document.getElementById('skyPixelCountryInfoNameOriginated');
         const skyPixelCountryInfoNameOriginatedStat = document.getElementById('skyPixelCountryInfoNameOriginatedStat');
         const skyPixelCountryInfoDescription = document.getElementById('skyPixelCountryInfoDescription');
@@ -2968,7 +3007,11 @@
             skyPixelPoliticalLegendList.innerHTML = skyPixelCountryBorders.filter(function (country) {
                 return skyPixelVisibleCountryNames.has(country.name);
             }).map(function (country) {
-                return '<div class="sky-pixel-political-legend-item"><span class="sky-pixel-political-legend-swatch" style="color:' + country.color + '; background:' + country.color + '"></span><span>' + country.name + '</span></div>';
+                const dashColor = 'rgba(255,255,255,0.98)';
+                return '<div class="sky-pixel-political-legend-item">' +
+                    '<span style="width:22px;height:0;border-top:3px dashed ' + dashColor + ';outline:1px solid rgba(12,16,20,0.94);flex:0 0 auto"></span>' +
+                    '<span style="display:inline-block;padding:1px 5px;border:1px solid ' + country.color + ';border-radius:4px;background:rgba(10,14,22,0.38)">' + country.name + '</span>' +
+                    '</div>';
             }).join('') || '<div class="sky-pixel-political-legend-item"><span>No countries selected</span></div>';
         }
         updateSkyPixelCountryLayerControls();
@@ -3005,9 +3048,13 @@
         function openSkyPixelCountryInfo(feature) {
             if (!feature || feature.get('type') !== 'country-border') return;
             if (skyPixelCountryInfoTitle) skyPixelCountryInfoTitle.textContent = feature.get('name') || 'Country';
+            if (skyPixelCountryInfoCapitalLabel) skyPixelCountryInfoCapitalLabel.textContent = feature.get('capitalLabel') || 'Capital';
             if (skyPixelCountryInfoCapital) skyPixelCountryInfoCapital.textContent = feature.get('capital') || 'Unknown';
+            if (skyPixelCountryInfoRegionLabel) skyPixelCountryInfoRegionLabel.textContent = feature.get('regionLabel') || 'Region';
             if (skyPixelCountryInfoRegion) skyPixelCountryInfoRegion.textContent = feature.get('region') || 'Unknown';
+            if (skyPixelCountryInfoFoundedLabel) skyPixelCountryInfoFoundedLabel.textContent = feature.get('foundedLabel') || 'Founded';
             if (skyPixelCountryInfoFounded) skyPixelCountryInfoFounded.textContent = feature.get('founded') || 'Unknown';
+            if (skyPixelCountryInfoEstablishedLabel) skyPixelCountryInfoEstablishedLabel.textContent = feature.get('establishmentLabel') || 'Established';
             if (skyPixelCountryInfoEstablished) skyPixelCountryInfoEstablished.textContent = feature.get('establishment') || 'Unknown';
             const nameOriginated = feature.get('nameOriginated') || '';
             if (skyPixelCountryInfoNameOriginated) skyPixelCountryInfoNameOriginated.textContent = nameOriginated;
@@ -8044,6 +8091,400 @@
     }
 
     window.skyPixelDrawR101Route = drawRouteSegment;
+})();
+</script>
+
+
+
+<!-- Sky Pixel Maritime Routes: Port of Razalia pilot network -->
+<style id="sky-pixel-maritime-routes-style">
+    .sky-pixel-maritime-tools {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 14px;
+        padding: 10px;
+        margin: 10px 0 0;
+        box-sizing: border-box;
+    }
+
+    .sky-pixel-maritime-tools button {
+        width: 100%;
+        border: 0;
+        border-radius: 14px;
+        padding: 10px 14px;
+        font-weight: 900;
+        cursor: pointer;
+        color: #ffffff;
+        background: linear-gradient(135deg, rgba(34,112,184,0.86), rgba(41,154,215,0.84));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18);
+    }
+
+    .sky-pixel-maritime-tools button.is-active {
+        background: linear-gradient(135deg, rgba(34,145,230,0.96), rgba(61,181,235,0.94));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
+    }
+
+    .sky-pixel-maritime-panel {
+        margin-top: 9px;
+        padding: 8px;
+        border-radius: 11px;
+        background: rgba(0,0,0,0.18);
+        border: 1px solid rgba(255,255,255,0.10);
+        color: rgba(255,255,255,0.86);
+        font-size: 12px;
+        font-weight: 780;
+        line-height: 1.4;
+    }
+
+    .sky-pixel-maritime-popup {
+        min-width: 220px;
+        max-width: 290px;
+        padding: 10px 12px;
+        color: #ffffff;
+        background: rgba(8,18,31,0.94);
+        border: 1px solid rgba(105,190,255,0.55);
+        border-radius: 13px;
+        box-shadow: 0 10px 26px rgba(0,0,0,0.38);
+        backdrop-filter: blur(10px);
+        font-size: 13px;
+        line-height: 1.4;
+        pointer-events: none;
+    }
+
+    .sky-pixel-maritime-popup strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 950;
+    }
+
+    .sky-pixel-maritime-popup span {
+        color: rgba(255,255,255,0.68);
+        font-weight: 800;
+    }
+
+    .sky-pixel-map-tools-panel.is-collapsed .sky-pixel-maritime-tools {
+        display: none !important;
+    }
+</style>
+
+<script id="sky-pixel-maritime-routes-script">
+(function () {
+    'use strict';
+
+    if (!window.ol || typeof unmined === 'undefined' || !unmined.olMap) return;
+
+    const toolsPanel = document.getElementById('skyPixelMapToolsPanel');
+    const countryTools = toolsPanel ? toolsPanel.querySelector('.sky-pixel-country-border-tools') : null;
+
+    const maritimeSection = document.createElement('section');
+    maritimeSection.className = 'sky-pixel-maritime-tools';
+    maritimeSection.setAttribute('aria-label', 'Sky Pixel maritime route tools');
+    maritimeSection.innerHTML =
+        '<button id="skyPixelMaritimeRoutesToggle" type="button" aria-pressed="false">⚓ Maritime Routes</button>' +
+        '<div id="skyPixelMaritimeRoutesPanel" class="sky-pixel-maritime-panel" hidden>' +
+        'Active maritime network<br>' +
+        '• 3 Port of Razalia routes<br>' +
+        '• 4 Harlow / Saylor routes<br>' +
+        '• 5 Port of Elowah connections<br>' +
+        '• 9 unique maritime routes total' +
+        '</div>';
+
+    if (toolsPanel) {
+        if (countryTools) toolsPanel.insertBefore(maritimeSection, countryTools);
+        else toolsPanel.appendChild(maritimeSection);
+    }
+
+    const routes = [
+        {
+            name: 'Port of Razalia Terminal 1 ↔ Lillooet Terminal 1',
+            origin: 'Port of Razalia Terminal 1',
+            destination: 'Lillooet Terminal 1',
+            terminal: 'Razalia Terminal 1 / Lillooet Terminal 1',
+            points: [
+                [-3346, -2860],
+                [-3725, -2921],
+                [-4345, -3027],
+                [-5033, -3013],
+                [-5165, -3137]
+            ]
+        },
+        {
+            name: 'Port of Razalia Terminal 2 ↔ Elowah Terminal 1',
+            origin: 'Port of Razalia Terminal 2',
+            destination: 'Elowah Terminal 1',
+            terminal: 'Razalia Terminal 2 / Elowah Terminal 1',
+            points: [
+                [-3366, -2882],
+                [-3496, -2898],
+                [-4050, -3027],
+                [-4535, -3064],
+                [-4877, -3396],
+                [-5217, -3720],
+                [-5627, -3858],
+                [-6106, -4109],
+                [-6226, -4576],
+                [-6389, -4584],
+                [-6342, -4720],
+                [-6232, -4734]
+            ]
+        },
+        {
+            name: 'Port of Razalia Terminal 3 ↔ Harlow / Saylor Terminal 5',
+            origin: 'Port of Razalia Terminal 3',
+            destination: 'Harlow / Saylor Terminal 5',
+            terminal: 'Razalia Terminal 3 / Harlow-Saylor Terminal 5',
+            points: [
+                [-3373, -2908],
+                [-3708, -2997],
+                [-3938, -3046],
+                [-3943, -3092]
+            ]
+        },
+        {
+            name: 'Harlow / Saylor Terminal 1 ↔ Elowah Terminal 2, Barge 3',
+            origin: 'Harlow / Saylor Terminal 1',
+            destination: 'Elowah Terminal 2, Barge 3',
+            terminal: 'Harlow-Saylor Terminal 1 / Elowah Terminal 2, Barge 3',
+            points: [
+                [-3982, -3294],
+                [-4315, -3340],
+                [-4719, -3380],
+                [-5284, -3809],
+                [-5915, -3982],
+                [-6097, -4225],
+                [-6135, -4464],
+                [-6447, -4597],
+                [-6293, -4745]
+            ]
+        },
+        {
+            name: 'Harlow / Saylor Terminal 2 ↔ Elowah Terminal 3, Barge 2',
+            origin: 'Harlow / Saylor Terminal 2',
+            destination: 'Elowah Terminal 3, Barge 2',
+            terminal: 'Harlow-Saylor Terminal 2 / Elowah Terminal 3, Barge 2',
+            points: [
+                [-4008, -3267],
+                [-4315, -3340],
+                [-4719, -3380],
+                [-5284, -3809],
+                [-5915, -3982],
+                [-6097, -4225],
+                [-6135, -4464],
+                [-6447, -4597],
+                [-6325, -4743]
+            ]
+        },
+        {
+            name: 'Harlow / Saylor Terminal 3 ↔ Port of Lillooet',
+            origin: 'Harlow / Saylor Terminal 3',
+            destination: 'Port of Lillooet',
+            terminal: 'Harlow-Saylor Terminal 3 / Port of Lillooet',
+            points: [
+                [-4038, -3239],
+                [-4503, -3238],
+                [-4872, -3059],
+                [-5132, -3033],
+                [-5145, -3132],
+                [-5195, -3141]
+            ]
+        },
+        {
+            name: 'Harlow / Saylor Terminal 4 ↔ Port of Sitkan / Alouette',
+            origin: 'Harlow / Saylor Terminal 4',
+            destination: 'Port of Sitkan / Alouette',
+            terminal: 'Harlow-Saylor Terminal 4 / Sitkan-Alouette Port',
+            points: [
+                [-4067, -3205],
+                [-4406, -3241],
+                [-4915, -3471],
+                [-5173, -3601],
+                [-5781, -3910],
+                [-6118, -4279],
+                [-6260, -4467],
+                [-6569, -4613],
+                [-6916, -5551],
+                [-7548, -6793],
+                [-9027, -7599],
+                [-11136, -8317],
+                [-11412, -8757],
+                [-11443, -9194],
+                [-11555, -9646],
+                [-11677, -9665]
+            ]
+        },
+        {
+            name: 'Port of Elowah Terminal 4 ↔ Port of Lillooet',
+            origin: 'Port of Elowah Terminal 4',
+            destination: 'Port of Lillooet',
+            terminal: 'Elowah Terminal 4 / Port of Lillooet',
+            points: [
+                [-6179, -4847],
+                [-6270, -4859],
+                [-6288, -4898],
+                [-6411, -4886],
+                [-6454, -4780],
+                [-6397, -4550],
+                [-6038, -4277],
+                [-5805, -3968],
+                [-5297, -3779],
+                [-4962, -3194],
+                [-5021, -3079],
+                [-5119, -3075],
+                [-5160, -3133],
+                [-5197, -3144]
+            ]
+        },
+        {
+            name: 'Port of Elowah Terminal 5 ↔ Port of Alouette / Sitkan',
+            origin: 'Port of Elowah Terminal 5',
+            destination: 'Port of Alouette / Sitkan',
+            terminal: 'Elowah Terminal 5 / Alouette-Sitkan Port',
+            points: [
+                [-6105, -5038],
+                [-6329, -5081],
+                [-7159, -6156],
+                [-7756, -6813],
+                [-9141, -7586],
+                [-11195, -8332],
+                [-11390, -8785],
+                [-11429, -9202],
+                [-11569, -9632],
+                [-11677, -9670]
+            ]
+        }
+    ];
+
+    function toViewCoord(point) {
+        return ol.proj.transform(point, unmined.dataProjection, unmined.viewProjection);
+    }
+
+    const routeFeatures = routes.map(function (route) {
+        const feature = new ol.Feature({
+            geometry: new ol.geom.LineString(route.points.map(toViewCoord))
+        });
+        feature.set('maritimeRoute', true);
+        feature.set('routeName', route.name);
+        feature.set('origin', route.origin);
+        feature.set('destination', route.destination);
+        feature.set('terminal', route.terminal);
+        return feature;
+    });
+
+    const maritimeSource = new ol.source.Vector({ features: routeFeatures });
+
+    function maritimeStyle(feature) {
+        const hovered = !!feature.get('isHovered');
+        return [
+            new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: hovered ? 'rgba(5,40,75,0.82)' : 'rgba(5,34,66,0.68)',
+                    width: hovered ? 3.6 : 2.8,
+                    lineDash: [7, 6],
+                    lineCap: 'round',
+                    lineJoin: 'round'
+                })
+            }),
+            new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: hovered ? 'rgba(105,205,255,1)' : 'rgba(71,166,235,0.94)',
+                    width: hovered ? 2.2 : 1.5,
+                    lineDash: [7, 6],
+                    lineCap: 'round',
+                    lineJoin: 'round'
+                })
+            })
+        ];
+    }
+
+    const maritimeLayer = new ol.layer.Vector({
+        source: maritimeSource,
+        visible: false,
+        zIndex: 900000,
+        style: maritimeStyle
+    });
+    maritimeLayer.set('skyPixelMaritimeLayer', true);
+    unmined.olMap.addLayer(maritimeLayer);
+
+    const popupElement = document.createElement('div');
+    popupElement.className = 'sky-pixel-maritime-popup';
+    popupElement.hidden = true;
+    document.body.appendChild(popupElement);
+
+    const popup = new ol.Overlay({
+        element: popupElement,
+        positioning: 'bottom-center',
+        offset: [0, -10],
+        stopEvent: false
+    });
+    unmined.olMap.addOverlay(popup);
+
+    const toggle = document.getElementById('skyPixelMaritimeRoutesToggle');
+    const panel = document.getElementById('skyPixelMaritimeRoutesPanel');
+
+    function setVisible(visible) {
+        maritimeLayer.setVisible(visible);
+        if (toggle) {
+            toggle.classList.toggle('is-active', visible);
+            toggle.setAttribute('aria-pressed', visible ? 'true' : 'false');
+        }
+        if (panel) panel.hidden = !visible;
+        if (!visible) {
+            popupElement.hidden = true;
+            popup.setPosition(undefined);
+            routeFeatures.forEach(function (feature) { feature.set('isHovered', false); });
+            maritimeLayer.changed();
+        }
+    }
+
+    if (toggle) {
+        toggle.addEventListener('click', function () {
+            setVisible(!maritimeLayer.getVisible());
+        });
+    }
+
+    let hoveredFeature = null;
+    unmined.olMap.on('pointermove', function (event) {
+        if (!maritimeLayer.getVisible() || event.dragging) return;
+        const found = unmined.olMap.forEachFeatureAtPixel(event.pixel, function (feature, layer) {
+            return layer === maritimeLayer ? feature : null;
+        }, { hitTolerance: 5 });
+
+        if (hoveredFeature !== found) {
+            if (hoveredFeature) hoveredFeature.set('isHovered', false);
+            hoveredFeature = found || null;
+            if (hoveredFeature) hoveredFeature.set('isHovered', true);
+            maritimeLayer.changed();
+        }
+        const target = unmined.olMap.getTargetElement();
+        if (target) target.style.cursor = found ? 'pointer' : '';
+    });
+
+    unmined.olMap.on('singleclick', function (event) {
+        if (!maritimeLayer.getVisible()) return;
+        const feature = unmined.olMap.forEachFeatureAtPixel(event.pixel, function (candidate, layer) {
+            return layer === maritimeLayer ? candidate : null;
+        }, { hitTolerance: 7 });
+
+        if (!feature) {
+            popupElement.hidden = true;
+            popup.setPosition(undefined);
+            return;
+        }
+
+        popupElement.innerHTML =
+            '<strong>' + feature.get('routeName') + '</strong>' +
+            '<div><span>Origin:</span> ' + feature.get('origin') + '</div>' +
+            '<div><span>Destination:</span> ' + feature.get('destination') + '</div>' +
+            '<div><span>Terminal connection:</span> ' + feature.get('terminal') + '</div>' +
+            '<div><span>Type:</span> Maritime route</div>' +
+            '<div><span>Status:</span> Operational</div>';
+        popupElement.hidden = false;
+        popup.setPosition(event.coordinate);
+    });
+
+    window.skyPixelMaritimeRoutesLayer = maritimeLayer;
+    window.skyPixelSetMaritimeRoutesVisible = setVisible;
 })();
 </script>
 
