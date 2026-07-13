@@ -1,0 +1,59 @@
+SKY PIXEL OPENLAYERS LIVE WEATHER HEAT MAP
+===========================================
+
+IMPORTANT
+---------
+This package REPLACES the earlier Leaflet version. Do not load both versions.
+
+FILES TO UPLOAD
+---------------
+1. sky-pixel-weather-openlayers.js
+2. sky-pixel-weather-openlayers.css
+
+Upload both files into the same folder as index.html.
+
+INDEX.HTML CHANGE
+-----------------
+At the very bottom of index.html, immediately before </body>, add:
+
+<link rel="stylesheet" href="sky-pixel-weather-openlayers.css">
+<script src="sky-pixel-weather-openlayers.js"></script>
+
+The ending should look like:
+
+</script>
+
+<link rel="stylesheet" href="sky-pixel-weather-openlayers.css">
+<script src="sky-pixel-weather-openlayers.js"></script>
+
+</body>
+</html>
+
+REMOVE THE OLD TEST VERSION
+---------------------------
+Remove these old lines if you previously added them:
+
+<link rel="stylesheet" href="sky-pixel-heatmap.css">
+<script src="SkyPixel-HeatMap.js"></script>
+
+TESTING
+-------
+1. Save index.html.
+2. Open the test map through a local web server or GitHub Pages.
+3. Hard refresh using Ctrl + Shift + R.
+4. A "Live Weather Heat Map" panel should appear at the upper-right.
+5. Turn on "Show heat map."
+6. Move the mouse over the map to see estimated weather anywhere.
+
+If the temperatures appear vertically mirrored, change:
+Map orientation → Flip north/south
+
+NOTES
+-----
+- This version is native OpenLayers and waits automatically for unmined.olMap.
+- It refreshes Open-Meteo data every 20 minutes.
+- It includes Temperature and Feels Like modes.
+- It includes opacity, labels, a color legend, hover readings, and manual refresh.
+- The temperature surface is interpolated between Sky Pixel weather anchors.
+- Mountain/desert climate-control anchors are included.
+- Open-Meteo attribution is displayed in the panel.
