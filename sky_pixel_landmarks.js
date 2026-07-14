@@ -244,7 +244,7 @@ window.SkyPixelLandmarkMarkers = {
     },
     {
       x: -3753.5, z: -6033.5, y: 312.0,
-      category: 'landmark', popupTitle: "Blackfall", popupType: "Mountain Peak",
+      category: 'landmark', popupTitle: "Mount Blackfall", popupType: "Mountain Peak",
       popupDescription: "Explore Mount Blackfall in the Sky Pixel Minecraft world.",
       image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
       text: "Mount Blackfall", textColor: "#ffffff",

@@ -1,0 +1,42 @@
+/* Sky Pixel Road Highlight overlay toggle */
+
+.sky-pixel-road-overlay-toggle {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 215, 80, 0.46);
+    border-radius: 10px;
+    padding: 9px 11px;
+    background: rgba(23, 25, 32, 0.78);
+    color: #f8f3df;
+    font: inherit;
+    cursor: pointer;
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease,
+        opacity 160ms ease;
+}
+
+.sky-pixel-road-overlay-toggle:hover {
+    border-color: rgba(255, 225, 120, 0.8);
+    background: rgba(42, 38, 27, 0.92);
+}
+
+.sky-pixel-road-overlay-toggle.is-active {
+    border-color: rgba(255, 229, 125, 0.96);
+    background: rgba(111, 79, 14, 0.9);
+    box-shadow: inset 0 0 10px rgba(255, 221, 108, 0.1);
+}
+
+.sky-pixel-road-overlay-toggle.is-loading {
+    opacity: 0.72;
+    cursor: wait;
+}
+
+.sky-pixel-road-overlay-floating {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 20000;
+    width: auto;
+}
