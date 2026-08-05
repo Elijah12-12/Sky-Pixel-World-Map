@@ -486,6 +486,37 @@
 <script type="text/javascript" src="sky-pixel-ai-ui.js?v=2.7.0"></script>
 <script type="text/javascript" src="sky-pixel-ai-voice.js?v=2.5.1"></script>
 
+<script type="text/javascript">
+/*
+  Keep panel "Explore with AI" links separate from Atlas AI.
+  Atlas may use other AI controls, but these two links always open
+  Google AI Mode in a new tab with the location/country prompt
+  already assigned by sky-pixel-main.js.
+*/
+(function () {
+    function protectGoogleAiModeLink(linkId) {
+        const link = document.getElementById(linkId);
+        if (!link) return;
+
+        link.addEventListener('click', function (event) {
+            const googleAiUrl = link.href;
+
+            // Prevent later Atlas handlers from taking over this specific button.
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+
+            if (googleAiUrl && googleAiUrl !== '#' && googleAiUrl !== window.location.href + '#') {
+                window.open(googleAiUrl, '_blank', 'noopener,noreferrer');
+            }
+        }, true);
+    }
+
+    protectGoogleAiModeLink('skyPixelAiModeLink');
+    protectGoogleAiModeLink('skyPixelCountryAiModeLink');
+})();
+</script>
+
 </body>
 
 </html>
