@@ -186,6 +186,15 @@
     else openToolsDrawer();
   }
 
+  function syncMobileViewportHeight() {
+    const viewport = global.visualViewport;
+    const height = viewport?.height || global.innerHeight;
+    document.documentElement.style.setProperty('--atlas-mobile-vh', `${height}px`);
+    if (state.open && global.innerWidth <= 720) {
+      els.messages?.scrollTo?.({ top: els.messages.scrollHeight, behavior: 'smooth' });
+    }
+  }
+
   function setOpen(open) {
     state.open = Boolean(open);
     if (state.open) closeToolsDrawer();
@@ -194,7 +203,10 @@
     els.launcher.setAttribute('aria-expanded', String(state.open));
     els.sidebar.setAttribute('aria-hidden', String(!state.open));
     document.body.classList.toggle('atlas-open', state.open);
-    if (state.open) setTimeout(() => els.input.focus(), 60);
+    if (state.open) {
+      syncMobileViewportHeight();
+      setTimeout(() => els.input.focus(), 80);
+    }
   }
 
   function openHistory(open) {
@@ -292,6 +304,10 @@
       event.stopImmediatePropagation();
       closeToolsDrawer();
     }, true);
+
+    global.visualViewport?.addEventListener('resize', syncMobileViewportHeight);
+    global.addEventListener('orientationchange', () => setTimeout(syncMobileViewportHeight, 120));
+    syncMobileViewportHeight();
 
     document.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape') return;

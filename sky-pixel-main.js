@@ -180,6 +180,14 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
 
             updateSkyPixelSearchFocusMode();
         }
+
+        if (searchButton) {
+            searchButton.addEventListener('click', function () {
+                if (window.innerWidth <= 720) {
+                    setTimeout(function () { searchInput?.blur(); }, 80);
+                }
+            });
+        }
         const measureToggle = document.getElementById('skyPixelMeasureToggle');
         const measureClear = document.getElementById('skyPixelMeasureClear');
         const measureReadout = document.getElementById('skyPixelMeasureReadout');
