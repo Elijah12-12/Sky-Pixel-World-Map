@@ -141,6 +141,45 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         const searchButton = document.getElementById('skyPixelSearchButton');
         const searchList = document.getElementById('skyPixelSearchList');
         const searchMessage = document.getElementById('skyPixelSearchMessage');
+
+        // Expand the search bar while the user is actively searching.
+        // AI Atlas and Sky Pixel Tools temporarily hide so the toolbar stays centered.
+        const skyPixelSearchRoot = document.querySelector('.sky-pixel-search');
+        const skyPixelSearchBox = document.querySelector('.sky-pixel-search-box');
+        let skyPixelSearchBlurTimer = null;
+
+        function updateSkyPixelSearchFocusMode() {
+            if (!skyPixelSearchRoot || !searchInput) return;
+            const focused = document.activeElement === searchInput;
+            const hasText = Boolean(searchInput.value.trim());
+            skyPixelSearchRoot.classList.toggle('is-search-focused', focused || hasText);
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('focus', function () {
+                clearTimeout(skyPixelSearchBlurTimer);
+                updateSkyPixelSearchFocusMode();
+            });
+
+            searchInput.addEventListener('input', updateSkyPixelSearchFocusMode);
+
+            searchInput.addEventListener('blur', function () {
+                clearTimeout(skyPixelSearchBlurTimer);
+                skyPixelSearchBlurTimer = setTimeout(updateSkyPixelSearchFocusMode, 120);
+            });
+
+            searchInput.addEventListener('search', updateSkyPixelSearchFocusMode);
+
+            searchInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    searchInput.value = '';
+                    searchInput.blur();
+                    updateSkyPixelSearchFocusMode();
+                }
+            });
+
+            updateSkyPixelSearchFocusMode();
+        }
         const measureToggle = document.getElementById('skyPixelMeasureToggle');
         const measureClear = document.getElementById('skyPixelMeasureClear');
         const measureReadout = document.getElementById('skyPixelMeasureReadout');

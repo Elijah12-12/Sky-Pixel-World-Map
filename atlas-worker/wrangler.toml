@@ -1,0 +1,9 @@
+name = "sky-pixel-atlas-openrouter"
+main = "src/index.js"
+compatibility_date = "2026-08-04"
+workers_dev = true
+preview_urls = false
+
+[vars]
+OPENROUTER_MODEL = "openrouter/free"
+SITE_URL = "https://elijah12-12.github.io/Sky-Pixel-World-Map/"
