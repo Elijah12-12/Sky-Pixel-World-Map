@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M8 29 19 19l11 10v22H8Z" fill="#f2d38a" stroke="#1c1c1c" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M4 29 19 15l15 14" fill="none" stroke="#1c1c1c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M34 25 45 15l11 10v26H34Z" fill="#d7a96b" stroke="#1c1c1c" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M30 25 45 11l15 14" fill="none" stroke="#1c1c1c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="15" y="37" width="8" height="14" rx="1" fill="#6b4a2f"/>
+    <rect x="42" y="35" width="7" height="16" rx="1" fill="#6b4a2f"/>
+    <rect x="10" y="31" width="7" height="7" rx="1" fill="#9ed8f7" stroke="#1c1c1c" stroke-width="2"/>
+    <rect x="38" y="28" width="7" height="7" rx="1" fill="#9ed8f7" stroke="#1c1c1c" stroke-width="2"/>
+    <path d="M5 52h54" stroke="#1c1c1c" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

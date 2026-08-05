@@ -952,5 +952,45 @@ window.SkyPixelLandmarkMarkers = {
       offsetX: 0, offsetY: 16,
       font: "bold 16px Calibri,sans-serif", labelMinZoom: 4.9
     },
+    {
+      x: -2817.5, z: -8306.5, y: 474,
+      category: 'landmark', popupTitle: "Mount Lillahoo", popupType: "Mountain",
+      popupDescription: "Explore Mount Lillahoo in the Sky Pixel Minecraft world.",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.23,
+      text: "Mount Lillahoo", textColor: "#d9d9d9",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: 16,
+      font: "bold 16px Calibri,sans-serif", labelMinZoom: 4.9
+    },
+    {
+      x: -1999.5, z: -8048.5, y: 461,
+      category: 'landmark', popupTitle: "Mount Tallulah", popupType: "Mountain",
+      popupDescription: "Explore Mount Tallulah in the Sky Pixel Minecraft world.",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.23,
+      text: "Mount Tallulah", textColor: "#d9d9d9",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: 16,
+      font: "bold 16px Calibri,sans-serif", labelMinZoom: 4.9
+    },
+    {
+      x: 3937.5, z: 9385.5, y: -174,
+      category: 'landmark', popupTitle: "Jagger Canyon Provincial Park", popupType: "Provincial Park",
+      popupDescription: "Explore Jagger Canyon Provincial Park in the Sky Pixel Minecraft world.",
+      image: "icon-park.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      text: "Jagger Canyon Provincial Park", textColor: "#9be27d",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: 16,
+      font: "bold 18px Calibri,sans-serif", labelMinZoom: 4.55
+    },
+    {
+      x: 3546.5, z: 9179.5, y: 48,
+      category: 'landmark', popupTitle: "Moen Peak", popupType: "Mountain",
+      popupDescription: "Explore Moen Peak in the Sky Pixel Minecraft world.",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.23,
+      text: "Moen Peak", textColor: "#d9d9d9",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: 16,
+      font: "bold 16px Calibri,sans-serif", labelMinZoom: 4.9
+    },
   ]
 };
