@@ -10,3 +10,5 @@ Install:
 Replace the map files with the files in this package, especially index.html, sky-pixel-ai-voice.js, sky-pixel-ai-ui.js, and sky-pixel-ai.css.
 No Cloudflare Worker redeploy is required.
 After upload, use Ctrl+F5.
+
+updated
