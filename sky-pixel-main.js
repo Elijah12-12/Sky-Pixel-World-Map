@@ -4616,6 +4616,8 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             "Cayenne Canyon Provincial Park": "https://preview.redd.it/scorching-sun-v0-ynikyl0r3qgc1.jpg?width=1080&crop=smart&auto=webp&s=7df3024b3fa8466c8fff3548df9e6f4cf6c51f43",
             "South Mount Ellie": "https://preview.redd.it/extreme-landscapes-v0-l5z8h9frillb1.jpg?width=1080&crop=smart&auto=webp&s=ed9391ac8500fc046b458a4b7f5511342516be92",
             "North Serra-Dor Mountains": "https://i.redd.it/l8jirbczm38h1.png",
+            "Jagger Canyon Provincial Park": "https://preview.redd.it/this-is-a-bit-different-from-what-i-usually-build-v0-reo0g7hlhtgh1.jpg?width=1080&crop=smart&auto=webp&s=5b3cc04bbd42989f011bfa8064c3e29fa147352c",
+            "Moen Peak": "https://i.redd.it/t3j1q94ze0gh1.jpeg",
         };
 
         function getSkyPixelManualHeroImage(marker) {
