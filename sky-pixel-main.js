@@ -4719,13 +4719,21 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             "Orlaith": { skyPixelLabel: "Orlaith", label: "Edinburgh, Scotland", latitude: 55.9533, longitude: -3.1883 },
             "Lenore": { skyPixelLabel: "Lenore", label: "Wilmington, NC", latitude: 34.2104, longitude: -77.8868 },
             "Morven": { skyPixelLabel: "Morven", label: "Winslow, AZ", latitude: 35.0242, longitude: -110.6974 },
-            "Octavian": { skyPixelLabel: "Octavian", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 }
+            "Octavian": { skyPixelLabel: "Octavian", label: "Sacramento, CA", latitude: 38.5816, longitude: -121.4944 },
+            "Milu": { skyPixelLabel: "Milu", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
+            "Nyra": { skyPixelLabel: "Nyra", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
+            "Barkha": { skyPixelLabel: "Barkha", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
+            "Mehula": { skyPixelLabel: "Mehula", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 }
         };
 
         // Sky Pixel local-time regions.
         // Weather can still use the real-world climate reference city, but the local time panel
         // can follow the Sky Pixel world's east/west position instead.
         const skyPixelLocalTimeZoneOverrides = {
+            "Nyra": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
+            "Barkha": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
+            "Mehula": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
+            "Milu": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
             "La Morley": { timeZone: "America/Vancouver", abbreviation: "PT" },
             "Bourbon": { timeZone: "America/Vancouver", abbreviation: "PT" },
             "Gumbo": { timeZone: "America/Vancouver", abbreviation: "PT" },
@@ -5099,9 +5107,46 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             if (countryName) panelTypeParts.push(countryName);
             panelType.textContent = panelTypeParts.join(' / ');
             panelTitle.textContent = title;
+            if (marker.panelSecondaryTitle) {
+                const panelSecondaryTitle = document.createElement('span');
+                panelSecondaryTitle.textContent = marker.panelSecondaryTitle;
+                panelSecondaryTitle.style.display = 'block';
+                panelSecondaryTitle.style.marginTop = '4px';
+                panelSecondaryTitle.style.fontSize = '0.58em';
+                panelSecondaryTitle.style.fontWeight = '600';
+                panelSecondaryTitle.style.lineHeight = '1.2';
+                panelSecondaryTitle.style.opacity = '0.82';
+                panelTitle.appendChild(panelSecondaryTitle);
+            }
             const cleanName = cleanSkyPixelPlaceName(marker);
             stampSkyPixelPassport(marker);
             panelDescription.textContent = marker.popupDescription || `Explore ${cleanName} in the Sky Pixel Minecraft world.`;
+            const previousMetroArea = document.getElementById('skyPixelPanelMetroArea');
+            if (previousMetroArea) previousMetroArea.remove();
+            if (marker.metropolitanAreaCities || marker.metropolitanCore) {
+                const metroArea = document.createElement('div');
+                metroArea.id = 'skyPixelPanelMetroArea';
+                metroArea.style.marginTop = '14px';
+                metroArea.style.padding = '12px 14px';
+                metroArea.style.border = '1px solid rgba(255,255,255,0.14)';
+                metroArea.style.borderRadius = '10px';
+                metroArea.style.background = 'rgba(255,255,255,0.055)';
+
+                const metroHeading = document.createElement('strong');
+                metroHeading.style.display = 'block';
+                metroHeading.style.marginBottom = '5px';
+                metroHeading.textContent = marker.metropolitanAreaCities
+                    ? 'Milu Metropolitan Area'
+                    : 'Metropolitan Area';
+                metroArea.appendChild(metroHeading);
+
+                const metroDetails = document.createElement('span');
+                metroDetails.textContent = marker.metropolitanAreaCities
+                    ? marker.metropolitanAreaCities.join(' • ')
+                    : `Part of the ${marker.metropolitanCore} Metropolitan Area`;
+                metroArea.appendChild(metroDetails);
+                panelDescription.insertAdjacentElement('afterend', metroArea);
+            }
             panelCoords.textContent = `${marker.x}, ${marker.z}`;
             panelMarkerType.textContent = marker.popupType || (marker.image && marker.image.includes('star') ? 'Major city' : 'City / place');
             renderSkyPixelRealWeather(marker);
@@ -5309,7 +5354,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         // No colored glow: labels keep a clean black outline for readability.
         const skyPixelMajorCityNames = new Set([
             'Octavian', 'Harlow', 'Prunelle', 'La Morley', 'Quantum',
-            'Xhaelis', 'Razalia', 'Elowah', 'Griffin', 'Oxland'
+            'Xhaelis', 'Razalia', 'Elowah', 'Griffin', 'Oxland', 'Milu'
         ]);
 
         const skyPixelRegionalCityNames = new Set([
@@ -5324,6 +5369,8 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         const skyPixelLabelGlobalScale = 1.16;
         const skyPixelFeaturedCityScale = 1.42;
         const skyPixelCapitalCityScale = 1.56;
+        // Major non-capitals that should carry the same label prominence as Octavian.
+        const skyPixelOctavianSizeCityNames = new Set(['Milu']);
         const skyPixelMediumCityScale = 1.28;
         const skyPixelValanceCityScale = 1.16;
         const skyPixelRosewoodCityScale = 1.22;
@@ -5341,7 +5388,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             'La Morley', 'Quantum', 'Octavian', 'Harlow', 'L\'Eulàlia', 'Prunelle'
         ]);
         const skyPixelFarZoomCityNames = new Set([
-            'Octavian', 'Harlow', 'La Morley', 'Quantum', 'L\'Eulàlia', 'Prunelle'
+            'Octavian', 'Harlow', 'La Morley', 'Quantum', 'L\'Eulàlia', 'Prunelle', 'Milu'
         ]);
 
         function scaleSkyPixelFont(font, scale) {
@@ -5355,6 +5402,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         function getSkyPixelLabelScale(marker) {
             const name = getSkyPixelBaseMarkerName(marker);
             if (skyPixelCapitalCityNames.has(name)) return skyPixelCapitalCityScale;
+            if (skyPixelOctavianSizeCityNames.has(name)) return skyPixelCapitalCityScale;
             if (skyPixelFeaturedCityNames.has(name)) return skyPixelFeaturedCityScale;
             if (skyPixelMediumCityNames.has(name)) return skyPixelMediumCityScale;
             if (skyPixelRosewoodCityNames.has(name)) return skyPixelRosewoodCityScale;
@@ -5580,6 +5628,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             // Night-city flare sizes are intentionally large and soft, like a satellite city-light bloom.
             // The flare remains behind the label/icon, and scales by city importance.
             if (skyPixelCapitalCityNames.has(name)) return 2.55;
+            if (skyPixelOctavianSizeCityNames.has(name)) return 2.55;
             if (skyPixelFeaturedCityNames.has(name)) return 2.25;
             if (skyPixelMajorCityNames.has(name)) return 2.05;
             if (skyPixelAdalineCityNames.has(name) || skyPixelRosewoodCityNames.has(name) || skyPixelValanceCityNames.has(name)) return 1.75;
@@ -5592,6 +5641,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
 
             // Bigger flares need slightly softer opacity so they blend into the darkened map.
             if (skyPixelCapitalCityNames.has(name)) return 0.78;
+            if (skyPixelOctavianSizeCityNames.has(name)) return 0.78;
             if (skyPixelFeaturedCityNames.has(name) || skyPixelMajorCityNames.has(name)) return 0.70;
             if (skyPixelRegionalCityNames.has(name) || shouldUseSmallSkyPixelCityIcon(marker)) return 0.58;
             return 0.48;
@@ -5679,6 +5729,24 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
                         ? new ol.style.Fill({ color: marker.textBackgroundColor })
                         : null
                 }));
+
+                if (marker.secondaryLabel) {
+                    styles.push(new ol.style.Style({
+                        text: new ol.style.Text({
+                            text: marker.secondaryLabel,
+                            font: scaleSkyPixelFont(marker.secondaryLabelFont || '600 14px Arial, sans-serif', getSkyPixelLabelScale(marker)),
+                            offsetX: marker.offsetX || 0,
+                            offsetY: getSkyPixelLabelOffsetY(marker) + (marker.secondaryLabelOffsetY || 20),
+                            fill: new ol.style.Fill({ color: marker.secondaryLabelColor || marker.textColor || rule.color || '#e5e7eb' }),
+                            stroke: new ol.style.Stroke({
+                                color: marker.textStrokeColor || rule.stroke || '#000000',
+                                width: Math.max(2, (marker.textStrokeWidth || rule.strokeWidth || 3) - 1)
+                            }),
+                            padding: marker.textPadding || [2, 5, 2, 5]
+                        }),
+                        zIndex: 10
+                    }));
+                }
             }
 
             styles.push(style);

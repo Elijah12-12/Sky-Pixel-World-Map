@@ -1,0 +1,130 @@
+:root {
+  --sp-a18-accent: #ffb020;
+  --sp-a18-fill: rgba(255, 176, 32, 0.16);
+  --sp-a18-outline: rgba(255, 196, 82, 0.96);
+  --sp-a18-label: #fff4d6;
+  --sp-a18-panel: rgba(12, 17, 27, 0.96);
+  --sp-a18-border: rgba(255, 255, 255, 0.16);
+}
+
+.sp-a18-toggle {
+  position: fixed;
+  top: 82px;
+  right: 18px;
+  z-index: 2200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 13px;
+  color: #fff;
+  background: var(--sp-a18-panel);
+  border: 1px solid var(--sp-a18-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.34);
+  font: 700 14px/1.2 Arial, sans-serif;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  user-select: none;
+}
+
+.sp-a18-toggle input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--sp-a18-accent);
+  cursor: pointer;
+}
+
+.sp-a18-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 7, 14, 0.68);
+  backdrop-filter: blur(6px);
+}
+
+.sp-a18-backdrop[hidden] {
+  display: none;
+}
+
+.sp-a18-dialog {
+  width: min(470px, 100%);
+  padding: 25px;
+  color: #f8fafc;
+  background: var(--sp-a18-panel);
+  border: 1px solid var(--sp-a18-border);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+  font-family: Arial, sans-serif;
+}
+
+.sp-a18-kicker {
+  margin: 0 0 8px;
+  color: var(--sp-a18-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.sp-a18-dialog h2 {
+  margin: 0 0 10px;
+  font-size: 25px;
+  line-height: 1.15;
+}
+
+.sp-a18-dialog p {
+  margin: 0;
+  color: #d7dde8;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.sp-a18-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.sp-a18-button {
+  padding: 10px 14px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--sp-a18-border);
+  border-radius: 10px;
+  font: 700 14px Arial, sans-serif;
+  cursor: pointer;
+}
+
+.sp-a18-button--primary {
+  color: #1a1100;
+  background: var(--sp-a18-accent);
+  border-color: var(--sp-a18-accent);
+}
+
+.sp-a18-button:hover,
+.sp-a18-button:focus-visible {
+  filter: brightness(1.1);
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .sp-a18-toggle {
+    top: auto;
+    right: 12px;
+    bottom: 18px;
+  }
+
+  .sp-a18-actions {
+    flex-direction: column-reverse;
+  }
+
+  .sp-a18-button {
+    width: 100%;
+  }
+}

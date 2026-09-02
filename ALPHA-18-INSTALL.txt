@@ -1,0 +1,17 @@
+SKY PIXEL ALPHA 18 OVERLAY
+
+1. Upload these two files beside your other map files:
+   - sky-pixel-alpha-18.css
+   - sky-pixel-alpha-18.js
+
+2. Add this line with your other stylesheet links:
+   <link rel="stylesheet" href="sky-pixel-alpha-18.css">
+
+3. Add this line after the uNmINeD/OpenLayers map scripts and Sky Pixel main script:
+   <script src="sky-pixel-alpha-18.js"></script>
+
+4. To add or edit highlighted regions later, open sky-pixel-alpha-18.js and
+   edit the ALPHA_18_AREAS array near the top of the file.
+
+The overlay starts hidden. The opening announcement lets visitors show it,
+and the Alpha 18 Areas toggle can turn it on or off at any time.

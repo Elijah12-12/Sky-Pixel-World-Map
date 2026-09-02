@@ -3,6 +3,235 @@ window.SkyPixelLandmarkMarkers = {
   isEnabled: true,
   markers: [
     {
+      x: -18758, z: -24839, category: 'mountain_peak', country: "Jesla Country",
+      popupTitle: "Mount Finisterre", popupType: "Mountain Peak",
+      popupDescription: "Mount Finisterre, locally known as Mount Sít'ellie, is a mountain in northwestern Jesla Country.",
+      text: "Mount Finisterre", secondaryLabel: "(Mount Sít'ellie)", panelSecondaryTitle: "(Mount Sít'ellie)",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", secondaryLabelFont: "italic 13px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 18, labelMinZoom: 5.1
+    },
+    {
+      x: -24253, z: -22316, category: 'mountain_peak', country: "Jesla Country",
+      popupTitle: "Mount Aporia", popupType: "Mountain Peak",
+      popupDescription: "Mount Aporia, locally known as Eli Sít' Tuxóodzi, is a mountain in northwestern Jesla Country.",
+      text: "Mount Aporia", secondaryLabel: "(Eli Sít' Tuxóodzi)", panelSecondaryTitle: "(Eli Sít' Tuxóodzi)",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", secondaryLabelFont: "italic 13px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 18, labelMinZoom: 5.1
+    },
+    {
+      x: -20532, z: -21716, category: 'mountain_peak', country: "Jesla Country",
+      popupTitle: "Mount Taquka", popupType: "Mountain Peak",
+      popupDescription: "Mount Taquka is a mountain in northwestern Jesla Country.",
+      text: "Mount Taquka", image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, labelMinZoom: 5.1
+    },
+    {
+      x: -20443, z: -20170, category: 'water_feature', country: "Jesla Country",
+      popupTitle: "Sikuvik Fjord", popupType: "Fjord / Inlet",
+      popupDescription: "Sikuvik Fjord is a fjord in northwestern Jesla Country.",
+      text: "Sikuvik Fjord", image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, labelMinZoom: 4.05
+    },
+    {
+      x: -21570, z: -25345, category: 'water_feature', country: "Jesla Country",
+      popupTitle: "Sikuaq Fjord", popupType: "Fjord / Inlet",
+      popupDescription: "Sikuaq Fjord is a fjord in northwestern Jesla Country.",
+      text: "Sikuaq Fjord", image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, labelMinZoom: 4.05
+    },
+    {
+      x: -17485, z: -17170, category: 'mountain_peak', country: "Jesla Country",
+      popupTitle: "Mount Kushdak", popupType: "Mountain Peak",
+      popupDescription: "Mount Kushdak is a mountain in northwestern Jesla Country.",
+      text: "Mount Kushdak", image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, labelMinZoom: 5.1
+    },
+    {
+      x: -4867, z: 27521, category: 'landmark',
+      popupTitle: "Kulo Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Kulo Peninsula in the Sky Pixel Minecraft world.",
+      text: "Kulo Peninsula", secondaryLabel: "কুলো উপদ্বীপ", panelSecondaryTitle: "কুলো উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -10487, z: 25699, category: 'mountain_range',
+      popupTitle: "North Bhavya Range", popupType: "Mountain Range",
+      popupDescription: "Explore North Bhavya Range in the Sky Pixel Minecraft world.",
+      text: "North Bhavya Range", secondaryLabel: "উত্তৰ ভব্য পৰ্বতমালা", panelSecondaryTitle: "উত্তৰ ভব্য পৰ্বতমালা",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.22,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 3.95
+    },
+    {
+      x: -8734, z: 27506, category: 'mountain_peak',
+      popupTitle: "Mount Japara", popupType: "Mountain Peak",
+      popupDescription: "Explore Mount Japara in the Sky Pixel Minecraft world.",
+      text: "Mount Japara", secondaryLabel: "জাপাৰা পৰ্বত", panelSecondaryTitle: "জাপাৰা পৰ্বত",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -8165, z: 27154, category: 'mountain_peak',
+      popupTitle: "Mount Nagakhalia", popupType: "Mountain Peak",
+      popupDescription: "Explore Mount Nagakhalia in the Sky Pixel Minecraft world.",
+      text: "Mount Nagakhalia", secondaryLabel: "নাগাখালিয়া পৰ্বত", panelSecondaryTitle: "নাগাখালিয়া পৰ্বত",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -7297, z: 28997, category: 'mountain_peak',
+      popupTitle: "Mount Barbari", popupType: "Mountain Peak",
+      popupDescription: "Explore Mount Barbari in the Sky Pixel Minecraft world.",
+      text: "Mount Barbari", secondaryLabel: "বৰবাৰী পৰ্বত", panelSecondaryTitle: "বৰবাৰী পৰ্বত",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -5632, z: 27098, category: 'landmark',
+      popupTitle: "Dibrugarh Island", popupType: "Island",
+      popupDescription: "Explore Dibrugarh Island in the Sky Pixel Minecraft world.",
+      text: "Dibrugarh Island", secondaryLabel: "ডিব্ৰুগড় দ্বীপ", panelSecondaryTitle: "ডিব্ৰুগড় দ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -4286, z: 28410, category: 'water_feature',
+      popupTitle: "Brahmaputra Bay", popupType: "Bay",
+      popupDescription: "Explore Brahmaputra Bay in the Sky Pixel Minecraft world.",
+      text: "Brahmaputra Bay", secondaryLabel: "ব্ৰহ্মপুত্ৰ উপসাগৰ", panelSecondaryTitle: "ব্ৰহ্মপুত্ৰ উপসাগৰ",
+      image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.05
+    },
+    {
+      x: -5446, z: 24257, category: 'landmark',
+      popupTitle: "Chakula Island", popupType: "Island",
+      popupDescription: "Explore Chakula Island in the Sky Pixel Minecraft world.",
+      text: "Chakula Island", secondaryLabel: "চাকুলা দ্বীপ", panelSecondaryTitle: "চাকুলা দ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -6474, z: 24390, category: 'landmark',
+      popupTitle: "Nawkata Island", popupType: "Island",
+      popupDescription: "Explore Nawkata Island in the Sky Pixel Minecraft world.",
+      text: "Nawkata Island", secondaryLabel: "নাওকাটা দ্বীপ", panelSecondaryTitle: "নাওকাটা দ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -6467, z: 25774, category: 'landmark',
+      popupTitle: "Lahowal Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Lahowal Peninsula in the Sky Pixel Minecraft world.",
+      text: "Lahowal Peninsula", secondaryLabel: "লাহোৱাল উপদ্বীপ", panelSecondaryTitle: "লাহোৱাল উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -8723, z: 30310, category: 'landmark',
+      popupTitle: "Bor Baruah Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Bor Baruah Peninsula in the Sky Pixel Minecraft world.",
+      text: "Bor Baruah Peninsula", secondaryLabel: "বৰ বৰুৱা উপদ্বীপ", panelSecondaryTitle: "বৰ বৰুৱা উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -10443, z: 30006, category: 'landmark',
+      popupTitle: "Laluka Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Laluka Peninsula in the Sky Pixel Minecraft world.",
+      text: "Laluka Peninsula", secondaryLabel: "লালুকা উপদ্বীপ", panelSecondaryTitle: "লালুকা উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -10934, z: 29321, category: 'landmark',
+      popupTitle: "Tingkhang Matikota Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Tingkhang Matikota Peninsula in the Sky Pixel Minecraft world.",
+      text: "Tingkhang Matikota Peninsula", secondaryLabel: "টিংখাং মাটিকটা উপদ্বীপ", panelSecondaryTitle: "টিংখাং মাটিকটা উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -11899, z: 26133, category: 'landmark',
+      popupTitle: "Ramya Pur Peninsula", popupType: "Peninsula",
+      popupDescription: "Explore Ramya Pur Peninsula in the Sky Pixel Minecraft world.",
+      text: "Ramya Pur Peninsula", secondaryLabel: "ৰম্যাপুৰ উপদ্বীপ", panelSecondaryTitle: "ৰম্যাপুৰ উপদ্বীপ",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -3860, z: 30047, category: 'water_feature',
+      popupTitle: "Khowang Bay", popupType: "Bay",
+      popupDescription: "Explore Khowang Bay in the Sky Pixel Minecraft world.",
+      text: "Khowang Bay", secondaryLabel: "খোৱাং উপসাগৰ", panelSecondaryTitle: "খোৱাং উপসাগৰ",
+      image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.05
+    },
+    {
+      x: -5071, z: 29463,
+      category: 'major_city', popupTitle: "Nyra, KV", popupType: "Major City",
+      popupDescription: "Nyra is a major city in Kavarr Country within the Sky Pixel Minecraft world.",
+      metropolitanCore: "Milu",
+      text: "Nyra, KV", secondaryLabel: "নাইরা, কে ভি", panelSecondaryTitle: "নাইরা, কে ভি",
+      textColor: "#ffffff", secondaryLabelColor: "#e5e7eb",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: -28, secondaryLabelOffsetY: 20,
+      labelMinZoom: 3.05
+    },
+    {
+      x: -5871, z: 28901,
+      category: 'major_city', popupTitle: "Barkha, KV", popupType: "Major City",
+      popupDescription: "Barkha is a major city in Kavarr Country within the Sky Pixel Minecraft world.",
+      metropolitanCore: "Milu",
+      text: "Barkha, KV", secondaryLabel: "বৰখা, কে ভি", panelSecondaryTitle: "বৰখা, কে ভি",
+      textColor: "#ffffff", secondaryLabelColor: "#e5e7eb",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: -28, secondaryLabelOffsetY: 20,
+      labelMinZoom: 3.05
+    },
+    {
+      x: -6067, z: 28479,
+      category: 'major_city', popupTitle: "Mehula, KV", popupType: "Major City",
+      popupDescription: "Mehula is a major city in Kavarr Country within the Sky Pixel Minecraft world.",
+      metropolitanCore: "Milu",
+      text: "Mehula, KV", secondaryLabel: "মেহুলা, কে ভি", panelSecondaryTitle: "মেহুলা, কে ভি",
+      textColor: "#ffffff", secondaryLabelColor: "#e5e7eb",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: -28, secondaryLabelOffsetY: 20,
+      labelMinZoom: 3.05
+    },
+    {
+      x: -5786, z: 30094,
+      category: 'major_city', popupTitle: "Milu, KV", popupType: "Major City",
+      popupDescription: "Milu is a major city in the Sky Pixel Minecraft world, inspired by the dense urban character and subtropical landscape of northeastern Assam.",
+      metropolitanAreaCities: ["Nyra", "Barkha", "Mehula"],
+      text: "Milu, KV", secondaryLabel: "মিলু, কে ভি", panelSecondaryTitle: "মিলু, কে ভি",
+      textColor: "#ffffff", secondaryLabelColor: "#e5e7eb",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: -28, secondaryLabelOffsetY: 22,
+      labelMinZoom: 2.05
+    },
+    {
       x: -4991.5, z: -8644.5, y: -27.0,
       category: 'landmark', popupTitle: "Aeta Provincial Park", popupType: "Provincial Park",
       popupDescription: "Explore Aeta Provincial Park in the Sky Pixel Minecraft world.",
