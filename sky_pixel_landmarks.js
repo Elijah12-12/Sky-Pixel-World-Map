@@ -232,6 +232,230 @@ window.SkyPixelLandmarkMarkers = {
       labelMinZoom: 2.05
     },
     {
+      x: -3966.5, z: 32594.5, y: 60,
+      category: 'major_city', popupTitle: "Abichu, KV", popupType: "Major City",
+      popupDescription: "Abichu is the second-largest city in Kavarr Country, located across the bay from Milu on the Tamku Coastal Flats. The humid monsoonal city is a major center for maritime trade, jungle logging, clay and rock supply, and concrete production beneath the Tibetan Range.",
+      text: "Abichu, KV", secondaryLabel: "अबिचु, केभी", panelSecondaryTitle: "अबिचु, केभी",
+      textColor: "#ffffff", secondaryLabelColor: "#e5e7eb",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4,
+      offsetX: 0, offsetY: -28, secondaryLabelOffsetY: 22,
+      labelMinZoom: 2.05
+    },
+    {
+      x: -3740.5, z: 36031.5, y: 1024, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Tinsukia", popupType: "Mountain Peak",
+      popupDescription: "Mount Tinsukia is a high peak of the western Tibetan Range south of Abichu.",
+      text: "Mount Tinsukia", secondaryLabel: "तिनसुकिया पर्वत", panelSecondaryTitle: "तिनसुकिया पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -5558.5, z: 35663.5, y: 1191, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Kharka", popupType: "Mountain Peak",
+      popupDescription: "Mount Kharka is the highest major peak near Abichu and a defining summit of the Tibetan Range.",
+      text: "Mount Kharka", secondaryLabel: "खर्का पर्वत", panelSecondaryTitle: "खर्का पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -3432.5, z: 36092.5, y: 968, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Kharka South Peak", popupType: "Mountain Peak",
+      popupDescription: "Mount Kharka South Peak is the southern summit associated with the Mount Kharka massif.",
+      text: "Mount Kharka South Peak", secondaryLabel: "खर्का पर्वत दक्षिणी शिखर", panelSecondaryTitle: "खर्का पर्वत दक्षिणी शिखर",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -1760.5, z: 35981.5, y: 863, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Tilche", popupType: "Mountain Peak",
+      popupDescription: "Mount Tilche is a high mountain of the Tibetan Range south of the Tamku Coastal Flats.",
+      text: "Mount Tilche", secondaryLabel: "तिल्चे पर्वत", panelSecondaryTitle: "तिल्चे पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: 4242.5, z: 34406.5, y: 1032, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Bhratang", popupType: "Mountain Peak",
+      popupDescription: "Mount Bhratang is a major summit of the eastern Tibetan Range in Aethia.",
+      text: "Mount Bhratang", secondaryLabel: "भ्राताङ पर्वत", panelSecondaryTitle: "भ्राताङ पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: 4735.5, z: 33717.5, y: 997, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Manang", popupType: "Mountain Peak",
+      popupDescription: "Mount Manang is a prominent mountain of the eastern Tibetan Range overlooking Aethia.",
+      text: "Mount Manang", secondaryLabel: "मनाङ पर्वत", panelSecondaryTitle: "मनाङ पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: 5723.5, z: 33153.5, y: 1026, category: 'mountain_peak', country: "Kavarr Country",
+      popupTitle: "Mount Lwang Ghalel", popupType: "Mountain Peak",
+      popupDescription: "Mount Lwang Ghalel is a high summit along the eastern side of the Tibetan Range.",
+      text: "Mount Lwang Ghalel", secondaryLabel: "ल्वाङ घलेल पर्वत", panelSecondaryTitle: "ल्वाङ घलेल पर्वत",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.24,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 5.1
+    },
+    {
+      x: -6164.5, z: 32445.5, y: 66, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Tamku Flats West", popupType: "Coastal Flats",
+      popupDescription: "Tamku Flats West forms the western portion of the humid Tamku Coastal Flats surrounding Abichu.",
+      text: "Tamku Flats West", secondaryLabel: "पश्चिमी तम्कु समथरभूमि", panelSecondaryTitle: "पश्चिमी तम्कु समथरभूमि",
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: 2345.5, z: 32318.5, y: 65, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Tamku Flats East", popupType: "Coastal Flats",
+      popupDescription: "Tamku Flats East forms the eastern portion of the Tamku Coastal Flats in Aethia.",
+      text: "Tamku Flats East", secondaryLabel: "पूर्वी तम्कु समथरभूमि", panelSecondaryTitle: "पूर्वी तम्कु समथरभूमि",
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: 1686.5, z: 35896.5, y: 663, category: 'mountain_range', country: "Kavarr Country",
+      popupTitle: "Shikha Complex", popupType: "Mountain Complex",
+      popupDescription: "Shikha Complex is an interconnected mountain complex within the Tibetan Range.",
+      text: "Shikha Complex", secondaryLabel: "शिखा पर्वतीय समूह", panelSecondaryTitle: "शिखा पर्वतीय समूह",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.22,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 3.95
+    },
+    {
+      x: 7363.5, z: 28929.5, y: 319, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Baskharka Plateau", popupType: "Plateau",
+      popupDescription: "Baskharka Plateau is an elevated plateau in eastern Aethia.",
+      text: "Baskharka Plateau", secondaryLabel: "बासखर्का पठार", panelSecondaryTitle: "बासखर्का पठार",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.2,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: 32.5, z: 36869.5, y: 403, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Surkhang Plateau", popupType: "Plateau",
+      popupDescription: "Surkhang Plateau is a broad highland plateau within the central Tibetan Range.",
+      text: "Surkhang Plateau", secondaryLabel: "सुरखाङ पठार", panelSecondaryTitle: "सुरखाङ पठार",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.2,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: -4951.5, z: 35879.5, y: 685, category: 'mountain_range', country: "Kavarr Country",
+      popupTitle: "West Tibetan Range", popupType: "Mountain Range",
+      popupDescription: "West Tibetan Range forms the western mountain wall south of Abichu and the Tamku Coastal Flats.",
+      text: "West Tibetan Range", secondaryLabel: "पश्चिमी तिब्बती पर्वतमाला", panelSecondaryTitle: "पश्चिमी तिब्बती पर्वतमाला",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.22,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 3.95
+    },
+    {
+      x: 6118.5, z: 32503.5, y: 533, category: 'mountain_range', country: "Kavarr Country",
+      popupTitle: "East Tibetan Range", popupType: "Mountain Range",
+      popupDescription: "East Tibetan Range forms the eastern section of Aethia's great mountain system.",
+      text: "East Tibetan Range", secondaryLabel: "पूर्वी तिब्बती पर्वतमाला", panelSecondaryTitle: "पूर्वी तिब्बती पर्वतमाला",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.22,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 3.95
+    },
+    {
+      x: -6584.5, z: 36722.5, y: 423, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Dhaulagiri Plateau", popupType: "Plateau",
+      popupDescription: "Dhaulagiri Plateau is a high plateau in the western Tibetan Range.",
+      text: "Dhaulagiri Plateau", secondaryLabel: "धौलागिरि पठार", panelSecondaryTitle: "धौलागिरि पठार",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.2,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: -4870.5, z: 34403.5, y: 453, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Gurja Khani Plateau", popupType: "Plateau",
+      popupDescription: "Gurja Khani Plateau is an elevated landform above the western Tamku Coastal Flats.",
+      text: "Gurja Khani Plateau", secondaryLabel: "गुर्जा खानी पठार", panelSecondaryTitle: "गुर्जा खानी पठार",
+      image: "icon-mountain.svg", imageAnchor: [0.5, 1], imageScale: 0.2,
+      labelFont: "italic 16px Calibri,sans-serif", textColor: "#ffffff", secondaryLabelColor: "#ffffff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.35
+    },
+    {
+      x: -2844.5, z: 32209.5, y: 63, category: 'water_feature', country: "Kavarr Country",
+      popupTitle: "Sundah Bay", popupType: "Bay",
+      popupDescription: "Sundah Bay is a coastal bay along the Tamku Coastal Flats near Abichu.",
+      text: "Sundah Bay", secondaryLabel: "सुन्दह खाडी", panelSecondaryTitle: "सुन्दह खाडी",
+      image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff", secondaryLabelColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.05
+    },
+    {
+      x: 1269.5, z: 30723.5, y: 82, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Sue Island", popupType: "Island",
+      popupDescription: "Sue Island is an island off the Aethian coast in southern Kavarr Country.",
+      text: "Sue Island", secondaryLabel: "सु टापु", panelSecondaryTitle: "सु टापु",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2", secondaryLabelColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: 8662.5, z: 30069.5, y: 78, category: 'park', country: "Kavarr Country",
+      popupTitle: "Resunga Provincial Park", popupType: "Provincial Park",
+      popupDescription: "Resunga Provincial Park protects a humid forested landscape in eastern Aethia.",
+      text: "Resunga Provincial Park", secondaryLabel: "रेसुङ्गा प्रादेशिक निकुञ्ज", panelSecondaryTitle: "रेसुङ्गा प्रादेशिक निकुञ्ज",
+      image: "icon-park.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 18px Calibri,sans-serif", textColor: "#9be27d", secondaryLabelColor: "#9be27d",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.55
+    },
+    {
+      x: -2605.5, z: 35939.5, y: 571, category: 'park', country: "Kavarr Country",
+      popupTitle: "Tibetan Range National Park", popupType: "National Park",
+      popupDescription: "Tibetan Range National Park protects high mountains, plateaus and snowy terrain south of Abichu.",
+      text: "Tibetan Range National Park", secondaryLabel: "तिब्बती पर्वतमाला राष्ट्रिय निकुञ्ज", panelSecondaryTitle: "तिब्बती पर्वतमाला राष्ट्रिय निकुञ्ज",
+      image: "icon-park.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 18px Calibri,sans-serif", textColor: "#9be27d", secondaryLabelColor: "#9be27d",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.55
+    },
+    {
+      x: 3488.5, z: 30216.5, y: 63, category: 'water_feature', country: "Kavarr Country",
+      popupTitle: "Jukena Bay", popupType: "Bay",
+      popupDescription: "Jukena Bay is a coastal bay on the eastern side of the Tamku Coastal Flats.",
+      text: "Jukena Bay", secondaryLabel: "जुकेना खाडी", panelSecondaryTitle: "जुकेना खाडी",
+      image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff", secondaryLabelColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.05
+    },
+    {
+      x: -8127.5, z: 34937.5, y: 63, category: 'water_feature', country: "Kavarr Country",
+      popupTitle: "Belbas Inlet", popupType: "Inlet",
+      popupDescription: "Belbas Inlet reaches into the western coast of Aethia near the Tibetan Range foothills.",
+      text: "Belbas Inlet", secondaryLabel: "बेलबास खाडी", panelSecondaryTitle: "बेलबास खाडी",
+      image: "icon-water.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "italic 18px Calibri,sans-serif", textColor: "#73c9ff", secondaryLabelColor: "#73c9ff",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.05
+    },
+    {
+      x: -8761.5, z: 34783.5, y: 65, category: 'landmark', country: "Kavarr Country",
+      popupTitle: "Khawang Peninsula", popupType: "Peninsula",
+      popupDescription: "Khawang Peninsula extends along the western Aethian coast beside Belbas Inlet.",
+      text: "Khawang Peninsula", secondaryLabel: "खवाङ प्रायद्वीप", panelSecondaryTitle: "खवाङ प्रायद्वीप",
+      image: "icon-island.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#7fe4d2", secondaryLabelColor: "#7fe4d2",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 19, labelMinZoom: 4.75
+    },
+    {
+      x: -7210.5, z: 34316.5, y: 125, category: 'nature_reserve', country: "Kavarr Country",
+      popupTitle: "Amuwa National Forest", popupType: "National Forest",
+      popupDescription: "Amuwa National Forest protects humid forest and foothill terrain in western Aethia.",
+      text: "Amuwa National Forest", secondaryLabel: "अमुवा राष्ट्रिय वन", panelSecondaryTitle: "अमुवा राष्ट्रिय वन",
+      image: "icon-park.svg", imageAnchor: [0.5, 1], imageScale: 0.3,
+      labelFont: "bold 16px Calibri,sans-serif", textColor: "#a8e884", secondaryLabelColor: "#a8e884",
+      textStrokeColor: 'rgba(0,0,0,0.92)', textStrokeWidth: 4, offsetX: 0, offsetY: 16, secondaryLabelOffsetY: 20, labelMinZoom: 4.85
+    },
+    {
       x: -4991.5, z: -8644.5, y: -27.0,
       category: 'landmark', popupTitle: "Aeta Provincial Park", popupType: "Provincial Park",
       popupDescription: "Explore Aeta Provincial Park in the Sky Pixel Minecraft world.",

@@ -4723,7 +4723,8 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             "Milu": { skyPixelLabel: "Milu", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
             "Nyra": { skyPixelLabel: "Nyra", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
             "Barkha": { skyPixelLabel: "Barkha", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
-            "Mehula": { skyPixelLabel: "Mehula", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 }
+            "Mehula": { skyPixelLabel: "Mehula", label: "Dibrugarh, Assam, India", latitude: 27.4728, longitude: 94.9120 },
+            "Abichu": { skyPixelLabel: "Abichu", label: "Tinsukia, Assam, India", latitude: 27.4886, longitude: 95.3558 }
         };
 
         // Sky Pixel local-time regions.
@@ -4734,6 +4735,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             "Barkha": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
             "Mehula": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
             "Milu": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
+            "Abichu": { timeZone: "Asia/Kolkata", abbreviation: "IST" },
             "La Morley": { timeZone: "America/Vancouver", abbreviation: "PT" },
             "Bourbon": { timeZone: "America/Vancouver", abbreviation: "PT" },
             "Gumbo": { timeZone: "America/Vancouver", abbreviation: "PT" },
@@ -5354,7 +5356,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         // No colored glow: labels keep a clean black outline for readability.
         const skyPixelMajorCityNames = new Set([
             'Octavian', 'Harlow', 'Prunelle', 'La Morley', 'Quantum',
-            'Xhaelis', 'Razalia', 'Elowah', 'Griffin', 'Oxland', 'Milu'
+            'Xhaelis', 'Razalia', 'Elowah', 'Griffin', 'Oxland', 'Milu', 'Abichu'
         ]);
 
         const skyPixelRegionalCityNames = new Set([
@@ -5370,7 +5372,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
         const skyPixelFeaturedCityScale = 1.42;
         const skyPixelCapitalCityScale = 1.56;
         // Major non-capitals that should carry the same label prominence as Octavian.
-        const skyPixelOctavianSizeCityNames = new Set(['Milu']);
+        const skyPixelOctavianSizeCityNames = new Set(['Milu', 'Abichu']);
         const skyPixelMediumCityScale = 1.28;
         const skyPixelValanceCityScale = 1.16;
         const skyPixelRosewoodCityScale = 1.22;
@@ -5388,7 +5390,7 @@ document.title = UnminedMapProperties.worldName + " - " + document.title;
             'La Morley', 'Quantum', 'Octavian', 'Harlow', 'L\'Eulàlia', 'Prunelle'
         ]);
         const skyPixelFarZoomCityNames = new Set([
-            'Octavian', 'Harlow', 'La Morley', 'Quantum', 'L\'Eulàlia', 'Prunelle', 'Milu'
+            'Octavian', 'Harlow', 'La Morley', 'Quantum', 'L\'Eulàlia', 'Prunelle', 'Milu', 'Abichu'
         ]);
 
         function scaleSkyPixelFont(font, scale) {

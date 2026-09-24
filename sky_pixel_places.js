@@ -22,6 +22,7 @@ window.SkyPixelPlaceLinks = {
   "Klaxikin": "https://sky-pixel-minecraft.fandom.com/wiki/Klaxikin_%22Skyline_Country%22",
   "Lilo": "https://sky-pixel-minecraft.fandom.com/wiki/Lilo_%22Kavarr_Country%22",
   "Malakai": "https://sky-pixel-minecraft.fandom.com/wiki/Malakai_%22Kavarr_Country%22",
+  "Abichu": "https://sky-pixel-minecraft.fandom.com/wiki/Abichu,_Kavarr_Country",
   "Taholah": "https://sky-pixel-minecraft.fandom.com/wiki/Taholah,_Jesla_Country",
   "Coralie": "https://sky-pixel-minecraft.fandom.com/wiki/Coralie",
   "Khaleesi": "https://sky-pixel-minecraft.fandom.com/wiki/Khaleesi,_Jesla_Country",
