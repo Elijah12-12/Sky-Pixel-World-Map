@@ -1,8 +1,8 @@
 :root {
-  --sp-a18-accent: #ffb020;
-  --sp-a18-fill: rgba(255, 176, 32, 0.16);
-  --sp-a18-outline: rgba(255, 196, 82, 0.96);
-  --sp-a18-label: #fff4d6;
+  --sp-a18-accent: #ff8c00;
+  --sp-a18-fill: rgba(255, 140, 0, 0.20);
+  --sp-a18-outline: rgba(255, 140, 0, 0.98);
+  --sp-a18-label: #ffd39a;
   --sp-a18-panel: rgba(12, 17, 27, 0.96);
   --sp-a18-border: rgba(255, 255, 255, 0.16);
 }
@@ -33,6 +33,24 @@
   margin: 0;
   accent-color: var(--sp-a18-accent);
   cursor: pointer;
+}
+
+.sp-a18-toggle-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sp-a18-toggle-title {
+  display: block;
+}
+
+.sp-a18-toggle-version {
+  display: block;
+  color: #ffbf69;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .sp-a18-backdrop {
@@ -81,6 +99,13 @@
   color: #d7dde8;
   font-size: 15px;
   line-height: 1.55;
+}
+
+.sp-a18-dialog .sp-a18-current-version {
+  margin: 0 0 9px;
+  color: #ffbf69;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .sp-a18-actions {

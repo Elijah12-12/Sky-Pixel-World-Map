@@ -7,54 +7,33 @@
 
   const ALPHA_18_AREAS = [
     {
-      name: 'Alpha 18 Area 1',
+      name: 'Developing Area 1',
       points: [
-        [-11350.2, 15740.9], [-12486.2, 15900.9], [-13046.2, 15564.9],
-        [-12774.2, 14620.9], [-11894.2, 14332.9], [-10470.2, 14108.9],
-        [-9494.2, 12572.9], [-11174.2, 11884.9], [-14966.2, 13724.9],
-        [-16582.2, 16364.9], [-15686.2, 21340.9], [-12950.2, 24876.9],
-        [-12391.6, 30250.1], [-11031.6, 34122.1], [-7934.4, 38628.1],
-        [-2894.4, 39300.1], [4897.6, 39812.1], [9697.6, 34212.1],
-        [10724.1, 26823], [10836.1, 24423], [9812.1, 23719],
-        [5924.1, 23543], [4612.1, 24727], [3108.1, 26935],
-        [-1947.9, 25735], [-6809, 17181.5], [-8921, 14621.5],
-        [-11369, 15757.5]
+        [-14720.8, -23566], [-12224.8, -23614], [-11936.8, -22638],
+        [-10016.8, -22654], [-9920.8, -18590], [-9472.8, -18590],
+        [-9488.8, -19166], [-6912.8, -19070], [-6960.8, -16366],
+        [-6896.8, -15678], [-4416.8, -15182], [-3840.8, -20398],
+        [-3648.8, -28862], [-3461.1, -33047.6], [-8693.1, -34823.6],
+        [-13765.1, -34583.6], [-15557.1, -31479.6], [-15637.1, -29127.6],
+        [-15621.1, -27111.6], [-15250.5, -25791.4], [-14722.5, -23519.4]
       ]
     },
     {
-      name: 'Alpha 18 Area 2',
+      name: 'Developing Area 2',
       points: [
-        [-15210.1, -22125.3], [-16450.1, -22117.3], [-17906.1, -21701.3],
-        [-18602.1, -20621.3], [-18738.1, -20229.3], [-18522.1, -19453.3],
-        [-18490.1, -18861.3], [-19170.1, -17805.3], [-19466.1, -16485.3],
-        [-20690.1, -15189.3], [-26653.3, -15423.7], [-28893.3, -17679.7],
-        [-29293.3, -22543.7], [-27325.3, -27407.7], [-22153.1, -33271.7],
-        [-17545.1, -34087.7], [-7977.1, -33351.7], [-7961.1, -28199.7],
-        [-7897.1, -23735.7], [-9561.1, -23031.7], [-11961.1, -23191.7],
-        [-11993.1, -23687.7], [-14809.1, -23671.7], [-14809.1, -22119.7],
-        [-15241.1, -22119.7]
+        [-23997.6, -16797.1], [-22301.6, -19085.1], [-21581.6, -21165.1],
+        [-21501.6, -27581.1], [-26285.6, -28205.1], [-29165.6, -24189.1],
+        [-28909.6, -17101.1], [-24061.6, -16733.1]
       ]
     },
     {
-      name: 'Alpha 18 Area 3',
+      name: 'Developing Area 3',
       points: [
-        [-3586, -2596.5], [-4046, -2924.5], [-4478, -3184.5],
-        [-4974, -3428.5], [-5290, -3468.5], [-5186, -3220.5],
-        [-5514, -3160.5], [-5702, -3272.5], [-5866, -3304.5],
-        [-5930, -3484.5], [-5934, -3664.5], [-6074, -3964.5],
-        [-6294, -3684.5], [-6030, -2924.5], [-5170, -2552.5],
-        [-4110, -2440.5], [-3598, -2408.5], [-3574, -2584.5]
-      ]
-    },
-    {
-      name: 'Alpha 18 Area 4',
-      points: [
-        [-14579.6, -9711.4], [-14663.6, -10099.4], [-14619.6, -10479.4],
-        [-14707.6, -11551.4], [-14991.6, -11643.4], [-15815.6, -11675.4],
-        [-16439.6, -11251.4], [-16747.6, -10175.4], [-16803.6, -9155.4],
-        [-16843.6, -8215.4], [-15711.6, -8135.4], [-14783.6, -8375.4],
-        [-13907.6, -9143.4], [-13543.6, -9631.4], [-13887.6, -9723.4],
-        [-14583.6, -9723.4]
+        [-11244.1, 31103.2], [-3628.1, 31135.2], [51.9, 29247.2],
+        [2451.9, 26239.2], [-2380.1, 19263.2], [-8492.1, 15327.2],
+        [-11660.1, 15903.2], [-12972.1, 15615.2], [-12844.1, 14527.2],
+        [-10124.1, 14047.2], [-9580.1, 12255.2], [-15980.1, 13535.2],
+        [-18860.1, 18591.2], [-11308.1, 31103.2]
       ]
     }
   ];
@@ -126,30 +105,41 @@
   function createInterface() {
     const toggle = document.createElement('label');
     toggle.className = 'sp-a18-toggle';
-    toggle.title = 'Show or hide areas added in Alpha 18';
+    toggle.title = 'Show or hide developing areas planned for later versions';
 
     toggleInput = document.createElement('input');
     toggleInput.type = 'checkbox';
-    toggleInput.setAttribute('aria-label', 'Toggle Alpha 18 highlighted areas');
+    toggleInput.setAttribute('aria-label', 'Toggle developing areas for later versions');
     toggleInput.addEventListener('change', function () {
       setAlpha18Visible(toggleInput.checked);
     });
 
+    const toggleCopy = document.createElement('span');
+    toggleCopy.className = 'sp-a18-toggle-copy';
+
     const toggleText = document.createElement('span');
-    toggleText.textContent = 'Alpha 18 Areas';
-    toggle.append(toggleInput, toggleText);
+    toggleText.className = 'sp-a18-toggle-title';
+    toggleText.textContent = 'Show developing areas for later versions';
+
+    const toggleVersion = document.createElement('span');
+    toggleVersion.className = 'sp-a18-toggle-version';
+    toggleVersion.textContent = 'Current version: Alpha 18';
+
+    toggleCopy.append(toggleText, toggleVersion);
+    toggle.append(toggleInput, toggleCopy);
     document.body.appendChild(toggle);
 
     const backdrop = document.createElement('div');
     backdrop.className = 'sp-a18-backdrop';
     backdrop.innerHTML =
       '<section class="sp-a18-dialog" role="dialog" aria-modal="true" aria-labelledby="spA18Title">' +
-        '<div class="sp-a18-kicker">Sky Pixel map version</div>' +
-        '<h2 id="spA18Title">Current map: Volume 17.5</h2>' +
-        '<p>This map shows the current Volume 17.5 release. Toggle Alpha 18 to see highlighted areas containing new Alpha 18 development.</p>' +
+        '<div class="sp-a18-kicker">Sky Pixel development map</div>' +
+        '<h2 id="spA18Title">Show developing areas for later versions</h2>' +
+        '<p class="sp-a18-current-version">Current version: Alpha 18</p>' +
+        '<p>Turn on the overlay to view areas currently planned or under development for releases after Alpha 18.</p>' +
         '<div class="sp-a18-actions">' +
           '<button class="sp-a18-button" type="button" data-a18-dismiss>Not now</button>' +
-          '<button class="sp-a18-button sp-a18-button--primary" type="button" data-a18-show>Show Alpha 18 areas</button>' +
+          '<button class="sp-a18-button sp-a18-button--primary" type="button" data-a18-show>Show developing areas</button>' +
         '</div>' +
       '</section>';
     document.body.appendChild(backdrop);
