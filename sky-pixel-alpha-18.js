@@ -1,4 +1,4 @@
-/* Sky Pixel Alpha 18 highlighted-area overlay.
+/* Sky Pixel Alpha 18.1 highlighted-area overlay.
  * Load this file after the uNmINeD/OpenLayers map scripts.
  * Add or edit areas only in ALPHA_18_AREAS below.
  */
@@ -16,14 +16,6 @@
         [-3648.8, -28862], [-3461.1, -33047.6], [-8693.1, -34823.6],
         [-13765.1, -34583.6], [-15557.1, -31479.6], [-15637.1, -29127.6],
         [-15621.1, -27111.6], [-15250.5, -25791.4], [-14722.5, -23519.4]
-      ]
-    },
-    {
-      name: 'Developing Area 2',
-      points: [
-        [-23997.6, -16797.1], [-22301.6, -19085.1], [-21581.6, -21165.1],
-        [-21501.6, -27581.1], [-26285.6, -28205.1], [-29165.6, -24189.1],
-        [-28909.6, -17101.1], [-24061.6, -16733.1]
       ]
     },
     {
@@ -123,7 +115,7 @@
 
     const toggleVersion = document.createElement('span');
     toggleVersion.className = 'sp-a18-toggle-version';
-    toggleVersion.textContent = 'Current version: Alpha 18';
+    toggleVersion.textContent = 'Current version: Alpha 18.1';
 
     toggleCopy.append(toggleText, toggleVersion);
     toggle.append(toggleInput, toggleCopy);
@@ -135,8 +127,8 @@
       '<section class="sp-a18-dialog" role="dialog" aria-modal="true" aria-labelledby="spA18Title">' +
         '<div class="sp-a18-kicker">Sky Pixel development map</div>' +
         '<h2 id="spA18Title">Show developing areas for later versions</h2>' +
-        '<p class="sp-a18-current-version">Current version: Alpha 18</p>' +
-        '<p>Turn on the overlay to view areas currently planned or under development for releases after Alpha 18.</p>' +
+        '<p class="sp-a18-current-version">Current version: Alpha 18.1</p>' +
+        '<p>Turn on the overlay to view areas currently planned or under development for releases after Alpha 18.1.</p>' +
         '<div class="sp-a18-actions">' +
           '<button class="sp-a18-button" type="button" data-a18-dismiss>Not now</button>' +
           '<button class="sp-a18-button sp-a18-button--primary" type="button" data-a18-show>Show developing areas</button>' +
